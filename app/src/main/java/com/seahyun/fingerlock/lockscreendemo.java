@@ -152,18 +152,25 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		}
 
 		if(count == password_size){
+			count = 0;
+			for(int i=0; i<input_arr.length; i++){
+				Log.d("사용자 입력 패스워드 : ", String.valueOf(input_arr[i]));
+			}
 			input_handler();
 		}
 	}
 
 	public void input_handler(){
 		int cnt=0;
+		select_mode=false;
+		Log.d("전) cnt 값 : ", String.valueOf(cnt));
 		for(int i=0; i< input_arr.length; i++){
-			if(user_password[i] == input_arr[i])
-				Log.d("패스워드 값 비교 : ", "user : "+String.valueOf(user_password[i])+" input : "+String.valueOf(input_arr[i]));
+			if(user_password[i] == input_arr[i]) {
+				Log.d("패스워드 값 비교 : ", "user : " + String.valueOf(user_password[i]) + " input : " + String.valueOf(input_arr[i]));
 				cnt++;
+			}
 		}
-		Log.d("cnt 값 : ", String.valueOf(cnt));
+		Log.d("후) cnt 값 : ", String.valueOf(cnt));
 		if(cnt == password_size){
 			Toast.makeText(this, "비밀번호가 동일합니다. 바로가기 원하는 어플 번호를 터치해주세요", Toast.LENGTH_SHORT).show();
 			select_mode = true;
@@ -171,7 +178,9 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		else{
 			Toast.makeText(this, "비밀번호를 다시 입력해 주세요", Toast.LENGTH_SHORT).show();
 		}
-		count = 0;
+		for(int i=0; i<input_arr.length; i++){
+			input_arr[i] = 0;
+		}
 	}
 
 	public void execute_application(int num) {
