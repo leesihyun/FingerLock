@@ -1,6 +1,7 @@
 package com.seahyun.fingerlock;
 
 import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -28,11 +29,13 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 	private boolean select_mode = false;
 	private int application_number = 0;
 
+	private Activity activity;
 
 	ArrayList<String> arGeneral;
 	List<ApplicationInfo> list;
 	ArrayList<String> pacageNm;
 
+	SimpleService simpleservice = new SimpleService();
 	//List <ApplicationInfo> mPackageApps = new ArrayList<ApplicationInfo>();
 
 	@Override
@@ -40,12 +43,15 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.screendemo);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+		//		WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+		setContentView(R.layout.screendemo);
+		//simpleservice.setKeyGuardEnable(false);
+
+		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 		for(int i=0; i<input_arr.length; i++){
 			input_arr[i] = 0;
 		}
@@ -174,6 +180,8 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		if(cnt == password_size){
 			Toast.makeText(this, "비밀번호가 동일합니다. 바로가기 원하는 어플 번호를 터치해주세요", Toast.LENGTH_SHORT).show();
 			select_mode = true;
+			//simpleservice.setKeyGuardEnable(true);
+
 		}
 		else{
 			Toast.makeText(this, "비밀번호를 다시 입력해 주세요", Toast.LENGTH_SHORT).show();
@@ -208,6 +216,16 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 			Log.d("설치된 앱 패키지>> ", pName);
 		}
 
+	}
+
+	@Override
+	public void onBackPressed(){
+		if(select_mode == false)
+			Toast.makeText(this, "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
+		else{
+			//simpleservice.onDestroy();
+			System.exit(0);
+		}
 	}
 
 }

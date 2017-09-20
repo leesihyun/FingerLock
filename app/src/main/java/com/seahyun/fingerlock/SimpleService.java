@@ -8,23 +8,39 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 public class SimpleService extends Service {
 	private KeyguardManager km = null;
 	private KeyguardManager.KeyguardLock keylock = null;
-	
+
+	public SimpleService(){};
 
 	private BroadcastReceiver mReceiver = new BroadcastReceiver(){
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Toast.makeText(context, "서비스 실행중!", Toast.LENGTH_LONG).show();
-            String action = intent.getAction();
+            /*String action = intent.getAction();
 			if(action.equals("android.intent.action.SCREEN_OFF")){
             	Intent i = new Intent(context, lockscreendemo.class);
             	i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             	context.startActivity(i);
-            }
+            }*/
+			if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
+				if (km == null)
+					km = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
+
+				if (keylock == null)
+					keylock = km.newKeyguardLock(Context.KEYGUARD_SERVICE);
+
+				disableKeyguard();
+
+				Intent i = new Intent(context, lockscreendemo.class);
+				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				context.startActivity(i);
+			}
+
 		}
 	};
 	
@@ -37,12 +53,13 @@ public class SimpleService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-		
-		km=(KeyguardManager) this.getSystemService(Activity.KEYGUARD_SERVICE);
-        if(km!=null){
-        	keylock = km.newKeyguardLock("test");
-        	keylock.disableKeyguard();
-        }
+
+		//km=(KeyguardManager) this.getSystemService(Activity.KEYGUARD_SERVICE);
+        //if(km!=null){
+        	//keylock = km.newKeyguardLock("test");
+        	//keylock = km.newKeyguardLock(Activity.KEYGUARD_SERVICE);
+			//keylock.disableKeyguard();
+       // }
         
 	}
 
@@ -67,4 +84,31 @@ public class SimpleService extends Service {
 		Toast.makeText(this, "서비스 종료", Toast.LENGTH_LONG).show();
 	}
 
+	public KeyguardManager.KeyguardLock getKeyLock(){
+		return keylock;
+	}
+
+	/*public void setKeyGuardEnable(boolean bflag){
+		Log.d("key gaurd 설정", "I will use keyguard");
+		if(bflag == true){
+			if(keylock == null)
+				keylock = km.newKeyguardLock(Activity.KEYGUARD_SERVICE);
+			keylock.disableKeyguard();
+			Log.d("unlock >>", "unlock keyguard");
+
+		}
+		else{
+			if(keylock!=null)
+				keylock.reenableKeyguard();
+			Log.d("lock >>", "lock keyguard");
+		}
+	}*/
+
+	public void reenableKeyguard() {
+		keylock.reenableKeyguard();
+	}
+
+	public void disableKeyguard() {
+		keylock.disableKeyguard();
+	}
 }
