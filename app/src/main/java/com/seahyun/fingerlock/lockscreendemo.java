@@ -248,14 +248,18 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 
 	public void input_handler(){
 		int cnt=0;
+		int i =0;
 		select_mode=false;
 		Log.d("전) cnt 값 : ", String.valueOf(cnt));
-		for(int i=0; i< input_arr.length; i++){
-			if(user_password[i] == input_arr[i]) {
+		//for(int i=0; input_arr[i]!=0; i++){
+		while(input_arr[i]!=0) {
+			if (user_password[i] == input_arr[i]) {
 				Log.d("패스워드 값 비교 : ", "user : " + String.valueOf(user_password[i]) + " input : " + String.valueOf(input_arr[i]));
 				cnt++;
 			}
+			i++;
 		}
+		//}
 		Log.d("후) cnt 값 : ", String.valueOf(cnt));
 		if(cnt == password_size){
 			Toast.makeText(this, "비밀번호가 동일합니다. 바로가기 원하는 어플 번호를 터치해주세요", Toast.LENGTH_SHORT).show();
@@ -266,8 +270,8 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		else{
 			Toast.makeText(this, "비밀번호를 다시 입력해 주세요", Toast.LENGTH_SHORT).show();
 		}
-		for(int i=0; i<input_arr.length; i++){
-			input_arr[i] = 0;
+		for(int j=0; j<input_arr.length; j++){
+			input_arr[j] = 0;
 		}
 	}
 
