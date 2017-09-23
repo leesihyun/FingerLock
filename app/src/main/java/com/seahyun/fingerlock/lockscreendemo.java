@@ -3,10 +3,12 @@ package com.seahyun.fingerlock;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,7 +26,7 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 
 	private static int password_size = 4;
 	private static int count = 0;
-	private int input_arr[] = new int[password_size];
+	private int input_arr[] = new int[6];
 	private int user_password[] = new int[password_size];
 	private boolean select_mode = false;
 	private int application_number = 0;
@@ -35,23 +37,39 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 	List<ApplicationInfo> list;
 	ArrayList<String> pacageNm;
 
+	Button button1;
+	Button button2;
+	Button button3;
+	Button button4;
+	Button button5;
+	Button button6;
+
 	SimpleService simpleservice = new SimpleService();
-	//List <ApplicationInfo> mPackageApps = new ArrayList<ApplicationInfo>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		//requestWindowFeature(Window.FEATURE_NO_TITLE);
-		//getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-		//		WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
-		setContentView(R.layout.screendemo);
-		//simpleservice.setKeyGuardEnable(false);
 
-		//getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+		SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
+
+		int num = prefs.getInt("tab_num", 4);
+		Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
+		if(num == 4){
+			setContentView(R.layout.lock_screen_touch_tab_four);
+		}
+		else if(num == 5){
+			setContentView(R.layout.lock_screen_touch_tab_five);
+		}
+		else if(num == 6){
+			setContentView(R.layout.lock_screen_touch_tab_six);
+		}
+
 		for(int i=0; i<input_arr.length; i++){
 			input_arr[i] = 0;
 		}
@@ -65,16 +83,35 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		user_password[3] = 4;
 
 
-		Button button1 = (Button) findViewById(R.id.button1);
-		Button button2 = (Button) findViewById(R.id.button2);
-		Button button3 = (Button) findViewById(R.id.button3);
-		Button button4 = (Button) findViewById(R.id.button4);
+		if(num == 4) {
+			button1 = (Button) findViewById(R.id.button4_1);
+			button2 = (Button) findViewById(R.id.button4_2);
+			button3 = (Button) findViewById(R.id.button4_3);
+			button4 = (Button) findViewById(R.id.button4_4);
+		}
+		else if(num == 5){
+			button1 = (Button) findViewById(R.id.button5_1);
+			button2 = (Button) findViewById(R.id.button5_2);
+			button3 = (Button) findViewById(R.id.button5_3);
+			button4 = (Button) findViewById(R.id.button5_4);
+			button5 = (Button) findViewById(R.id.button5_5);
 
+		}
+		else if(num == 6){
+			button1 = (Button) findViewById(R.id.button6_1);
+			button2 = (Button) findViewById(R.id.button6_2);
+			button3 = (Button) findViewById(R.id.button6_3);
+			button4 = (Button) findViewById(R.id.button6_4);
+			button5 = (Button) findViewById(R.id.button6_5);
+			button6 = (Button) findViewById(R.id.button6_6);
 
+		}
 		button1.setOnClickListener(this);
 		button2.setOnClickListener(this);
 		button3.setOnClickListener(this);
 		button4.setOnClickListener(this);
+		button5.setOnClickListener(this);
+		button6.setOnClickListener(this);
 
 		//check_application();
 
@@ -84,7 +121,9 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()){
-			case R.id.button1:
+			case R.id.button4_1:
+			case R.id.button5_1:
+			case R.id.button6_1:
 				Toast.makeText(this, "1클릭", Toast.LENGTH_SHORT).show();
 				if(select_mode == false){
 					for(int i=0; i<input_arr.length; i++){
@@ -102,7 +141,9 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 				}
 				break;
 
-			case R.id.button2:
+			case R.id.button4_2:
+			case R.id.button5_2:
+			case R.id.button6_2:
 				Toast.makeText(this, "2클릭", Toast.LENGTH_SHORT).show();
 				if(select_mode == false) {
 					for (int i = 0; i < input_arr.length; i++) {
@@ -120,7 +161,9 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 				}
 				break;
 
-			case R.id.button3:
+			case R.id.button4_3:
+			case R.id.button5_3:
+			case R.id.button6_3:
 				Toast.makeText(this, "3클릭", Toast.LENGTH_SHORT).show();
 				if(select_mode == false) {
 					for (int i = 0; i < input_arr.length; i++) {
@@ -138,7 +181,9 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 				}
 				break;
 
-			case R.id.button4:
+			case R.id.button4_4:
+			case R.id.button5_4:
+			case R.id.button6_4:
 				Toast.makeText(this, "4클릭", Toast.LENGTH_SHORT).show();
 				if(select_mode == false) {
 					for (int i = 0; i < input_arr.length; i++) {
@@ -152,6 +197,41 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 				}
 				else{
 					application_number = 4;
+					execute_application(application_number);
+				}
+				break;
+			case R.id.button5_5:
+			case R.id.button6_5:
+				Toast.makeText(this, "5클릭", Toast.LENGTH_SHORT).show();
+				if(select_mode == false) {
+					for (int i = 0; i < input_arr.length; i++) {
+						if (input_arr[i] == 0) {
+							input_arr[i] = 5;
+							i = input_arr.length;
+						}
+					}
+					count++;
+					Log.d("count 값 : ", String.valueOf(count));
+				}
+				else{
+					application_number = 5;
+					execute_application(application_number);
+				}
+				break;
+			case R.id.button6_6:
+				Toast.makeText(this, "6클릭", Toast.LENGTH_SHORT).show();
+				if(select_mode == false) {
+					for (int i = 0; i < input_arr.length; i++) {
+						if (input_arr[i] == 0) {
+							input_arr[i] = 6;
+							i = input_arr.length;
+						}
+					}
+					count++;
+					Log.d("count 값 : ", String.valueOf(count));
+				}
+				else{
+					application_number = 6;
 					execute_application(application_number);
 				}
 				break;
@@ -195,12 +275,57 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		Toast.makeText(this, "선택한 어플리케이션 번호는 "+ String.valueOf(application_number), Toast.LENGTH_SHORT).show();
 		PackageManager packageManager = this.getPackageManager();
 
-		if(num == 1){
-			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+		SharedPreferences prefs = getSharedPreferences("PakageName", MODE_PRIVATE);
+		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-			Intent intent = packageManager.getLaunchIntentForPackage("com.kakao.talk");
-			intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent);
+		if(num == 1){
+			String pakage_name = prefs.getString("name1", "");
+			if(pakage_name.equals("")){
+				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
+				System.exit(0);
+			}
+			else {
+				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		}
+
+		else if(num == 2){
+			String pakage_name = prefs.getString("name2", "");
+			if(pakage_name.equals("")){
+				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
+				System.exit(0);
+			}
+			else {
+				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		}
+		else if(num == 3){
+			String pakage_name = prefs.getString("name3", "");
+			if(pakage_name.equals("")){
+				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
+				System.exit(0);
+			}
+			else {
+				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
+		}
+		if(num == 4){
+			String pakage_name = prefs.getString("name4", "");
+			if(pakage_name.equals("")){
+				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
+				System.exit(0);
+			}
+			else {
+				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+			}
 		}
 	}
 
