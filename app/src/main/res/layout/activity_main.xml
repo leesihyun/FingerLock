@@ -28,10 +28,11 @@
 
         <ImageButton
             android:id="@+id/finger_lock_setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
             android:background="#00FFFFFF"
             android:scaleType="centerInside"
             app:srcCompat="@drawable/settings" />
@@ -58,8 +59,9 @@
 
         <ImageButton
             android:id="@+id/touch_tab_lock_setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:background="#00FFFFFF"
@@ -88,8 +90,9 @@
 
         <ImageButton
             android:id="@+id/color_tab_lock_setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:background="#00FFFFFF"
@@ -118,8 +121,9 @@
 
         <ImageButton
             android:id="@+id/pin_lock_setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="20dp"
             android:background="#00FFFFFF"
