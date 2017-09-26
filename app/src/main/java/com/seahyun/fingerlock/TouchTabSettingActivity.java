@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
@@ -13,8 +15,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by seahyun on 2017-09-20.
@@ -27,7 +33,7 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
     private static String TAG = "TouchTabSettingActivity";
     TouchTabPreview object = new TouchTabPreview();
     Spinner s;
-
+    private String PackageName[] = new String[6];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -248,6 +254,9 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
         prefsEditor.putBoolean("select2", false);
         prefsEditor.putBoolean("select3", false);
         prefsEditor.putBoolean("select4", false);
+        prefsEditor.putBoolean("select5", false);
+        prefsEditor.putBoolean("select6", false);
+
         prefsEditor.commit();
 
 
@@ -258,6 +267,8 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
         prefsEditor2.putString("msg2", "여기에 어플을 등록합니다");
         prefsEditor2.putString("msg3", "여기에 어플을 등록합니다");
         prefsEditor2.putString("msg4", "여기에 어플을 등록합니다");
+        prefsEditor2.putString("msg5", "여기에 어플을 등록합니다");
+        prefsEditor2.putString("msg6", "여기에 어플을 등록합니다");
         prefsEditor2.commit();
 
         SharedPreferences prefs3 = getSharedPreferences("PakageName", MODE_PRIVATE);
@@ -267,12 +278,107 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
         prefsEditor3.putString("name2","");
         prefsEditor3.putString("name3","");
         prefsEditor3.putString("name4","");
+        prefsEditor3.putString("name5","");
+        prefsEditor3.putString("name6","");
+        prefsEditor3.commit();
+
+        TextView textView1 = (TextView)findViewById(R.id.app_name1);
+        TextView textView2 = (TextView)findViewById(R.id.app_name2);
+        TextView textView3 = (TextView)findViewById(R.id.app_name3);
+        TextView textView4 = (TextView)findViewById(R.id.app_name4);
+        TextView textView5 = (TextView)findViewById(R.id.app_name5);
+        TextView textView6 = (TextView)findViewById(R.id.app_name6);
+
+        textView1.setText("");
+        textView2.setText("");
+        textView3.setText("");
+        textView4.setText("");
+        textView5.setText("");
+        textView6.setText("");
+
+        ImageView imageView1 = (ImageView)findViewById(R.id.image1);
+        ImageView imageView2 = (ImageView)findViewById(R.id.image2);
+        ImageView imageView3 = (ImageView)findViewById(R.id.image3);
+        ImageView imageView4 = (ImageView)findViewById(R.id.image4);
+        ImageView imageView5 = (ImageView)findViewById(R.id.image5);
+        ImageView imageView6 = (ImageView)findViewById(R.id.image6);
+
+        imageView1.setImageDrawable(null);
+        imageView2.setImageDrawable(null);
+        imageView3.setImageDrawable(null);
+        imageView4.setImageDrawable(null);
+        imageView5.setImageDrawable(null);
+        imageView6.setImageDrawable(null);
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
-//        s.setSelection(prefs.getInt("tab_num", 4));
-//    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        SharedPreferences pref = getSharedPreferences("PakageName", MODE_PRIVATE);
+        SharedPreferences pref2 = getSharedPreferences("Message", MODE_PRIVATE);
+
+        PackageManager pm = getPackageManager();
+
+        PackageName[0] = pref.getString("name1","");
+        PackageName[1] = pref.getString("name2","");
+        PackageName[2] = pref.getString("name3","");
+        PackageName[3] = pref.getString("name4","");
+        PackageName[4] = pref.getString("name5","");
+        PackageName[5] = pref.getString("name6","");
+
+        ImageView imageView1 = (ImageView)findViewById(R.id.image1);
+        ImageView imageView2 = (ImageView)findViewById(R.id.image2);
+        ImageView imageView3 = (ImageView)findViewById(R.id.image3);
+        ImageView imageView4 = (ImageView)findViewById(R.id.image4);
+        ImageView imageView5 = (ImageView)findViewById(R.id.image5);
+        ImageView imageView6 = (ImageView)findViewById(R.id.image6);
+
+        TextView textView1 = (TextView)findViewById(R.id.app_name1);
+        TextView textView2 = (TextView)findViewById(R.id.app_name2);
+        TextView textView3 = (TextView)findViewById(R.id.app_name3);
+        TextView textView4 = (TextView)findViewById(R.id.app_name4);
+        TextView textView5 = (TextView)findViewById(R.id.app_name5);
+        TextView textView6 = (TextView)findViewById(R.id.app_name6);
+
+
+        try {
+            Drawable App_icon1 = pm.getApplicationIcon(PackageName[0]);
+            if(!PackageName[0].equals("")) {
+                imageView1.setImageDrawable(App_icon1);
+                textView1.setText(pref2.getString("msg1",""));
+            }
+
+            Drawable App_icon2 = pm.getApplicationIcon(PackageName[1]);
+            if(!PackageName[1].equals("")) {
+                imageView2.setImageDrawable(App_icon2);
+                textView2.setText(pref2.getString("msg2",""));
+            }
+
+            Drawable App_icon3 = pm.getApplicationIcon(PackageName[2]);
+            if(!PackageName[2].equals("")) {
+                imageView3.setImageDrawable(App_icon3);
+                textView3.setText(pref2.getString("msg3",""));
+            }
+            Drawable App_icon4 = pm.getApplicationIcon(PackageName[3]);
+            if(!PackageName[3].equals("")) {
+                imageView4.setImageDrawable(App_icon4);
+                textView4.setText(pref2.getString("msg4",""));
+            }
+            Drawable App_icon5 = pm.getApplicationIcon(PackageName[4]);
+            if(!PackageName[4].equals("")) {
+                imageView5.setImageDrawable(App_icon5);
+                textView5.setText(pref2.getString("msg5",""));
+            }
+
+            Drawable App_icon6 = pm.getApplicationIcon(PackageName[5]);
+            if(!PackageName[5].equals("")) {
+                imageView6.setImageDrawable(App_icon6);
+                textView6.setText(pref2.getString("msg6",""));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
