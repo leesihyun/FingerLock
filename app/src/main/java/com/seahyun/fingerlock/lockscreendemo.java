@@ -24,14 +24,14 @@ import java.util.List;
 
 public class lockscreendemo extends AppCompatActivity implements OnClickListener {
 
-	private static int password_size = 4;
+	private static int password_size ;
 	private static int count = 0;
-	private int input_arr[] = new int[6];
-	private int user_password[] = new int[password_size];
+	private int input_arr[] = new int[8];
+	private int user_password[] = new int[8];
 	private boolean select_mode = false;
 	private int application_number = 0;
 
-	private Activity activity;
+	TouchTabFourPassword o = new TouchTabFourPassword();
 
 	ArrayList<String> arGeneral;
 	List<ApplicationInfo> list;
@@ -77,10 +77,18 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		arGeneral = new ArrayList<String>();
 		pacageNm = new ArrayList<String>();
 
-		user_password[0] = 1;
-		user_password[1] = 2;
-		user_password[2] = 3;
-		user_password[3] = 4;
+		password_size = o.getPassword_count();
+		Log.d("패스워드 자릿수 >> ", String.valueOf(password_size));
+		//사용자가 설정한 비밀번호 가져오기
+		SharedPreferences prefs2 = getSharedPreferences("password", MODE_PRIVATE);
+		user_password[0] = prefs2.getInt("1st password",0);
+		user_password[1] = prefs2.getInt("2nd password",0);
+		user_password[2] = prefs2.getInt("3rd password",0);
+		user_password[3] = prefs2.getInt("4th password",0);
+		user_password[4] = prefs2.getInt("5th password",0);
+		user_password[5] = prefs2.getInt("6th password",0);
+		user_password[6] = prefs2.getInt("7th password",0);
+		user_password[7] = prefs2.getInt("8th password",0);
 
 
 		if(num == 4) {
@@ -333,7 +341,7 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		}
 	}
 
-	public void check_application(){
+	/*public void check_application(){
 		Toast.makeText(this, "설치된 앱 확인", Toast.LENGTH_SHORT).show();
 
 		final PackageManager pm = getPackageManager();
@@ -345,7 +353,7 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 			Log.d("설치된 앱 패키지>> ", pName);
 		}
 
-	}
+	}*/
 
 	@Override
 	public void onBackPressed(){
