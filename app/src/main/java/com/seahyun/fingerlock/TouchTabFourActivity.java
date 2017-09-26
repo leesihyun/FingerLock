@@ -63,7 +63,6 @@ public class TouchTabFourActivity extends AppCompatActivity implements View.OnCl
                 finish();
                 break;
             case R.id.app_cancel:
-                PrefInit();
                 finish();
                 break;
         }
@@ -97,32 +96,4 @@ public class TouchTabFourActivity extends AppCompatActivity implements View.OnCl
 
     }
 
-    public void PrefInit(){
-        SharedPreferences prefs = getSharedPreferences("select_state", MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = prefs.edit();
-
-        prefsEditor.putBoolean("select1", false);
-        prefsEditor.putBoolean("select2", false);
-        prefsEditor.putBoolean("select3", false);
-        prefsEditor.putBoolean("select4", false);
-        prefsEditor.commit();
-
-
-        SharedPreferences prefs2 = getSharedPreferences("Message", MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor2 = prefs2.edit();
-
-        prefsEditor2.putString("msg1", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg2", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg3", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg4", "여기에 어플을 등록합니다");
-        prefsEditor2.commit();
-
-        SharedPreferences prefs3 = getSharedPreferences("PakageName", MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor3 = prefs3.edit();
-
-        prefsEditor3.putString("name1","");
-        prefsEditor3.putString("name2","");
-        prefsEditor3.putString("name3","");
-        prefsEditor3.putString("name4","");
-    }
 }

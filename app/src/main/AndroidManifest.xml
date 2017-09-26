@@ -28,6 +28,8 @@
         <activity android:name=".TouchTabFourActivity"></activity>
         <activity android:name=".TouchTabFiveActivity"></activity>
         <activity android:name=".TouchTabSixActivity"></activity>
+        <activity android:name=".TouchTabFourPassword"></activity>
+        <activity android:name=".RE_TouchTabFourPassword"></activity>
         <service android:name="SimpleService"></service>
     </application>
 
