@@ -15,7 +15,11 @@ import android.widget.Button;
 
 public class TouchTabSixActivity extends AppCompatActivity implements View.OnClickListener {
 
+
     public TouchTabSixActivity(){};
+
+    public String[] Message = new String[6];
+    public String[] PackageName = new String[6];
 
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -30,6 +34,9 @@ public class TouchTabSixActivity extends AppCompatActivity implements View.OnCli
         getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
         setContentView(R.layout.touch_tab_six);
+
+        //기존의 바로가기 설정 어플 목록 가져오기
+        applicationList();
 
     }
     @Override
@@ -69,12 +76,10 @@ public class TouchTabSixActivity extends AppCompatActivity implements View.OnCli
                 startActivity(new Intent(this, ApplicationSelectionActivity.class));
                 break;
             case R.id.app_registration:
-                Log.d("버튼 클릭 >> ", "등록완료");
                 finish();
                 break;
             case R.id.app_cancel:
-                Log.d("버튼 클릭 >> ", "취소");
-                PrefInit();
+                returnApplicationList();
                 finish();
                 break;
         }
@@ -111,41 +116,61 @@ public class TouchTabSixActivity extends AppCompatActivity implements View.OnCli
         button6_4.setText(prefs.getString("msg4", "여기에 어플을 등록합니다"));
         button6_5.setText(prefs.getString("msg5", "여기에 어플을 등록합니다"));
         button6_6.setText(prefs.getString("msg6", "여기에 어플을 등록합니다"));
+
     }
 
+    public void applicationList(){
 
-    public void PrefInit(){
-        SharedPreferences prefs = getSharedPreferences("select_state", MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = prefs.edit();
+        SharedPreferences prefs3 = getSharedPreferences("Message", MODE_PRIVATE);
 
-        prefsEditor.putBoolean("select1", false);
-        prefsEditor.putBoolean("select2", false);
-        prefsEditor.putBoolean("select3", false);
-        prefsEditor.putBoolean("select4", false);
-        prefsEditor.putBoolean("select5", false);
-        prefsEditor.putBoolean("select6", false);
-        prefsEditor.commit();
+        SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
 
+        Message[0] = prefs3.getString("msg1","여기에 어플을 등록합니다");
+        Message[1] = prefs3.getString("msg2","여기에 어플을 등록합니다");
+        Message[2] = prefs3.getString("msg3","여기에 어플을 등록합니다");
+        Message[3] = prefs3.getString("msg4","여기에 어플을 등록합니다");
+        Message[4] = prefs3.getString("msg5","여기에 어플을 등록합니다");
+        Message[5] = prefs3.getString("msg6","여기에 어플을 등록합니다");
 
-        SharedPreferences prefs2 = getSharedPreferences("Message", MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor2 = prefs2.edit();
+        PackageName[0] = prefs4.getString("name1","");
+        PackageName[1] = prefs4.getString("name2","");
+        PackageName[2] = prefs4.getString("name3","");
+        PackageName[3] = prefs4.getString("name4","");
+        PackageName[4] = prefs4.getString("name5","");
+        PackageName[5] = prefs4.getString("name6","");
 
-        prefsEditor2.putString("msg1", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg2", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg3", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg4", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg5", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg6", "여기에 어플을 등록합니다");
+        for(int i=0; i<6; i++){
+            Log.d("TouchTabSixActivity", "Message >> "+Message[i]);
+            Log.d("TouchTabSixActivity", "PackageName >> "+PackageName[i]);
+        }
+    }
+
+    public void returnApplicationList(){
+
+        SharedPreferences prefs3 = getSharedPreferences("Message", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor2 = prefs3.edit();
+
+        SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor3 = prefs4.edit();
+
+        prefsEditor2.putString("msg1", Message[0]);
+        prefsEditor2.putString("msg2", Message[1]);
+        prefsEditor2.putString("msg3", Message[2]);
+        prefsEditor2.putString("msg4", Message[3]);
+        prefsEditor2.putString("msg5", Message[4]);
+        prefsEditor2.putString("msg6", Message[5]);
+
         prefsEditor2.commit();
 
-        SharedPreferences prefs3 = getSharedPreferences("PakageName", MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor3 = prefs3.edit();
+        prefsEditor3.putString("name1", PackageName[0]);
+        prefsEditor3.putString("name2", PackageName[1]);
+        prefsEditor3.putString("name3", PackageName[2]);
+        prefsEditor3.putString("name4", PackageName[3]);
+        prefsEditor3.putString("name5", PackageName[4]);
+        prefsEditor3.putString("name6", PackageName[5]);
 
-        prefsEditor3.putString("name1","");
-        prefsEditor3.putString("name2","");
-        prefsEditor3.putString("name3","");
-        prefsEditor3.putString("name4","");
-        prefsEditor3.putString("name5","");
-        prefsEditor3.putString("name6","");
+        prefsEditor3.commit();
+
+
     }
 }

@@ -120,22 +120,27 @@ public class ApplicationSelectionActivity extends Activity {
                     SharedPreferences prefs2 = getSharedPreferences("select_state", MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor = prefs2.edit();
 
+                    SharedPreferences prefs3 = getSharedPreferences("Message", MODE_PRIVATE);
+                    SharedPreferences.Editor prefsEditor2 = prefs3.edit();
+
+                    SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
+                    SharedPreferences.Editor prefsEditor3 = prefs4.edit();
 
                     //if (num == 4) {//터치탭 개수가 4개일 때
                         if(prefs2.getBoolean("select1",false)==true) { //선택한 어플을 터치탭에 등록
                             Log.d("터치탭 선택 >> ", "1번 터치탭");
                             shortcut[0] = msg;
 
-                            applicationSave(0, info.activityInfo.packageName);
+                            //applicationSave(0, info.activityInfo.packageName);
 
                             prefsEditor.putBoolean("select1", false);
                             prefsEditor.commit();
 
-                            /*prefsEditor2.putString("msg1", shortcut[0]);
+                            prefsEditor2.putString("msg1", shortcut[0]);
                             prefsEditor2.commit();
 
                             prefsEditor3.putString("name1", info.activityInfo.packageName);
-                            prefsEditor3.commit();*/
+                            prefsEditor3.commit();
 
                             Log.d("1번 바로가기 설정된 앱 >> ", shortcut[0]);
                         }
@@ -143,16 +148,16 @@ public class ApplicationSelectionActivity extends Activity {
                             Log.d("터치탭 선택 >> ", "2번 터치탭");
                             shortcut[1] = msg;
 
-                            applicationSave(1, info.activityInfo.packageName);
+                            //applicationSave(1, info.activityInfo.packageName);
 
                             prefsEditor.putBoolean("select2", false);
                             prefsEditor.commit();
 
-                            /*prefsEditor2.putString("msg2", shortcut[1]);
+                            prefsEditor2.putString("msg2", shortcut[1]);
                             prefsEditor2.commit();
 
                             prefsEditor3.putString("name2", info.activityInfo.packageName);
-                            prefsEditor3.commit();*/
+                            prefsEditor3.commit();
 
                             Log.d("2번 바로가기 설정된 앱 >> ", shortcut[1]);
                         }
@@ -160,15 +165,15 @@ public class ApplicationSelectionActivity extends Activity {
                             Log.d("터치탭 선택 >> ", "3번 터치탭");
                             shortcut[2] = msg;
 
-                            applicationSave(2, info.activityInfo.packageName);
+                            //applicationSave(2, info.activityInfo.packageName);
                             prefsEditor.putBoolean("select3", false);
                             prefsEditor.commit();
 
-                            /*prefsEditor2.putString("msg3", shortcut[2]);
+                            prefsEditor2.putString("msg3", shortcut[2]);
                             prefsEditor2.commit();
 
                             prefsEditor3.putString("name3", info.activityInfo.packageName);
-                            prefsEditor3.commit();*/
+                            prefsEditor3.commit();
 
                             Log.d("3번 바로가기 설정된 앱 >> ", shortcut[2]);
                         }
@@ -176,15 +181,15 @@ public class ApplicationSelectionActivity extends Activity {
                             Log.d("터치탭 선택 >> ", "4번 터치탭");
                             shortcut[3] = msg;
 
-                            applicationSave(3, info.activityInfo.packageName);
+                            //applicationSave(3, info.activityInfo.packageName);
                             prefsEditor.putBoolean("select4", false);
                             prefsEditor.commit();
 
-                            /*prefsEditor2.putString("msg4", shortcut[3]);
+                            prefsEditor2.putString("msg4", shortcut[3]);
                             prefsEditor2.commit();
 
                             prefsEditor3.putString("name4", info.activityInfo.packageName);
-                            prefsEditor3.commit();*/
+                            prefsEditor3.commit();
 
                             Log.d("4번 바로가기 설정된 앱 >> ", shortcut[3]);
                         }
@@ -195,27 +200,27 @@ public class ApplicationSelectionActivity extends Activity {
                             prefsEditor.putBoolean("select5", false);
                             prefsEditor.commit();
 
-                            /*prefsEditor2.putString("msg5", shortcut[4]);
+                            prefsEditor2.putString("msg5", shortcut[4]);
                             prefsEditor2.commit();
 
                             prefsEditor3.putString("name5", info.activityInfo.packageName);
-                            prefsEditor3.commit();*/
-                            applicationSave(4, info.activityInfo.packageName);
+                            prefsEditor3.commit();
+                            //applicationSave(4, info.activityInfo.packageName);
 
                             Log.d("5번 바로가기 설정된 앱 >> ", shortcut[4]);
                         }
                         else if(prefs2.getBoolean("select6",false)==true){
                             Log.d("터치탭 선택 >> ", "6번 터치탭");
                             shortcut[5] = msg;
-                            applicationSave(5, info.activityInfo.packageName);
+                            //applicationSave(5, info.activityInfo.packageName);
                             prefsEditor.putBoolean("select6", false);
                             prefsEditor.commit();
 
-                            /*prefsEditor2.putString("msg6", shortcut[5]);
+                            prefsEditor2.putString("msg6", shortcut[5]);
                             prefsEditor2.commit();
 
                             prefsEditor3.putString("name6", info.activityInfo.packageName);
-                            prefsEditor3.commit();*/
+                            prefsEditor3.commit();
 
 
                             Log.d("6번 바로가기 설정된 앱 >> ", shortcut[5]);
@@ -227,7 +232,7 @@ public class ApplicationSelectionActivity extends Activity {
             return convertView;
         }
     }
-    public void applicationSave(int i, String pakcageName){
+    /*public void applicationSave(int i, String pakcageName){
 
         if(i==1){
            msg = "msg1";
@@ -265,5 +270,5 @@ public class ApplicationSelectionActivity extends Activity {
 
         prefsEditor3.putString(name, pakcageName);
         prefsEditor3.commit();
-    }
+    }*/
 }

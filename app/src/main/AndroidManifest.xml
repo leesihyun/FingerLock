@@ -30,6 +30,10 @@
         <activity android:name=".TouchTabSixActivity"></activity>
         <activity android:name=".TouchTabFourPassword"></activity>
         <activity android:name=".RE_TouchTabFourPassword"></activity>
+        <activity android:name=".TouchTabFivePassword"></activity>
+        <activity android:name=".RE_TouchTabFivePassword"></activity>
+        <activity android:name=".TouchTabSixPassword"></activity>
+        <activity android:name=".RE_TouchTabSixPassword"></activity>
         <service android:name="SimpleService"></service>
     </application>
 

@@ -66,6 +66,8 @@ public class TouchTabFourPassword extends AppCompatActivity implements View.OnCl
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
         next.setOnClickListener(this);
+
+        password_count = 0;
     }
 
     @Override
@@ -120,6 +122,7 @@ public class TouchTabFourPassword extends AppCompatActivity implements View.OnCl
                 break;
             case R.id.complete:
                 Log.d(TAG, "비밀번호 확인 Activity로 이동");
+                Log.d(TAG, "1) 비밀번호 개수 >> "+String.valueOf(password_count));
                 Intent intent = new Intent(getApplicationContext(), RE_TouchTabFourPassword.class);
                 startActivity(intent);
                 break;

@@ -48,11 +48,13 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
         Button preview = (Button)findViewById(R.id.preview);
         Button set_password = (Button)findViewById(R.id.set_password);
         Button complete = (Button)findViewById(R.id.setting_complete);
+        Button init = (Button)findViewById(R.id.application_init);
 
         preview.setOnClickListener((View.OnClickListener)TouchTabSettingActivity.this);
         select.setOnClickListener((View.OnClickListener) TouchTabSettingActivity.this);
         set_password.setOnClickListener((View.OnClickListener)TouchTabSettingActivity.this);
         complete.setOnClickListener((View.OnClickListener)TouchTabSettingActivity.this);
+        init.setOnClickListener((View.OnClickListener)TouchTabSettingActivity.this);
 
         //tab_num 스피너 생성
         s = (Spinner)findViewById(R.id.touch_tab_num);
@@ -145,11 +147,11 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.preview:
+            case R.id.preview: //미리보기 버튼
                 Intent intent = new Intent(getApplicationContext(), TouchTabPreview.class);
                 startActivity(intent);
                 break;
-            case R.id.application_select:
+            case R.id.application_select: //어플 선택하기 버튼
                 SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
                 int num = prefs.getInt("tab_num", 4);
                 if(num == 4){
@@ -165,10 +167,11 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
                     startActivity(intent2);
                 }
                 break;
-            case R.id.application_init:
+            case R.id.application_init: //어플 선택 초기화 버튼
+                Toast.makeText(this, "어플 바로가기 설정이 초기화 되었습니다", Toast.LENGTH_SHORT).show();
                 PrefInit();
                 break;
-            case R.id.set_password:
+            case R.id.set_password: //비밀번호 설정 버튼
                 Log.d("버튼 입력 >> ", "비밀번호 설정");
                 SharedPreferences prefs2 = getSharedPreferences("user_tab_num", MODE_PRIVATE);
                 int tab_num2 = prefs2.getInt("tab_num", 4);

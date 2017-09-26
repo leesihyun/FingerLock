@@ -18,6 +18,9 @@ public class TouchTabFourActivity extends AppCompatActivity implements View.OnCl
 
     public TouchTabFourActivity(){};
 
+    public String[] Message = new String[6];
+    public String[] PackageName = new String[6];
+
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
@@ -31,6 +34,9 @@ public class TouchTabFourActivity extends AppCompatActivity implements View.OnCl
         getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
         setContentView(R.layout.touch_tab_four);
+
+        //기존의 바로가기 설정 어플 목록 가져오기
+        applicationList();
 
     }
     @Override
@@ -63,6 +69,7 @@ public class TouchTabFourActivity extends AppCompatActivity implements View.OnCl
                 finish();
                 break;
             case R.id.app_cancel:
+                returnApplicationList();
                 finish();
                 break;
         }
@@ -96,4 +103,58 @@ public class TouchTabFourActivity extends AppCompatActivity implements View.OnCl
 
     }
 
+    public void applicationList(){
+
+        SharedPreferences prefs3 = getSharedPreferences("Message", MODE_PRIVATE);
+
+        SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
+
+        Message[0] = prefs3.getString("msg1","여기에 어플을 등록합니다");
+        Message[1] = prefs3.getString("msg2","여기에 어플을 등록합니다");
+        Message[2] = prefs3.getString("msg3","여기에 어플을 등록합니다");
+        Message[3] = prefs3.getString("msg4","여기에 어플을 등록합니다");
+        Message[4] = prefs3.getString("msg5","여기에 어플을 등록합니다");
+        Message[5] = prefs3.getString("msg6","여기에 어플을 등록합니다");
+
+        PackageName[0] = prefs4.getString("name1","");
+        PackageName[1] = prefs4.getString("name2","");
+        PackageName[2] = prefs4.getString("name3","");
+        PackageName[3] = prefs4.getString("name4","");
+        PackageName[4] = prefs4.getString("name5","");
+        PackageName[5] = prefs4.getString("name6","");
+
+        for(int i=0; i<6; i++){
+            Log.d("TouchTabFourActivity", "Message >> "+Message[i]);
+            Log.d("TouchTabFourActivity", "PackageName >> "+PackageName[i]);
+        }
+    }
+
+    public void returnApplicationList(){
+
+        SharedPreferences prefs3 = getSharedPreferences("Message", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor2 = prefs3.edit();
+
+        SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor3 = prefs4.edit();
+
+        prefsEditor2.putString("msg1", Message[0]);
+        prefsEditor2.putString("msg2", Message[1]);
+        prefsEditor2.putString("msg3", Message[2]);
+        prefsEditor2.putString("msg4", Message[3]);
+        prefsEditor2.putString("msg5", Message[4]);
+        prefsEditor2.putString("msg6", Message[5]);
+
+        prefsEditor2.commit();
+
+        prefsEditor3.putString("name1", PackageName[0]);
+        prefsEditor3.putString("name2", PackageName[1]);
+        prefsEditor3.putString("name3", PackageName[2]);
+        prefsEditor3.putString("name4", PackageName[3]);
+        prefsEditor3.putString("name5", PackageName[4]);
+        prefsEditor3.putString("name6", PackageName[5]);
+
+        prefsEditor3.commit();
+
+
+    }
 }

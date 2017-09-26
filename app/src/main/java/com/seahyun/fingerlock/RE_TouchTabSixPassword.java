@@ -19,14 +19,14 @@ import android.widget.Toast;
  * Created by seahyun on 2017-09-23.
  */
 
-public class RE_TouchTabFourPassword extends AppCompatActivity implements View.OnClickListener{
+public class RE_TouchTabSixPassword extends AppCompatActivity implements View.OnClickListener{
 
     private static int user_password[] = new int[8];
     private static int input_arr[] = new int[8];
     private int pre_input_arr[] = new int[8]; //이전 비밀번호 설정창에서 입력한 비밀번호가 저장된 배열
     private static int password_count = 0;
-    private static String TAG = "TouchTabFourPassword";
-    TouchTabFourPassword o = new TouchTabFourPassword();
+    private static String TAG = "TouchTabSixPassword";
+    TouchTabSixPassword o = new TouchTabSixPassword();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,7 +40,7 @@ public class RE_TouchTabFourPassword extends AppCompatActivity implements View.O
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
-        setContentView(R.layout.touch_tab_four_password);
+        setContentView(R.layout.touch_tab_six_password);
 
 
         TextView info_text = (TextView)findViewById(R.id.info_text);
@@ -59,16 +59,21 @@ public class RE_TouchTabFourPassword extends AppCompatActivity implements View.O
             Log.d(TAG, "예전에 입력한 배열 >> "+pre_input_arr[i]);
         }
 
-        Button button1 = (Button)findViewById(R.id.button4_1);
-        Button button2 = (Button)findViewById(R.id.button4_2);
-        Button button3 = (Button)findViewById(R.id.button4_3);
-        Button button4 = (Button)findViewById(R.id.button4_4);
+        Button button1 = (Button)findViewById(R.id.button6_1);
+        Button button2 = (Button)findViewById(R.id.button6_2);
+        Button button3 = (Button)findViewById(R.id.button6_3);
+        Button button4 = (Button)findViewById(R.id.button6_4);
+        Button button5 = (Button)findViewById(R.id.button6_5);
+        Button button6 = (Button)findViewById(R.id.button6_6);
+
         Button next = (Button)findViewById(R.id.complete);
 
         button1.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
+        button5.setOnClickListener(this);
+        button6.setOnClickListener(this);
         next.setOnClickListener(this);
 
         password_count=0;
@@ -80,7 +85,7 @@ public class RE_TouchTabFourPassword extends AppCompatActivity implements View.O
         SharedPreferences.Editor prefsEditor = prefs.edit();
 
         switch (v.getId()) {
-            case R.id.button4_1:
+            case R.id.button6_1:
                 Log.d("비밀번호 설정", "1입력");
                 for(int i=0; i<input_arr.length; i++){
                     if(input_arr[i]==0){
@@ -91,7 +96,7 @@ public class RE_TouchTabFourPassword extends AppCompatActivity implements View.O
                 password_count++;
                 Log.d("count 값 : ", String.valueOf(password_count));
                 break;
-            case R.id.button4_2:
+            case R.id.button6_2:
                 Log.d("비밀번호 설정", "2입력");
                 for(int i=0; i<input_arr.length; i++){
                     if(input_arr[i]==0){
@@ -102,7 +107,7 @@ public class RE_TouchTabFourPassword extends AppCompatActivity implements View.O
                 password_count++;
                 Log.d("count 값 : ", String.valueOf(password_count));
                 break;
-            case R.id.button4_3:
+            case R.id.button6_3:
                 Log.d("비밀번호 설정", "3입력");
                 for(int i=0; i<input_arr.length; i++){
                     if(input_arr[i]==0){
@@ -113,11 +118,33 @@ public class RE_TouchTabFourPassword extends AppCompatActivity implements View.O
                 password_count++;
                 Log.d("count 값 : ", String.valueOf(password_count));
                 break;
-            case R.id.button4_4:
+            case R.id.button6_4:
                 Log.d("비밀번호 설정", "4입력");
                 for(int i=0; i<input_arr.length; i++){
                     if(input_arr[i]==0){
                         input_arr[i] = 4;
+                        i = input_arr.length;
+                    }
+                }
+                password_count++;
+                Log.d("count 값 : ", String.valueOf(password_count));
+                break;
+            case R.id.button6_5:
+                Log.d("비밀번호 설정", "5입력");
+                for(int i=0; i<input_arr.length; i++){
+                    if(input_arr[i]==0){
+                        input_arr[i] = 5;
+                        i = input_arr.length;
+                    }
+                }
+                password_count++;
+                Log.d("count 값 : ", String.valueOf(password_count));
+                break;
+            case R.id.button6_6:
+                Log.d("비밀번호 설정", "6입력");
+                for(int i=0; i<input_arr.length; i++){
+                    if(input_arr[i]==0){
+                        input_arr[i] = 6;
                         i = input_arr.length;
                     }
                 }
@@ -133,7 +160,7 @@ public class RE_TouchTabFourPassword extends AppCompatActivity implements View.O
                 else{
                     Toast.makeText(this, "비밀번호를 다시 입력합니다.", Toast.LENGTH_SHORT).show();
                     password_count=0;
-                    Intent intent = new Intent(getApplicationContext(), TouchTabFourPassword.class);
+                    Intent intent = new Intent(getApplicationContext(), TouchTabSixPassword.class);
                     startActivity(intent);
                 }
                 break;
