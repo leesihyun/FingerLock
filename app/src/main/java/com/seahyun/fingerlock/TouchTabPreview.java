@@ -19,7 +19,7 @@ public class TouchTabPreview extends Activity{
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
         int num = prefs.getInt("tab_num", 4);
         Log.d("Preview 터치탭 개수 >>", String.valueOf(num));
         if(num == 4){
