@@ -26,7 +26,9 @@ public class MainActivity extends AppCompatActivity{
     //private Button stopServiceButton;
     //private Button checkAliveButton;
     Switch touch_tab;
+    Switch pin_lock;
     ImageButton touch_tab_setting;
+    ImageButton pin_lock_setting;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,20 @@ public class MainActivity extends AppCompatActivity{
                         }
                     }
                 });
+        pin_lock = (Switch)findViewById(R.id.pin_lock);
+        pin_lock.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        if(pin_lock.isChecked()){
+                            startService(new Intent(MainActivity.this, SimpleServicePin.class));
+                            pin_lock.setChecked(true);
+                        }
+                        else{
+                            stopService(new Intent(MainActivity.this, SimpleServicePin.class));
+                            pin_lock.setChecked(false);
+                        }
+                    }
+                });
 
         touch_tab_setting = (ImageButton)findViewById(R.id.touch_tab_lock_setting);
         touch_tab_setting.setOnClickListener(
@@ -65,6 +81,17 @@ public class MainActivity extends AppCompatActivity{
                     public void onClick(View v){
                         Log.d("환경설정 >> ", "터치탭");
                         Intent intent = new Intent(getApplicationContext(), TouchTabSettingActivity.class);
+                        startActivity(intent);
+
+                    }
+                }
+        );
+        pin_lock_setting=(ImageButton)findViewById(R.id.pin_lock_setting);
+        pin_lock_setting.setOnClickListener(
+                new Button.OnClickListener(){
+                    public void onClick(View v){
+                        Log.d("환경설정 >> ", "PinLock");
+                        Intent intent = new Intent(getApplicationContext(), PinSettingActivity.class);
                         startActivity(intent);
 
                     }

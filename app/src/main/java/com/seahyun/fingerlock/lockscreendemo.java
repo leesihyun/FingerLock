@@ -30,6 +30,7 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 	private int user_password[] = new int[8];
 	private boolean select_mode = false;
 	private int application_number = 0;
+	private int app_num[] = new int[4];
 
 	TouchTabFourPassword o = new TouchTabFourPassword();
 
@@ -89,6 +90,11 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		user_password[5] = prefs2.getInt("6th password",0);
 		user_password[6] = prefs2.getInt("7th password",0);
 		user_password[7] = prefs2.getInt("8th password",0);
+		SharedPreferences pref3 = getSharedPreferences("num", MODE_PRIVATE);
+		app_num[0]=pref3.getInt("num1",0);
+		app_num[1]=pref3.getInt("num2",0);
+		app_num[2]=pref3.getInt("num3",0);
+		app_num[3]=pref3.getInt("num4",0);
 
 
 		if(num == 4) {
@@ -290,7 +296,7 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 		SharedPreferences prefs = getSharedPreferences("PakageName", MODE_PRIVATE);
 		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-		if(num == 1){
+		if(num == app_num[0]){
 			String pakage_name = prefs.getString("name1", "");
 			if(pakage_name.equals("")){
 				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -303,7 +309,7 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 			}
 		}
 
-		else if(num == 2){
+		else if(num == app_num[1]){
 			String pakage_name = prefs.getString("name2", "");
 			if(pakage_name.equals("")){
 				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -315,7 +321,7 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 				startActivity(intent);
 			}
 		}
-		else if(num == 3){
+		else if(num == app_num[2]){
 			String pakage_name = prefs.getString("name3", "");
 			if(pakage_name.equals("")){
 				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -327,7 +333,7 @@ public class lockscreendemo extends AppCompatActivity implements OnClickListener
 				startActivity(intent);
 			}
 		}
-		if(num == 4){
+		if(num == app_num[3]){
 			String pakage_name = prefs.getString("name4", "");
 			if(pakage_name.equals("")){
 				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
