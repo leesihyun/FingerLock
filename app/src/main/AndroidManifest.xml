@@ -26,36 +26,43 @@
         <activity android:name=".PinLock" />
         <activity android:name=".PinSettingActivity" />
         <activity android:name=".RE_PinPassword" />
+
         <service android:name=".SimpleService" />
-=======
-        <activity android:name="touchtab_lockscreen"></activity>
-        <activity android:name=".TouchTabSettingActivity"></activity>
-        <activity android:name=".ColorTabSettingActivity"></activity>
-        <activity android:name=".ColorTabPreview" android:theme="@android:style/Theme.Dialog"></activity>
+        =======
+        <activity android:name=".touchtab_lockscreen" />
+        <activity android:name=".TouchTabSettingActivity" />
+        <activity android:name=".ColorTabSettingActivity" />
+        <activity
+            android:name=".ColorTabPreview"
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".ApplicationSelectionActivity"
-            android:theme = "@android:style/Theme.Dialog"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".TouchTabFourActivity"></activity>
-        <activity android:name=".TouchTabFiveActivity"></activity>
-        <activity android:name=".TouchTabSixActivity"></activity>
-        <activity android:name=".TouchTabFourPassword"></activity>
-        <activity android:name=".RE_TouchTabFourPassword"></activity>
-        <activity android:name=".TouchTabFivePassword"></activity>
-        <activity android:name=".RE_TouchTabFivePassword"></activity>
-        <activity android:name=".TouchTabSixPassword"></activity>
-        <activity android:name=".RE_TouchTabSixPassword"></activity>
-        <activity android:name=".ColorTabFourActivity"></activity>
-        <activity android:name=".ColorTabFiveActivity"></activity>
-        <activity android:name=".ColorTabSixActivity"></activity>
-        <activity android:name=".ColorTabFourPassword"></activity>
-        <activity android:name=".RE_ColorTabFourPassword"></activity>
-        <activity android:name=".ColorTabFivePassword"></activity>
-        <activity android:name=".RE_ColorTabFivePassword"></activity>
-        <activity android:name=".ColorTabSixPassword"></activity>
-        <activity android:name=".RE_ColorTabSixPassword"></activity>
-        <service android:name="SimpleService"></service>
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog"></activity>
+        <activity android:name=".TouchTabFourActivity" />
+        <activity android:name=".TouchTabFiveActivity" />
+        <activity android:name=".TouchTabSixActivity" />
+        <activity android:name=".TouchTabFourPassword" />
+        <activity android:name=".RE_TouchTabFourPassword" />
+        <activity android:name=".TouchTabFivePassword" />
+        <activity android:name=".RE_TouchTabFivePassword" />
+        <activity android:name=".TouchTabSixPassword" />
+        <activity android:name=".RE_TouchTabSixPassword" />
+        <activity android:name=".ColorTabFourActivity" />
+        <activity android:name=".ColorTabFiveActivity" />
+        <activity android:name=".ColorTabSixActivity" />
+        <activity android:name=".ColorTabFourPassword" />
+        <activity android:name=".RE_ColorTabFourPassword" />
+        <activity android:name=".ColorTabFivePassword" />
+        <activity android:name=".RE_ColorTabFivePassword" />
+        <activity android:name=".ColorTabSixPassword" />
+        <activity android:name=".RE_ColorTabSixPassword" />
+        <activity android:name=".FingerprintAddActivity" />
+        <activity android:name=".FingerprintSettingActivity" />
+
+        <service android:name=".SimpleService" />
+
+        <activity android:name=".FingerprintEditActivity"></activity>
     </application>
 
 </manifest>
