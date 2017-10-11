@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity{
     ImageButton touch_tab_setting;
     ImageButton pin_lock_setting;
     ImageButton color_tab_setting;
+    ImageButton finger_lock_setting;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -128,6 +129,16 @@ public class MainActivity extends AppCompatActivity{
                 }
         );
 
+        finger_lock_setting = (ImageButton)findViewById(R.id.finger_lock_setting);
+        finger_lock_setting.setOnClickListener(new OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View v) {
+                                                       Log.d("환경설정 >> ", "지문설정");
+                                                       Intent intent = new Intent(getApplicationContext(), FingerprintSettingActivity.class);
+                                                       startActivity(intent);
+                                                   }
+                                               }
+        );
 
     }
 

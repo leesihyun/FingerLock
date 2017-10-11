@@ -27,7 +27,6 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.List;
-
 public class ApplicationSelectionActivity extends Activity {
 
     Activity act = this;

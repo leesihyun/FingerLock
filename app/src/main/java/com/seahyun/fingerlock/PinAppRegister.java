@@ -151,7 +151,6 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
                 int num2 = prefs2.getInt("num2", 0);
                 int num3 = prefs2.getInt("num3", 0);
                 int num4 = prefs2.getInt("num4", 0);
-
                 Log.d("CCC >> ", String.valueOf(num1));
                 Log.d("CCC >> ", String.valueOf(num2));
                 Log.d("CCC >> ", String.valueOf(num3));
