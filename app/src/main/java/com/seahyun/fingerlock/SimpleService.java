@@ -23,7 +23,6 @@ public class SimpleService extends Service {
 			Toast.makeText(context, "서비스 실행중!", Toast.LENGTH_LONG).show();
             /*String action = intent.getAction();
 			if(action.equals("android.intent.action.SCREEN_OFF")){
-            	Intent i = new Intent(context, lockscreendemo.class);
             	i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             	context.startActivity(i);
             }*/
@@ -36,7 +35,7 @@ public class SimpleService extends Service {
 
 				disableKeyguard();
 
-				Intent i = new Intent(context, lockscreendemo.class);
+				Intent i = new Intent(context, touchtab_lockscreen.class);
 				i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				context.startActivity(i);
 			}

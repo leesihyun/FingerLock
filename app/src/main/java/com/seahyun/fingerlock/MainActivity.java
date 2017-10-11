@@ -26,7 +26,9 @@ public class MainActivity extends AppCompatActivity{
     //private Button stopServiceButton;
     //private Button checkAliveButton;
     Switch touch_tab;
+    Switch color_tab;
     ImageButton touch_tab_setting;
+    ImageButton color_tab_setting;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,33 @@ public class MainActivity extends AppCompatActivity{
                     public void onClick(View v){
                         Log.d("환경설정 >> ", "터치탭");
                         Intent intent = new Intent(getApplicationContext(), TouchTabSettingActivity.class);
+                        startActivity(intent);
+
+                    }
+                }
+        );
+
+        color_tab = (Switch)findViewById(R.id.color_tab_lock);
+        color_tab.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        if(color_tab.isChecked()){
+                            startService(new Intent(MainActivity.this, SimpleService.class));
+                            color_tab.setChecked(true);
+                        }
+                        else{
+                            stopService(new Intent(MainActivity.this, SimpleService.class));
+                            color_tab.setChecked(false);
+                        }
+                    }
+                });
+
+        color_tab_setting = (ImageButton)findViewById(R.id.color_tab_lock_setting);
+        color_tab_setting.setOnClickListener(
+                new Button.OnClickListener(){
+                    public void onClick(View v){
+                        Log.d("환경설정 >> ", "컬러탭");
+                        Intent intent = new Intent(getApplicationContext(), ColorTabSettingActivity.class);
                         startActivity(intent);
 
                     }

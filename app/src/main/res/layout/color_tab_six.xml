@@ -15,7 +15,7 @@
             android:id="@+id/button6_1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_shape"
             android:layout_marginRight="5dp"
             android:textColor="#FFFFFF"/>
 
@@ -24,14 +24,14 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginRight="5dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_shape"
             android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/button6_3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_shape"
             android:textColor="#FFFFFF"/>
 
     </LinearLayout>
@@ -44,7 +44,7 @@
             android:id="@+id/button6_4"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_shape"
             android:layout_marginRight="5dp"
             android:textColor="#FFFFFF"/>
 
@@ -52,7 +52,7 @@
             android:id="@+id/button6_5"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_shape"
             android:layout_marginRight="5dp"
             android:textColor="#FFFFFF"/>
 
@@ -60,7 +60,7 @@
             android:id="@+id/button6_6"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_shape"
             android:textColor="#FFFFFF"/>
 
     </LinearLayout>

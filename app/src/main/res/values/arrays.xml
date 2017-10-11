@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="touch_tab_num">
+    <string-array name="tab_num">
         <item>4개</item>
         <item>5개</item>
         <item>6개</item>

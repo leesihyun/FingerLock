@@ -137,6 +137,7 @@ public class TouchTabFivePassword extends AppCompatActivity implements View.OnCl
                 Log.d(TAG, "비밀번호 확인 Activity로 이동");
                 Intent intent = new Intent(getApplicationContext(), RE_TouchTabFivePassword.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

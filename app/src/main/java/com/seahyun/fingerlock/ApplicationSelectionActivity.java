@@ -126,9 +126,14 @@ public class ApplicationSelectionActivity extends Activity {
                     SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
                     SharedPreferences.Editor prefsEditor3 = prefs4.edit();
 
+                    SharedPreferences prefs5 = getSharedPreferences("select_color", MODE_PRIVATE);
+
                     //if (num == 4) {//터치탭 개수가 4개일 때
                         if(prefs2.getBoolean("select1",false)==true) { //선택한 어플을 터치탭에 등록
                             Log.d("터치탭 선택 >> ", "1번 터치탭");
+
+                            //int i = prefs.getInt("passwd", 0);
+                            //shortcut[i] = msg;
                             shortcut[0] = msg;
 
                             //applicationSave(0, info.activityInfo.packageName);
@@ -146,8 +151,11 @@ public class ApplicationSelectionActivity extends Activity {
                         }
                         else if(prefs2.getBoolean("select2",false)==true){
                             Log.d("터치탭 선택 >> ", "2번 터치탭");
-                            shortcut[1] = msg;
 
+                            //int i = prefs.getInt("passwd", 0);
+
+                            //shortcut[i] = msg;
+                            shortcut[1] = msg;
                             //applicationSave(1, info.activityInfo.packageName);
 
                             prefsEditor.putBoolean("select2", false);
@@ -163,8 +171,10 @@ public class ApplicationSelectionActivity extends Activity {
                         }
                         else if(prefs2.getBoolean("select3",false)==true){
                             Log.d("터치탭 선택 >> ", "3번 터치탭");
-                            shortcut[2] = msg;
 
+                            //int i = prefs.getInt("passwd", 0);
+                            //shortcut[i] = msg;
+                            shortcut[2] = msg;
                             //applicationSave(2, info.activityInfo.packageName);
                             prefsEditor.putBoolean("select3", false);
                             prefsEditor.commit();
@@ -179,8 +189,10 @@ public class ApplicationSelectionActivity extends Activity {
                         }
                         else if(prefs2.getBoolean("select4",false)==true){
                             Log.d("터치탭 선택 >> ", "4번 터치탭");
-                            shortcut[3] = msg;
 
+//                            int i = prefs.getInt("passwd", 0);
+//                            shortcut[i] = msg;
+                            shortcut[3] = msg;
                             //applicationSave(3, info.activityInfo.packageName);
                             prefsEditor.putBoolean("select4", false);
                             prefsEditor.commit();
@@ -195,8 +207,9 @@ public class ApplicationSelectionActivity extends Activity {
                         }
                         else if(prefs2.getBoolean("select5",false)==true){
                             Log.d("터치탭 선택 >> ", "5번 터치탭");
+//                            int i = prefs.getInt("passwd", 0);
+//                            shortcut[i] = msg;
                             shortcut[4] = msg;
-
                             prefsEditor.putBoolean("select5", false);
                             prefsEditor.commit();
 
@@ -211,6 +224,7 @@ public class ApplicationSelectionActivity extends Activity {
                         }
                         else if(prefs2.getBoolean("select6",false)==true){
                             Log.d("터치탭 선택 >> ", "6번 터치탭");
+//                            int i = prefs.getInt("passwd", 0);
                             shortcut[5] = msg;
                             //applicationSave(5, info.activityInfo.packageName);
                             prefsEditor.putBoolean("select6", false);

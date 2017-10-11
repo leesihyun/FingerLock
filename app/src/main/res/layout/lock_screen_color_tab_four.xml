@@ -19,7 +19,6 @@
            android:id="@+id/button4_1"
            android:layout_width="150dp"
            android:layout_height="150dp"
-           android:background="@drawable/touch_tab_shape"
            android:layout_marginRight="5dp"
            android:textColor="#FFFFFF"/>
 
@@ -27,7 +26,6 @@
            android:id="@+id/button4_2"
            android:layout_width="150dp"
            android:layout_height="150dp"
-           android:background="@drawable/touch_tab_shape"
            android:textColor="#FFFFFF"/>
 
    </LinearLayout>
@@ -39,7 +37,6 @@
            android:id="@+id/button4_3"
            android:layout_width="150dp"
            android:layout_height="150dp"
-           android:background="@drawable/touch_tab_shape"
            android:layout_marginRight="5dp"
            android:textColor="#FFFFFF"/>
 
@@ -47,7 +44,6 @@
            android:id="@+id/button4_4"
            android:layout_width="150dp"
            android:layout_height="150dp"
-           android:background="@drawable/touch_tab_shape"
            android:textColor="#FFFFFF"/>
 
    </LinearLayout>

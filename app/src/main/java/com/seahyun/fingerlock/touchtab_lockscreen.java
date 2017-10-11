@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class lockscreendemo extends AppCompatActivity implements OnClickListener {
+public class touchtab_lockscreen extends AppCompatActivity implements OnClickListener {
 
 	private static int password_size ;
 	private static int count = 0;
