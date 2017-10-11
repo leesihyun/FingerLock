@@ -162,6 +162,9 @@ public class PinSettingActivity extends AppCompatActivity implements View.OnClic
                 break;
             case R.id.setting_complete:
                 Log.d(TAG, "완료버튼 클릭");
+                Intent intent5 = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent5);
+                finish();
                 /*final SharedPreferences p = getSharedPreferences("user_tab_num", MODE_PRIVATE);
                 final SharedPreferences.Editor prefsEditor = p.edit();
                 int n = p.getInt("tab_num", 0);
@@ -198,7 +201,7 @@ public class PinSettingActivity extends AppCompatActivity implements View.OnClic
                     nothing_selected.show();
                 }
                 else*/
-                finish();
+              //  finish();
                 break;
         }
     }
