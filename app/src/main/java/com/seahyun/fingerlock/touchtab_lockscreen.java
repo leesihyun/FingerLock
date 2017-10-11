@@ -102,6 +102,11 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 			button2 = (Button) findViewById(R.id.button4_2);
 			button3 = (Button) findViewById(R.id.button4_3);
 			button4 = (Button) findViewById(R.id.button4_4);
+
+			button1.setOnClickListener(this);
+			button2.setOnClickListener(this);
+			button3.setOnClickListener(this);
+			button4.setOnClickListener(this);
 		}
 		else if(num == 5){
 			button1 = (Button) findViewById(R.id.button5_1);
@@ -109,6 +114,12 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 			button3 = (Button) findViewById(R.id.button5_3);
 			button4 = (Button) findViewById(R.id.button5_4);
 			button5 = (Button) findViewById(R.id.button5_5);
+
+			button1.setOnClickListener(this);
+			button2.setOnClickListener(this);
+			button3.setOnClickListener(this);
+			button4.setOnClickListener(this);
+			button5.setOnClickListener(this);
 
 		}
 		else if(num == 6){
@@ -119,13 +130,14 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 			button5 = (Button) findViewById(R.id.button6_5);
 			button6 = (Button) findViewById(R.id.button6_6);
 
+			button1.setOnClickListener(this);
+			button2.setOnClickListener(this);
+			button3.setOnClickListener(this);
+			button4.setOnClickListener(this);
+			button5.setOnClickListener(this);
+			button6.setOnClickListener(this);
 		}
-		button1.setOnClickListener(this);
-		button2.setOnClickListener(this);
-		button3.setOnClickListener(this);
-		button4.setOnClickListener(this);
-		button5.setOnClickListener(this);
-		button6.setOnClickListener(this);
+
 
 		//check_application();
 
