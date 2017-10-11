@@ -95,13 +95,13 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(pin_lock.isChecked()){
-                            startService(new Intent(MainActivity.this, SimpleServicePin.class));
+                            startService(new Intent(MainActivity.this, SimpleService.class));
                             pin_lock.setChecked(true);
                             prefsEditor.putInt("lock",3);
                             prefsEditor.commit();
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, SimpleServicePin.class));
+                            stopService(new Intent(MainActivity.this, SimpleService.class));
                             pin_lock.setChecked(false);
                         }
                     }
