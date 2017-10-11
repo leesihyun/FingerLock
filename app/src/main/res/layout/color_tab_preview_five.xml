@@ -14,7 +14,7 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_orange"
             android:layout_marginRight="5dp"
             android:text="여기에 어플을 등록합니다"
             android:textColor="#FFFFFF"/>
@@ -22,7 +22,7 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_yellow"
             android:text="여기에 어플을 등록합니다"
             android:textColor="#FFFFFF"/>
 
@@ -34,7 +34,7 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_green"
             android:layout_marginRight="5dp"
             android:text="여기에 어플을 등록합니다"
             android:textColor="#FFFFFF"/>
@@ -42,7 +42,7 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_blue"
             android:layout_marginRight="5dp"
             android:text="여기에 어플을 등록합니다"
             android:textColor="#FFFFFF"/>
@@ -50,7 +50,7 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/touch_tab_shape"
+            android:background="@drawable/color_tab_purple"
             android:text="여기에 어플을 등록합니다"
             android:textColor="#FFFFFF"/>
 

@@ -125,6 +125,7 @@ public class TouchTabFourPassword extends AppCompatActivity implements View.OnCl
                 Log.d(TAG, "1) 비밀번호 개수 >> "+String.valueOf(password_count));
                 Intent intent = new Intent(getApplicationContext(), RE_TouchTabFourPassword.class);
                 startActivity(intent);
+                finish();
                 break;
         }
     }

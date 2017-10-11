@@ -143,12 +143,14 @@ public class RE_TouchTabFivePassword extends AppCompatActivity implements View.O
                     Log.d(TAG, "터치탭 환경설정 화면으로 이동");
                     Intent intent = new Intent(getApplicationContext(), TouchTabSettingActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 else{
                     Toast.makeText(this, "비밀번호를 다시 입력합니다.", Toast.LENGTH_SHORT).show();
                     password_count=0;
                     Intent intent = new Intent(getApplicationContext(), TouchTabFivePassword.class);
                     startActivity(intent);
+                    finish();
                 }
                 break;
         }

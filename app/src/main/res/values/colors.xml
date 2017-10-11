@@ -9,4 +9,11 @@
     <color name="DarkYellow">#998A2F</color>
     <color name="DarkOrange">#FFA644</color>
     <color name="DarkPink">#E54661</color>
+
+    <color name="Orange">#eb591c</color>
+    <color name="Yellow">#e5bd04</color>
+    <color name="Pink">#f746b7</color>
+    <color name="Purple">#9503e0</color>
+    <color name="Blue">#0085D6</color>
+    <color name="Green">#74ac51</color>
 </resources>

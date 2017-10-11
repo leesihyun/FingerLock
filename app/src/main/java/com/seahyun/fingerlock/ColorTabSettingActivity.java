@@ -1,15 +1,11 @@
 package com.seahyun.fingerlock;
 
-import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -20,21 +16,24 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by seahyun on 2017-09-20.
  */
 
-public class TouchTabSettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class ColorTabSettingActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     public int tab_num;
-    private static String TAG = "TouchTabSettingActivity";
-    TouchTabPreview object = new TouchTabPreview();
+    private static String TAG = "ColorTabSettingActivity";
+    ColorTabPreview object = new ColorTabPreview();
     Spinner s;
     private String PackageName[] = new String[6];
 
+    private static int color[] = new int[6];
+
+    private View header4,header5, header6;
+
+    //private boolean select = false;
     ImageView imageView1;
     ImageView imageView2;
     ImageView imageView3;
@@ -56,13 +55,13 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
 
         ActionBar actionBar = getSupportActionBar();
         //ActionBar title 변경
-        actionBar.setTitle("터치탭 환경설정");
+        actionBar.setTitle("컬러탭 환경설정");
         // ActionBar 배경색 변경
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.DarkBlue));
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.DarkGreen));
 
-        getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.DarkGreen));
 
-        setContentView(R.layout.touch_tab_setting);
+        setContentView(R.layout.color_tab_setting);
 
 
         Button select = (Button)findViewById(R.id.application_select);
@@ -71,11 +70,12 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
         Button complete = (Button)findViewById(R.id.setting_complete);
         Button init = (Button)findViewById(R.id.application_init);
 
-        preview.setOnClickListener((View.OnClickListener)TouchTabSettingActivity.this);
-        select.setOnClickListener((View.OnClickListener) TouchTabSettingActivity.this);
-        set_password.setOnClickListener((View.OnClickListener)TouchTabSettingActivity.this);
-        complete.setOnClickListener((View.OnClickListener)TouchTabSettingActivity.this);
-        init.setOnClickListener((View.OnClickListener)TouchTabSettingActivity.this);
+        preview.setOnClickListener((View.OnClickListener)ColorTabSettingActivity.this);
+        select.setOnClickListener((View.OnClickListener) ColorTabSettingActivity.this);
+        set_password.setOnClickListener((View.OnClickListener)ColorTabSettingActivity.this);
+        complete.setOnClickListener((View.OnClickListener)ColorTabSettingActivity.this);
+        init.setOnClickListener((View.OnClickListener)ColorTabSettingActivity.this);
+
 
 
         imageView1 = (ImageView)findViewById(R.id.image1);
@@ -94,7 +94,7 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
 
 
         //tab_num 스피너 생성
-        s = (Spinner)findViewById(R.id.touch_tab_num);
+        s = (Spinner)findViewById(R.id.color_tab_num);
         SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
         Log.d(TAG, "사용자가 설정한 탭 개수 >>"+prefs.getInt("tab_num", 4));
         if(prefs.getInt("tab_num", 4)==4){
@@ -108,11 +108,18 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
         }
         //s.setSelection(prefs.getInt("tab_num", 4));
 
-        select_touch_tab();
+        color[0] = R.color.Orange;
+        color[1] = R.color.Yellow;
+        color[2] = R.color.Green;
+        color[3] = R.color.Blue;
+        color[4] = R.color.Purple;
+        color[5] = R.color.Pink;
+
+        select_color_tab();
     }
 
     //터치탭 개수 설정하기
-    public void select_touch_tab(){
+    public void select_color_tab(){
 
         SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
         final SharedPreferences.Editor prefsEditor = prefs.edit();
@@ -121,37 +128,6 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
-                //Toast.makeText(TouchTabSettingActivity.this, parent.getItemAtPosition(position)+"를 선택하셨습니다!", Toast.LENGTH_SHORT).show();
-                //if(parent.getItemAtPosition(position).toString().equals("선택하지 않음")){
-                //    tab_num = 0;
-                //    prefsEditor.putInt("tab_num", 0);
-                //    prefsEditor.commit();
-                    //tab_num 선택하지 않을 시 대화상자 띄우기
-                    /*final AlertDialog.Builder nothing_selected = new AlertDialog.Builder(TouchTabSettingActivity.this);
-
-                    nothing_selected.setTitle("아무것도 선택하지 않으셨습니다")
-                            .setMessage("기본 설정 값인 4개로 설정됩니다.")
-                            .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                                //확인 버튼 클릭
-                                public void onClick(DialogInterface dialog, int whichButton){
-                                    tab_num = 4;
-                                    //putTabnum();
-                                    prefsEditor.putInt("tab_num", 4);
-                                    prefsEditor.commit();
-                                    dialog.cancel();
-                                }
-                            })
-                            .setNegativeButton("취소", new DialogInterface.OnClickListener(){
-                                //취소 버튼 클릭
-                                public void onClick(DialogInterface dialog, int whichButton){
-                                    tab_num = 4;
-                                    prefsEditor.putInt("tab_num", 4);
-                                    prefsEditor.commit();
-                                    dialog.cancel();
-                                }
-
-                            });*/
-                //}
                 if(parent.getItemAtPosition(position).toString().contains("4")){
                     tab_num = 4;
                     prefsEditor.putInt("tab_num", 4);
@@ -173,7 +149,7 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
                     prefsEditor.putInt("tab_num", 6);
                     prefsEditor.commit();
                 }
-                //putTabnum();
+                tabColorSetting();
 
             }
             @Override
@@ -191,22 +167,23 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
 
         switch (v.getId()){
             case R.id.preview: //미리보기 버튼
-                Intent intent = new Intent(getApplicationContext(), TouchTabPreview.class);
+                Intent intent = new Intent(getApplicationContext(), ColorTabPreview.class);
                 startActivity(intent);
                 break;
             case R.id.application_select: //어플 선택하기 버튼
+                //select = true;
                 SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
                 int num = prefs.getInt("tab_num", 4);
                 if(num == 4){
-                    Intent intent2 = new Intent(getApplicationContext(), TouchTabFourActivity.class);
+                    Intent intent2 = new Intent(getApplicationContext(), ColorTabFourActivity.class);
                     startActivity(intent2);
                 }
                 else if(num == 5){
-                    Intent intent2 = new Intent(getApplicationContext(), TouchTabFiveActivity.class);
+                    Intent intent2 = new Intent(getApplicationContext(), ColorTabFiveActivity.class);
                     startActivity(intent2);
                 }
                 else if(num == 6){
-                    Intent intent2 = new Intent(getApplicationContext(), TouchTabSixActivity.class);
+                    Intent intent2 = new Intent(getApplicationContext(), ColorTabSixActivity.class);
                     startActivity(intent2);
                 }
                 break;
@@ -216,29 +193,31 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
                 break;
             case R.id.set_password: //비밀번호 설정 버튼
                 Log.d("버튼 입력 >> ", "비밀번호 설정");
-                SharedPreferences prefs2 = getSharedPreferences("user_tab_num", MODE_PRIVATE);
-                int tab_num2 = prefs2.getInt("tab_num", 4);
-                Log.d(TAG, "터치탭 개수 >> "+tab_num2);
-                if(tab_num2 == 4){
-                    Intent intent3 = new Intent(getApplicationContext(), TouchTabFourPassword.class);
-                    startActivity(intent3);
-                }
-                else if(tab_num2 == 5){
-                    Intent intent3 = new Intent(getApplicationContext(), TouchTabFivePassword.class);
-                    startActivity(intent3);
+                //if(select == false){
+                //    Toast.makeText(this, "바로가기 설정할 어플을 먼저 선택해주세요", Toast.LENGTH_SHORT).show();
+                //}
+                //else {
+                    SharedPreferences prefs2 = getSharedPreferences("user_tab_num", MODE_PRIVATE);
+                    int tab_num2 = prefs2.getInt("tab_num", 4);
+                    Log.d(TAG, "터치탭 개수 >> " + tab_num2);
+                    if (tab_num2 == 4) {
+                        Intent intent3 = new Intent(getApplicationContext(), ColorTabFourPassword.class);
+                        startActivity(intent3);
+                    } else if (tab_num2 == 5) {
+                        Intent intent3 = new Intent(getApplicationContext(), ColorTabFivePassword.class);
+                        startActivity(intent3);
 
-                }
-                else if(tab_num2 == 6){
-                    Intent intent3 = new Intent(getApplicationContext(), TouchTabSixPassword.class);
-                    startActivity(intent3);
-                }
+                    } else if (tab_num2 == 6) {
+                        Intent intent3 = new Intent(getApplicationContext(), ColorTabSixPassword.class);
+                        startActivity(intent3);
+                    }
+               // }
                 break;
             case R.id.setting_complete:
                 Log.d(TAG, "완료버튼 클릭");
                 Intent intent3 = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent3);
                 finish();
-
         }
     }
 
@@ -319,6 +298,8 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
     protected void onResume() {
         super.onResume();
 
+        //tabColorSetting();
+
         SharedPreferences pref = getSharedPreferences("PakageName", MODE_PRIVATE);
         SharedPreferences pref2 = getSharedPreferences("Message", MODE_PRIVATE);
 
@@ -331,38 +312,48 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
         PackageName[4] = pref.getString("name5","");
         PackageName[5] = pref.getString("name6","");
 
+        for(int i=0; i<6; i++){
+            Log.d(TAG, "바로가기 설정된 어플 >> "+PackageName[i]);
+        }
 
         try {
+
             if(!PackageName[0].equals("")) {
                 Drawable App_icon1 = pm.getApplicationIcon(PackageName[0]);
+                Log.d(TAG, "어플이름 >> "+pref2.getString("msg1",""));
                 imageView1.setImageDrawable(App_icon1);
                 textView1.setText(pref2.getString("msg1",""));
             }
 
             if(!PackageName[1].equals("")) {
                 Drawable App_icon2 = pm.getApplicationIcon(PackageName[1]);
+                Log.d(TAG, "어플이름 >> "+pref2.getString("msg2",""));
                 imageView2.setImageDrawable(App_icon2);
                 textView2.setText(pref2.getString("msg2",""));
             }
 
             if(!PackageName[2].equals("")) {
                 Drawable App_icon3 = pm.getApplicationIcon(PackageName[2]);
+                Log.d(TAG, "어플이름 >> "+pref2.getString("msg3",""));
                 imageView3.setImageDrawable(App_icon3);
                 textView3.setText(pref2.getString("msg3",""));
             }
             if(!PackageName[3].equals("")) {
                 Drawable App_icon4 = pm.getApplicationIcon(PackageName[3]);
+                Log.d(TAG, "어플이름 >> "+pref2.getString("msg4",""));
                 imageView4.setImageDrawable(App_icon4);
                 textView4.setText(pref2.getString("msg4",""));
             }
             if(!PackageName[4].equals("")) {
                 Drawable App_icon5 = pm.getApplicationIcon(PackageName[4]);
+                Log.d(TAG, "어플이름 >> "+pref2.getString("msg5",""));
                 imageView5.setImageDrawable(App_icon5);
                 textView5.setText(pref2.getString("msg5",""));
             }
 
             if(!PackageName[5].equals("")) {
                 Drawable App_icon6 = pm.getApplicationIcon(PackageName[5]);
+                Log.d(TAG, "어플이름 >> "+pref2.getString("msg6",""));
                 imageView6.setImageDrawable(App_icon6);
                 textView6.setText(pref2.getString("msg6",""));
             }
@@ -383,4 +374,131 @@ public class TouchTabSettingActivity extends AppCompatActivity implements View.O
         }
 
     }
+
+    public void tabColorSetting(){
+
+        SharedPreferences prefs2 = getSharedPreferences("user_tab_num", MODE_PRIVATE);
+        int tab_num2 = prefs2.getInt("tab_num", 4);
+
+        int random[] = new int[tab_num2];
+
+        for(int i=0; i<random.length; i++){
+
+            random[i] = (int)(Math.random()*tab_num2);
+
+            for(int j=0; j<i; j++){
+                if(random[i] == random[j]){
+                    i--;
+                    break;
+                }
+            }
+
+        }
+
+        for (int i=0; i<random.length; i++){
+            Log.d(TAG, "랜덤숫자 >> "+String.valueOf(random[i]));
+        }
+        SharedPreferences prefs = getSharedPreferences("color", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = prefs.edit();
+
+        String colorname[] = new String[tab_num2];
+
+        for(int i=0; i<tab_num2; i++) {
+            if (color[random[i]] == R.color.Orange)
+                colorname[i] = "Orange";
+            else if (color[random[i]] == R.color.Yellow)
+                colorname[i] = "Yellow";
+            else if (color[random[i]] == R.color.Green)
+                colorname[i] = "Green";
+            else if (color[random[i]] == R.color.Blue)
+                colorname[i] = "Blue";
+            else if(color[random[i]] == R.color.Purple)
+                colorname[i] = "Purple";
+            else if(color[random[i]] == R.color.Pink)
+                colorname[i] = "Pink";
+        }
+        if(tab_num2 == 4){
+            prefsEditor.putString("color1", colorname[0]);
+            prefsEditor.putString("color2", colorname[1]);
+            prefsEditor.putString("color3", colorname[2]);
+            prefsEditor.putString("color4", colorname[3]);
+        }
+        else if(tab_num2 == 5){
+            prefsEditor.putString("color1", colorname[0]);
+            prefsEditor.putString("color2", colorname[1]);
+            prefsEditor.putString("color3", colorname[2]);
+            prefsEditor.putString("color4", colorname[3]);
+            prefsEditor.putString("color5", colorname[4]);
+        }
+        else if(tab_num2 == 6){
+            prefsEditor.putString("color1", colorname[0]);
+            prefsEditor.putString("color2", colorname[1]);
+            prefsEditor.putString("color3", colorname[2]);
+            prefsEditor.putString("color4", colorname[3]);
+            prefsEditor.putString("color5", colorname[4]);
+            prefsEditor.putString("color6", colorname[5]);
+        }
+
+
+
+//        Log.d(TAG, "탭 색깔 >> "+colorname[0]);
+//        Log.d(TAG, "탭 색깔 >> "+colorname[1]);
+//        Log.d(TAG, "탭 색깔 >> "+colorname[2]);
+//        Log.d(TAG, "탭 색깔 >> "+colorname[3]);
+//        Log.d(TAG, "탭 색깔 >> "+colorname[4]);
+//        Log.d(TAG, "탭 색깔 >> "+colorname[5]);
+        prefsEditor.commit();
+
+
+
+        Button button1, button2, button3, button4, button5, button6;
+
+        header4 = getLayoutInflater().inflate(R.layout.color_tab_four, null, false);
+        header5 = getLayoutInflater().inflate(R.layout.color_tab_five, null, false);
+        header6 = getLayoutInflater().inflate(R.layout.color_tab_six, null, false);
+
+        if(tab_num2 == 4){
+            button1 = (Button)header4.findViewById(R.id.button4_1);
+            button2 = (Button)header4.findViewById(R.id.button4_2);
+            button3 = (Button)header4.findViewById(R.id.button4_3);
+            button4 = (Button)header4.findViewById(R.id.button4_4);
+
+            button1.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[0]]));
+            button2.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[1]]));
+            button3.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[2]]));
+            button4.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[3]]));
+        }
+        else if(tab_num2 == 5){
+            button1 = (Button)header5.findViewById(R.id.button5_1);
+            button2 = (Button)header5.findViewById(R.id.button5_2);
+            button3 = (Button)header5.findViewById(R.id.button5_3);
+            button4 = (Button)header5.findViewById(R.id.button5_4);
+            button5 = (Button)header5.findViewById(R.id.button5_5);
+
+            button1.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[0]]));
+            button2.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[1]]));
+            button3.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[2]]));
+            button4.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[3]]));
+            button5.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[4]]));
+        }
+        else if(tab_num2 == 6){
+            button1 = (Button)header6.findViewById(R.id.button6_1);
+            button2 = (Button)header6.findViewById(R.id.button6_2);
+            button3 = (Button)header6.findViewById(R.id.button6_3);
+            button4 = (Button)header6.findViewById(R.id.button6_4);
+            button5 = (Button)header6.findViewById(R.id.button6_5);
+            button6 = (Button)header6.findViewById(R.id.button6_6);
+
+            button1.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[0]]));
+            button2.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[1]]));
+            button3.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[2]]));
+            button4.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[3]]));
+            button5.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[4]]));
+            button6.setBackgroundColor(getApplicationContext().getResources().getColor(color[random[5]]));
+        }
+
+
+
+    }
+
 }
