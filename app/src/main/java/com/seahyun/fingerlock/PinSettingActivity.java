@@ -247,6 +247,15 @@ public class PinSettingActivity extends AppCompatActivity implements View.OnClic
         prefsEditor3.putString("name6","");
         prefsEditor3.commit();
 
+        SharedPreferences prefs4 = getSharedPreferences("num", MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor4 = prefs4.edit();
+
+        prefsEditor4.putInt("num1", 0);
+        prefsEditor4.putInt("num2", 0);
+        prefsEditor4.putInt("num3", 0);
+        prefsEditor4.putInt("num4", 0);
+        prefsEditor4.commit();
+
         TextView textView1 = (TextView)findViewById(R.id.app_name1);
         TextView textView2 = (TextView)findViewById(R.id.app_name2);
         TextView textView3 = (TextView)findViewById(R.id.app_name3);
@@ -315,25 +324,25 @@ public class PinSettingActivity extends AppCompatActivity implements View.OnClic
 
 
         try {
-            Drawable App_icon1 = pm.getApplicationIcon(PackageName[0]);
             if(!PackageName[0].equals("")) {
+                Drawable App_icon1 = pm.getApplicationIcon(PackageName[0]);
                 imageView1.setImageDrawable(App_icon1);
                 textView1.setText(Integer.toString(num[0]));
             }
 
-            Drawable App_icon2 = pm.getApplicationIcon(PackageName[1]);
             if(!PackageName[1].equals("")) {
+                Drawable App_icon2 = pm.getApplicationIcon(PackageName[1]);
                 imageView2.setImageDrawable(App_icon2);
                 textView2.setText(Integer.toString(num[1]));
             }
 
-            Drawable App_icon3 = pm.getApplicationIcon(PackageName[2]);
             if(!PackageName[2].equals("")) {
+                Drawable App_icon3 = pm.getApplicationIcon(PackageName[2]);
                 imageView3.setImageDrawable(App_icon3);
                 textView3.setText(Integer.toString(num[2]));
             }
-            Drawable App_icon4 = pm.getApplicationIcon(PackageName[3]);
             if(!PackageName[3].equals("")) {
+                Drawable App_icon4 = pm.getApplicationIcon(PackageName[3]);
                 imageView4.setImageDrawable(App_icon4);
                 textView4.setText(Integer.toString(num[3]));
             }
