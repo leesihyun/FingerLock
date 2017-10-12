@@ -24,7 +24,7 @@ public class ColorTabSettingActivity extends AppCompatActivity implements View.O
 
 
     public int tab_num;
-    private static String TAG = "ColorTabSettingActivity";
+    private static String TAG =  "ColorTabSettingActivity";
     ColorTabPreview object = new ColorTabPreview();
     Spinner s;
     private String PackageName[] = new String[6];

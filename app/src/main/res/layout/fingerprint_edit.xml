@@ -13,13 +13,25 @@
         android:layout_height="wrap_content"
         android:hint="fingerprint name"/>
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:id="@+id/fingeredit_image"/>
+
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fingeredit_selectButton"
+        android:layout_gravity="center"
+        android:text="앱 등록"/>
+    <!--
+    <ImageButton
         android:id="@+id/fingeredit_selectButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/shape"
         android:layout_gravity="center"
-        android:textColor="#FFFFFF"/>
+/>!-->
 
     <Button
         android:layout_width="match_parent"
