@@ -33,6 +33,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     private int user_password[] = new int[4];
     private boolean select_mode = false;
     private int application_number = 0;
+    private int app_num[]=new int [4];
 
     TouchTabFourPassword o = new TouchTabFourPassword();
 
@@ -78,6 +79,13 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         user_password[0] = prefs2.getInt("1st password",0);
         user_password[1] = prefs2.getInt("2nd password",0);
         user_password[2] = prefs2.getInt("3rd password",0);
+        user_password[3] = prefs2.getInt("4rd password",0);
+
+        SharedPreferences prefs3 = getSharedPreferences("num", MODE_PRIVATE);
+        app_num[0] = prefs3.getInt("num1",0);
+        app_num[1] = prefs3.getInt("num2",0);
+        app_num[2] = prefs3.getInt("num3",0);
+        app_num[3] = prefs3.getInt("num4",0);
 
         num1 = (EditText) findViewById(R.id.num1);
         num2 = (EditText) findViewById(R.id.num2);
@@ -364,7 +372,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         SharedPreferences prefs = getSharedPreferences("PakageName", MODE_PRIVATE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-        if(num == 1){
+        if(num == app_num[0]){
             String pakage_name = prefs.getString("name1", "");
             if(pakage_name.equals("")){
                 Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -377,7 +385,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
             }
         }
 
-        else if(num == 2){
+        else if(num == app_num[1]){
             String pakage_name = prefs.getString("name2", "");
             if(pakage_name.equals("")){
                 Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -389,7 +397,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 startActivity(intent);
             }
         }
-        else if(num == 3){
+        else if(num == app_num[2]){
             String pakage_name = prefs.getString("name3", "");
             if(pakage_name.equals("")){
                 Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -401,7 +409,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 startActivity(intent);
             }
         }
-        if(num == 4){
+        if(num == app_num[3]){
             String pakage_name = prefs.getString("name4", "");
             if(pakage_name.equals("")){
                 Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();

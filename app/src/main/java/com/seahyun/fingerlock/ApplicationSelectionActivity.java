@@ -27,7 +27,6 @@ import android.widget.Toast;
 import org.w3c.dom.Text;
 
 import java.util.List;
-
 public class ApplicationSelectionActivity extends Activity {
 
     Activity act = this;
@@ -171,12 +170,12 @@ public class ApplicationSelectionActivity extends Activity {
 
                             prefsEditor2.putString("msg2", shortcut[1]);
                             prefsEditor2.commit();
-
                             prefsEditor3.putString("name2", info.activityInfo.packageName);
                             prefsEditor3.commit();
 
-                            prefsEditor5.putInt("num1",num[0]);
-                            prefsEditor5.commit();
+
+                           // prefsEditor5.putInt("num1",num[0]);
+                           // prefsEditor5.commit();
                             Log.d("2번 바로가기 설정된 앱 >> ", shortcut[1]);
                         }
                         else if(prefs2.getBoolean("select3",false)==true){
@@ -195,8 +194,8 @@ public class ApplicationSelectionActivity extends Activity {
                             prefsEditor3.putString("name3", info.activityInfo.packageName);
                             prefsEditor3.commit();
 
-                            prefsEditor5.putInt("num2",num[1]);
-                            prefsEditor5.commit();
+                           // prefsEditor5.putInt("num2",num[1]);
+                            //prefsEditor5.commit();
                             Log.d("3번 바로가기 설정된 앱 >> ", shortcut[2]);
                         }
                         else if(prefs2.getBoolean("select4",false)==true){
@@ -214,8 +213,8 @@ public class ApplicationSelectionActivity extends Activity {
 
                             prefsEditor3.putString("name4", info.activityInfo.packageName);
                             prefsEditor3.commit();
-                            prefsEditor5.putInt("num3",num[2]);
-                            prefsEditor5.commit();
+                           // prefsEditor5.putInt("num3",num[2]);
+                           // prefsEditor5.commit();
                             Log.d("4번 바로가기 설정된 앱 >> ", shortcut[3]);
                         }
                         else if(prefs2.getBoolean("select5",false)==true){
@@ -232,8 +231,8 @@ public class ApplicationSelectionActivity extends Activity {
                             prefsEditor3.putString("name5", info.activityInfo.packageName);
                             prefsEditor3.commit();
                             //applicationSave(4, info.activityInfo.packageName);
-                            prefsEditor5.putInt("num4",num[3]);
-                            prefsEditor5.commit();
+                          //  prefsEditor5.putInt("num4",num[3]);
+                           // prefsEditor5.commit();
                             Log.d("5번 바로가기 설정된 앱 >> ", shortcut[4]);
                         }
                         else if(prefs2.getBoolean("select6",false)==true){

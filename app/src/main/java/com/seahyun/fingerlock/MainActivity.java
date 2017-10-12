@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity{
     ImageButton touch_tab_setting;
     ImageButton pin_lock_setting;
     ImageButton color_tab_setting;
+    ImageButton finger_lock_setting;
 
 
     public MainActivity(){};
@@ -125,7 +126,7 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(pin_lock.isChecked()){
-                            startService(new Intent(MainActivity.this, SimpleServicePin.class));
+                            startService(new Intent(MainActivity.this, SimpleService.class));
                             pin_lock.setChecked(true);
 
                             prefsEditor.putInt("lock",3);
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity{
                             prefsEditor2.commit();
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, SimpleServicePin.class));
+                            stopService(new Intent(MainActivity.this, SimpleService.class));
                             pin_lock.setChecked(false);
 
                             prefsEditor2.putBoolean("pin_lock", false);
@@ -180,6 +181,16 @@ public class MainActivity extends AppCompatActivity{
                 }
         );
 
+        finger_lock_setting = (ImageButton)findViewById(R.id.finger_lock_setting);
+        finger_lock_setting.setOnClickListener(new OnClickListener() {
+                                                   @Override
+                                                   public void onClick(View v) {
+                                                       Log.d("환경설정 >> ", "지문설정");
+                                                       Intent intent = new Intent(getApplicationContext(), FingerprintSettingActivity.class);
+                                                       startActivity(intent);
+                                                   }
+                                               }
+        );
 
 
 
