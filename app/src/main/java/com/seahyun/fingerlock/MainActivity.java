@@ -56,23 +56,44 @@ public class MainActivity extends AppCompatActivity{
         SharedPreferences prefs = getSharedPreferences("lock_mode", MODE_PRIVATE);
         final SharedPreferences.Editor prefsEditor = prefs.edit();
 
+        final SharedPreferences prefs2 = getSharedPreferences("switch_state", MODE_PRIVATE);
+        final SharedPreferences.Editor prefsEditor2 = prefs2.edit();
+
+
+
         touch_tab = (Switch)findViewById(R.id.touch_tab_lock);
+        /*이전 스위치 on/off 정보 유지*/
+        if(prefs2.getBoolean("touch_tab", false)){
+            touch_tab.setChecked(true);
+        }
         touch_tab.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(touch_tab.isChecked()){
                             startService(new Intent(MainActivity.this, SimpleService.class));
                             touch_tab.setChecked(true);
+
                             prefsEditor.putInt("lock",1);
                             prefsEditor.commit();
+
+                            prefsEditor2.putBoolean("touch_tab", true);
+                            prefsEditor2.commit();
+
                         }
                         else{
                             stopService(new Intent(MainActivity.this, SimpleService.class));
                             touch_tab.setChecked(false);
+
+                            prefsEditor2.putBoolean("touch_tab", false);
+                            prefsEditor2.commit();
                         }
                     }
                 });
         color_tab = (Switch)findViewById(R.id.color_tab_lock);
+        /*이전 스위치 on/off 정보 유지*/
+        if(prefs2.getBoolean("color_tab", false)){
+            color_tab.setChecked(true);
+        }
         color_tab.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
@@ -82,14 +103,23 @@ public class MainActivity extends AppCompatActivity{
 
                             prefsEditor.putInt("lock",2);
                             prefsEditor.commit();
+
+                            prefsEditor2.putBoolean("color_tab", true);
+                            prefsEditor2.commit();
                         }
                         else{
                             stopService(new Intent(MainActivity.this, SimpleService.class));
                             color_tab.setChecked(false);
+
+                            prefsEditor2.putBoolean("color_tab", false);
+                            prefsEditor2.commit();
                         }
                     }
                 });
-
+        /*이전 스위치 on/off 정보 유지*/
+        if(prefs2.getBoolean("pin_lock", false)){
+            pin_lock.setChecked(true);
+        }
         pin_lock = (Switch)findViewById(R.id.pin_lock);
         pin_lock.setOnClickListener(
                 new Button.OnClickListener() {
@@ -97,12 +127,19 @@ public class MainActivity extends AppCompatActivity{
                         if(pin_lock.isChecked()){
                             startService(new Intent(MainActivity.this, SimpleServicePin.class));
                             pin_lock.setChecked(true);
+
                             prefsEditor.putInt("lock",3);
                             prefsEditor.commit();
+
+                            prefsEditor2.putBoolean("pin_lock", true);
+                            prefsEditor2.commit();
                         }
                         else{
                             stopService(new Intent(MainActivity.this, SimpleServicePin.class));
                             pin_lock.setChecked(false);
+
+                            prefsEditor2.putBoolean("pin_lock", false);
+                            prefsEditor2.commit();
                         }
                     }
                 });

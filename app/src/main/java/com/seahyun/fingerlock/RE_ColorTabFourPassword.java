@@ -235,7 +235,7 @@ public class RE_ColorTabFourPassword extends AppCompatActivity implements View.O
         }
         if((cnt == input_arr.size())&&(cnt == o.getPassword_count())) {
             //비밀번호 저장
-            SharedPreferences prefs = getSharedPreferences("select_state", MODE_PRIVATE);
+            SharedPreferences prefs = getSharedPreferences("password", MODE_PRIVATE);
             SharedPreferences.Editor prefsEditor = prefs.edit();
             try {
                 prefsEditor.putInt("1st password", input_arr.get(0));

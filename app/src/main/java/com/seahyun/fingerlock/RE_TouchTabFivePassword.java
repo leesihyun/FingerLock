@@ -180,7 +180,7 @@ public class RE_TouchTabFivePassword extends AppCompatActivity implements View.O
         }
         if((cnt == password_count)&&(cnt == o.getPassword_count())) {
             //비밀번호 저장
-            SharedPreferences prefs = getSharedPreferences("select_state", MODE_PRIVATE);
+            SharedPreferences prefs = getSharedPreferences("password", MODE_PRIVATE);
             SharedPreferences.Editor prefsEditor = prefs.edit();
             prefsEditor.putInt("1st password", input_arr[0]);
             prefsEditor.putInt("2nd password", input_arr[1]);

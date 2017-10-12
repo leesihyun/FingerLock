@@ -155,6 +155,7 @@ public class ApplicationSelectionActivity extends Activity {
                             prefsEditor3.commit();
 
                             Log.d("1번 바로가기 설정된 앱 >> ", shortcut[0]);
+                            Log.d("패키지 이름 >> ", prefs4.getString("name1", ""));
                         }
                         else if(prefs2.getBoolean("select2",false)==true){
                             Log.d("터치탭 선택 >> ", "2번 터치탭");

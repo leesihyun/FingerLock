@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.Touch;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class touchtab_lockscreen extends AppCompatActivity implements OnClickListener {
+public class TouchTabLockScreen extends AppCompatActivity implements OnClickListener {
 
 	private static int password_size ;
 	private static int count = 0;
@@ -30,7 +31,10 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 	private int user_password[] = new int[8];
 	private boolean select_mode = false;
 	private int application_number = 0;
-	private int app_num[] = new int[4];
+	//private int app_num[] = new int[4];
+	private static String TAG = "TouchTabLockscreen";
+
+	public static Activity TouchTabLockScreenActivity;
 
 	TouchTabFourPassword o = new TouchTabFourPassword();
 
@@ -57,8 +61,9 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
-		SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
+		SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
 
+		TouchTabLockScreenActivity = TouchTabLockScreen.this;
 		int num = prefs.getInt("tab_num", 4);
 		Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
 		if(num == 4){
@@ -78,8 +83,8 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 		arGeneral = new ArrayList<String>();
 		pacageNm = new ArrayList<String>();
 
-		password_size = o.getPassword_count();
-		Log.d("패스워드 자릿수 >> ", String.valueOf(password_size));
+		//password_size = o.getPassword_count();
+		//Log.d("패스워드 자릿수 >> ", String.valueOf(password_size));
 		//사용자가 설정한 비밀번호 가져오기
 		SharedPreferences prefs2 = getSharedPreferences("password", MODE_PRIVATE);
 		user_password[0] = prefs2.getInt("1st password",0);
@@ -90,11 +95,21 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 		user_password[5] = prefs2.getInt("6th password",0);
 		user_password[6] = prefs2.getInt("7th password",0);
 		user_password[7] = prefs2.getInt("8th password",0);
-		SharedPreferences pref3 = getSharedPreferences("num", MODE_PRIVATE);
-		app_num[0]=pref3.getInt("num1",0);
-		app_num[1]=pref3.getInt("num2",0);
-		app_num[2]=pref3.getInt("num3",0);
-		app_num[3]=pref3.getInt("num4",0);
+
+//		SharedPreferences pref3 = getSharedPreferences("num", MODE_PRIVATE);
+//		app_num[0]=pref3.getInt("num1",0);
+//		app_num[1]=pref3.getInt("num2",0);
+//		app_num[2]=pref3.getInt("num3",0);
+//		app_num[3]=pref3.getInt("num4",0);
+
+		Log.d(TAG, "사용자가 설정한 비밀번호?");
+		for(int i=0;i<8; i++){
+			Log.d(TAG, String.valueOf(user_password[i]));
+			if(user_password[i]!=0){
+				password_size++;
+			}
+		}
+		Log.d(TAG, "사용자가 설정한 비밀번호 자릿수? "+String.valueOf(password_size));
 
 
 		if(num == 4) {
@@ -308,7 +323,7 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 		SharedPreferences prefs = getSharedPreferences("PakageName", MODE_PRIVATE);
 		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
-		if(num == app_num[0]){
+		if(num == 1){
 			String pakage_name = prefs.getString("name1", "");
 			if(pakage_name.equals("")){
 				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -318,10 +333,11 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				finish();
 			}
 		}
 
-		else if(num == app_num[1]){
+		else if(num == 2){
 			String pakage_name = prefs.getString("name2", "");
 			if(pakage_name.equals("")){
 				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -331,9 +347,10 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				finish();
 			}
 		}
-		else if(num == app_num[2]){
+		else if(num == 3){
 			String pakage_name = prefs.getString("name3", "");
 			if(pakage_name.equals("")){
 				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -343,9 +360,10 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				finish();
 			}
 		}
-		if(num == app_num[3]){
+		if(num == 4){
 			String pakage_name = prefs.getString("name4", "");
 			if(pakage_name.equals("")){
 				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
@@ -355,6 +373,33 @@ public class touchtab_lockscreen extends AppCompatActivity implements OnClickLis
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				finish();
+			}
+		}
+		if(num == 5){
+			String pakage_name = prefs.getString("name5", "");
+			if(pakage_name.equals("")){
+				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
+				System.exit(0);
+			}
+			else {
+				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				finish();
+			}
+		}
+		if(num == 6){
+			String pakage_name = prefs.getString("name6", "");
+			if(pakage_name.equals("")){
+				Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
+				System.exit(0);
+			}
+			else {
+				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				finish();
 			}
 		}
 	}
