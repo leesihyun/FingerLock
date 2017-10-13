@@ -5,46 +5,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="1"
     tools:context="com.seahyun.fingerlock.FingerprintEditActivity">
-
-    <EditText
-        android:id="@+id/fingeredit_editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="fingerprint name"/>
-
+    <!--
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
         android:id="@+id/fingeredit_image"/>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fingeredit_selectButton"
-        android:layout_gravity="center"
-        android:text="앱 등록"/>
-    <!--
-    <ImageButton
-        android:id="@+id/fingeredit_selectButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-/>!-->
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fingeredit_deleteButton"
         android:layout_gravity="center"
-        android:text="지문 삭제"/>
-
-    <Button
+        android:text="정보 초기화"/> !-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="0.8" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="지문 이름"
+            android:textColor="@color/Grey"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/fingeredit_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:selectAllOnFocus="true"
+            android:textColor="@color/DarkBlue"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="실행할 어플"
+            android:textColor="@color/Grey" />
+
+        <Button
+            android:id="@+id/fingeredit_selectButton"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/shape"
+            android:text="여기에 어플을 등록하세요"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
+
+        </LinearLayout>
+
+    <Button
         android:id="@+id/fingeredit_completeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="완료"/>
+        android:background="@color/DarkBlue"
+        android:text="수정 완료"
+        android:textColor="#ffffff"
+        android:layout_weight="0.2"/>
 
 </LinearLayout>

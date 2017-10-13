@@ -1,6 +1,7 @@
 package com.seahyun.fingerlock;
 
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ public class FingerprintListviewAdapter extends BaseAdapter {
     Context context;
     ArrayList<FingerprintListviewItem> list_itemArrayList;
     ViewHolder viewholder;
+    PackageManager pm;
 
     public FingerprintListviewAdapter(Context context, ArrayList<FingerprintListviewItem> list_itemArrayList) {
         this.context = context;
@@ -54,11 +56,15 @@ public class FingerprintListviewAdapter extends BaseAdapter {
             viewholder = (ViewHolder)convertView.getTag();
         }
         viewholder.textView.setText(list_itemArrayList.get(position).getFingerprint_name());
-        //PackageManager pm = getPackageManager();
-        //Drawable app_icon = pm.getApplicationIcon(list_itemArrayList.get(position).getApp_name());
-        Drawable app_icon = null;
-        viewholder.imageView.setImageDrawable(app_icon);
 
+        PackageManager pm = context.getPackageManager();
+        Drawable app_icon = null;
+        try {
+            app_icon = pm.getApplicationIcon(list_itemArrayList.get(position).getApp_name());
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        viewholder.imageView.setImageDrawable(app_icon);
         return convertView;
     }
 
