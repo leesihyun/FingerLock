@@ -25,7 +25,7 @@ import java.util.List;
 
 public class TouchTabLockScreen extends AppCompatActivity implements OnClickListener {
 
-	private static int password_size ;
+	private static int password_size =0;
 	private static int count = 0;
 	private int input_arr[] = new int[8];
 	private int user_password[] = new int[8];
@@ -64,6 +64,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 		SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
 
 		TouchTabLockScreenActivity = TouchTabLockScreen.this;
+		password_size = 0;
 		int num = prefs.getInt("tab_num", 4);
 		Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
 		if(num == 4){
@@ -102,7 +103,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 //		app_num[2]=pref3.getInt("num3",0);
 //		app_num[3]=pref3.getInt("num4",0);
 
-		Log.d(TAG, "사용자가 설정한 비밀번호?");
+		Log.d(TAG, "##사용자가 설정한 비밀번호?");
 		for(int i=0;i<8; i++){
 			Log.d(TAG, String.valueOf(user_password[i]));
 			if(user_password[i]!=0){
@@ -165,7 +166,8 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 			case R.id.button4_1:
 			case R.id.button5_1:
 			case R.id.button6_1:
-				Toast.makeText(this, "1클릭", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, "1클릭", Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "1클릭");
 				if(select_mode == false){
 					for(int i=0; i<input_arr.length; i++){
 						if(input_arr[i]==0){
@@ -185,7 +187,8 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 			case R.id.button4_2:
 			case R.id.button5_2:
 			case R.id.button6_2:
-				Toast.makeText(this, "2클릭", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, "2클릭", Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "2클릭");
 				if(select_mode == false) {
 					for (int i = 0; i < input_arr.length; i++) {
 						if (input_arr[i] == 0) {
@@ -205,7 +208,8 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 			case R.id.button4_3:
 			case R.id.button5_3:
 			case R.id.button6_3:
-				Toast.makeText(this, "3클릭", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, "3클릭", Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "3클릭");
 				if(select_mode == false) {
 					for (int i = 0; i < input_arr.length; i++) {
 						if (input_arr[i] == 0) {
@@ -225,7 +229,8 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 			case R.id.button4_4:
 			case R.id.button5_4:
 			case R.id.button6_4:
-				Toast.makeText(this, "4클릭", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, "4클릭", Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "4클릭");
 				if(select_mode == false) {
 					for (int i = 0; i < input_arr.length; i++) {
 						if (input_arr[i] == 0) {
@@ -243,7 +248,8 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 				break;
 			case R.id.button5_5:
 			case R.id.button6_5:
-				Toast.makeText(this, "5클릭", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, "5클릭", Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "5클릭");
 				if(select_mode == false) {
 					for (int i = 0; i < input_arr.length; i++) {
 						if (input_arr[i] == 0) {
@@ -260,7 +266,8 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 				}
 				break;
 			case R.id.button6_6:
-				Toast.makeText(this, "6클릭", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(this, "6클릭", Toast.LENGTH_SHORT).show();
+				Log.d(TAG, "6클릭");
 				if(select_mode == false) {
 					for (int i = 0; i < input_arr.length; i++) {
 						if (input_arr[i] == 0) {
@@ -281,7 +288,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 		if(count == password_size){
 			count = 0;
 			for(int i=0; i<input_arr.length; i++){
-				Log.d("사용자 입력 패스워드 : ", String.valueOf(input_arr[i]));
+				Log.d("##사용자 입력 패스워드 : ", String.valueOf(input_arr[i]));
 			}
 			input_handler();
 		}
@@ -291,7 +298,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 		int cnt=0;
 		int i =0;
 		select_mode=false;
-		Log.d("전) cnt 값 : ", String.valueOf(cnt));
+		//Log.d("전) cnt 값 : ", String.valueOf(cnt));
 		//for(int i=0; input_arr[i]!=0; i++){
 		while(input_arr[i]!=0) {
 			if (user_password[i] == input_arr[i]) {
@@ -301,7 +308,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 			i++;
 		}
 		//}
-		Log.d("후) cnt 값 : ", String.valueOf(cnt));
+		//Log.d("후) cnt 값 : ", String.valueOf(cnt));
 		if(cnt == password_size){
 			Toast.makeText(this, "비밀번호가 동일합니다. 바로가기 원하는 어플 번호를 터치해주세요", Toast.LENGTH_SHORT).show();
 			select_mode = true;

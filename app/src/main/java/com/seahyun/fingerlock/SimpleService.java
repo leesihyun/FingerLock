@@ -24,8 +24,11 @@ public class SimpleService extends Service {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			Toast.makeText(context, "서비스 실행중!", Toast.LENGTH_LONG).show();
+//            ((Activity)context).getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                    WindowManager.LayoutParams.FLAG_FULLSCREEN);
 			String action = intent.getAction();
 			SharedPreferences prefs = getSharedPreferences("lock_mode", MODE_PRIVATE);
+
 			int lock_mode = prefs.getInt("lock",-1);
 			Intent i = null;
 			if(action.equals("android.intent.action.SCREEN_ON")){
@@ -61,9 +64,18 @@ public class SimpleService extends Service {
 			else if(action.equals("android.intent.action.SCREEN_OFF")){
 				Log.d("알림 >> ", "화면 꺼짐");
 				//TouchActivity.finish();
-				TouchTabLockScreen activity = (TouchTabLockScreen)TouchTabLockScreen.TouchTabLockScreenActivity;
-				if(activity!=null)
-					activity.finish();
+				TouchTabLockScreen activity1 = (TouchTabLockScreen)TouchTabLockScreen.TouchTabLockScreenActivity;
+				if(activity1!=null)
+					activity1.finish();
+
+                ColorTabLockScreen activity2 = (ColorTabLockScreen)ColorTabLockScreen.ColorTabLockScreenActivity;
+                if(activity2!=null)
+                    activity2.finish();
+
+                PinLock activity3 = (PinLock) PinLock.PinLockActivity;
+                if(activity3!=null)
+                    activity3.finish();
+
 			}
 		}
 	};
@@ -77,7 +89,6 @@ public class SimpleService extends Service {
 	public void onCreate() {
 		// TODO Auto-generated method stub
 		super.onCreate();
-
 		km=(KeyguardManager) this.getSystemService(Activity.KEYGUARD_SERVICE);
 		if(km!=null){
 			keylock = km.newKeyguardLock("test");

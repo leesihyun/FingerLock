@@ -15,7 +15,6 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -28,22 +27,12 @@
         <activity android:name=".PinSettingActivity" />
         <activity android:name=".RE_PinPassword" />
 
-        <service android:name=".SimpleService" />
-<<<<<<< HEAD
         <activity android:name=".TouchTabLockScreen"></activity>
         <activity android:name=".ColorTabLockScreen"></activity>
         <activity android:name=".TouchTabSettingActivity"></activity>
         <activity android:name=".ColorTabSettingActivity"></activity>
         <activity android:name=".ColorTabPreview" android:theme="@android:style/Theme.Dialog"></activity>
-=======
-        =======
-        <activity android:name=".touchtab_lockscreen" />
-        <activity android:name=".TouchTabSettingActivity" />
-        <activity android:name=".ColorTabSettingActivity" />
-        <activity
-            android:name=".ColorTabPreview"
-            android:theme="@android:style/Theme.Dialog" />
->>>>>>> 95f35d2c6f92801326f4b5b02be70138d376ea81
+
         <activity
             android:name=".ApplicationSelectionActivity"
             android:screenOrientation="portrait"
@@ -69,8 +58,14 @@
         <activity android:name=".FingerprintAddActivity" />
         <activity android:name=".FingerprintSettingActivity" />
 
-        <service android:name=".SimpleService" />
-
+        <service android:name=".SimpleService"/>
+        <service android:name=".StartService">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
         <activity android:name=".FingerprintEditActivity"></activity>
     </application>
 

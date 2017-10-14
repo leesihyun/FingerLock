@@ -26,7 +26,7 @@ import java.util.List;
 
 public class ColorTabLockScreen extends AppCompatActivity implements OnClickListener {
 
-    private static int password_size;
+    private static int password_size = 0;
     private static int count = 0;
     private int input_arr[] = new int[8];
     private int user_password[] = new int[8];
@@ -38,6 +38,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
     private static int color[] = new int[6];
 
     private static String TAG = "ColorTabLockscreen";
+    public static Activity ColorTabLockScreenActivity;
 
     TouchTabFourPassword o = new TouchTabFourPassword();
 
@@ -66,7 +67,9 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
 
         SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
 
+        ColorTabLockScreenActivity = ColorTabLockScreen.this;
 
+        password_size = 0;
         color[0] = R.color.Orange;
         color[1] = R.color.Yellow;
         color[2] = R.color.Green;

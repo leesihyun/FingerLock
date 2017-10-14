@@ -35,6 +35,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     private int application_number = 0;
     private int app_num[]=new int [4];
 
+    public static Activity PinLockActivity;
+
     TouchTabFourPassword o = new TouchTabFourPassword();
 
     ArrayList<String> arGeneral;
@@ -61,6 +63,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
 
         SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
 
+        PinLockActivity = PinLock.this;
         int num = prefs.getInt("tab_num", 4);
         Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
         setContentView(R.layout.lock_screen_pin);

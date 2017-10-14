@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity{
     ImageButton color_tab_setting;
     ImageButton finger_lock_setting;
 
+    private BackPressCloseSystem backPressCloseSystem;
 
     public MainActivity(){};
 
@@ -51,8 +52,9 @@ public class MainActivity extends AppCompatActivity{
 
         getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
-
         setContentView(R.layout.activity_main);
+        backPressCloseSystem = new BackPressCloseSystem(this);
+
 
         SharedPreferences prefs = getSharedPreferences("lock_mode", MODE_PRIVATE);
         final SharedPreferences.Editor prefsEditor = prefs.edit();
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(touch_tab.isChecked()){
-                            startService(new Intent(MainActivity.this, SimpleService.class));
+                            startService(new Intent(MainActivity.this, StartService.class));
                             touch_tab.setChecked(true);
 
                             prefsEditor.putInt("lock",1);
@@ -82,7 +84,7 @@ public class MainActivity extends AppCompatActivity{
 
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, SimpleService.class));
+                            stopService(new Intent(MainActivity.this, StartService.class));
                             touch_tab.setChecked(false);
 
                             prefsEditor2.putBoolean("touch_tab", false);
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(color_tab.isChecked()){
-                            startService(new Intent(MainActivity.this, SimpleService.class));
+                            startService(new Intent(MainActivity.this, StartService.class));
                             color_tab.setChecked(true);
 
                             prefsEditor.putInt("lock",2);
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity{
                             prefsEditor2.commit();
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, SimpleService.class));
+                            stopService(new Intent(MainActivity.this, StartService.class));
                             color_tab.setChecked(false);
 
                             prefsEditor2.putBoolean("color_tab", false);
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(pin_lock.isChecked()){
-                            startService(new Intent(MainActivity.this, SimpleService.class));
+                            startService(new Intent(MainActivity.this, StartService.class));
                             pin_lock.setChecked(true);
 
                             prefsEditor.putInt("lock",3);
@@ -136,7 +138,7 @@ public class MainActivity extends AppCompatActivity{
                             prefsEditor2.commit();
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, SimpleService.class));
+                            stopService(new Intent(MainActivity.this, StartService.class));
                             pin_lock.setChecked(false);
 
                             prefsEditor2.putBoolean("pin_lock", false);
@@ -195,6 +197,18 @@ public class MainActivity extends AppCompatActivity{
 
 
     }
+
+    @Override public void onBackPressed() {
+        super.onBackPressed();
+
+        //backPressCloseSystem.onBackPressed();
+        //
+        this.moveTaskToBack(true);
+        this.finish();
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(0);
+    }
+
 //    public String switch_checked(){
 //
 //        Log.d("선택된 스피너? in MainActivity>> ", lock);

@@ -15,7 +15,7 @@
             android:id="@+id/button5_1"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/shape"
+            android:background="@drawable/touch_tab"
             android:layout_marginRight="5dp"
             android:textColor="#FFFFFF"/>
 
@@ -23,7 +23,7 @@
             android:id="@+id/button5_2"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/shape"
+            android:background="@drawable/touch_tab"
             android:textColor="#FFFFFF"/>
 
     </LinearLayout>
@@ -35,7 +35,7 @@
             android:id="@+id/button5_3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/shape"
+            android:background="@drawable/touch_tab"
             android:layout_marginRight="5dp"
             android:textColor="#FFFFFF"/>
 
@@ -43,7 +43,7 @@
             android:id="@+id/button5_4"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/shape"
+            android:background="@drawable/touch_tab"
             android:layout_marginRight="5dp"
             android:textColor="#FFFFFF"/>
 
@@ -51,7 +51,7 @@
             android:id="@+id/button5_5"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:background="@drawable/shape"
+            android:background="@drawable/touch_tab"
             android:textColor="#FFFFFF"/>
 
     </LinearLayout>
