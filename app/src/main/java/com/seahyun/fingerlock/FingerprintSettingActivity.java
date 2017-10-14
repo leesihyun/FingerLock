@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -18,18 +19,24 @@ import java.util.List;
 import java.util.Map;
 
 public class FingerprintSettingActivity extends AppCompatActivity {
-    ListView fingersetting_listView;
-    FingerprintListviewAdapter fingerprintListviewAdapter;
-    ArrayList<FingerprintListviewItem> fingerprintList;
-    ArrayList<FingerprintListviewItem> showList;
-
-    String tempId = "";
-
-    ArrayList<String> fingerIDInSys;
+    private String TAG = FingerprintSettingActivity.class.getSimpleName();
+    private ListView fingersetting_listView;
+    private FingerprintListviewAdapter fingerprintListviewAdapter;
+    private ArrayList<FingerprintListviewItem> fingerprintList; // pref에 저장된 fingerprint List
+    private ArrayList<FingerprintListviewItem> showList; // 사용자에게 보여줄 fingerprint List
+    private ArrayList<String> fingerIDInSys; // 시스템에서 받아온 fingerID List
+    private String fingeredit_tempID = ""; // 수정 할 fingerID
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        ActionBar actionBar = getSupportActionBar();
+        //ActionBar title 변경
+        actionBar.setTitle("지문 환경설정");
+        // ActionBar 배경색 변경
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.DarkBlue));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
         setContentView(R.layout.fingerprint_setting);
 
         fingerprintList = new ArrayList<FingerprintListviewItem>();
@@ -37,35 +44,32 @@ public class FingerprintSettingActivity extends AppCompatActivity {
         fingerIDInSys = new ArrayList<String>();
 
         fingersetting_listView = (ListView) findViewById(R.id.fingersetting_listView);
-        getFingerIdInSys();
+        getFingerIdInSys(); // fingerIDInSys에 시스템에 저장 된 fingerID 불러오기
+        getAllPreferences(); // fingerprintList에 pref에 저장 된 fingerprint List 불러오기
 
-        getAllPreferences();
-
-        fingerprintListviewAdapter = new FingerprintListviewAdapter(FingerprintSettingActivity.this, showList);
+        fingerprintListviewAdapter = new FingerprintListviewAdapter(FingerprintSettingActivity.this, showList); // 실제로 사용자에게 보여줄 showList 를 붙인다.
         fingersetting_listView.setAdapter(fingerprintListviewAdapter);
-        compareFinger();
-
-
+        compareFinger(); //
 
         fingersetting_listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Log.d("Fingerprint 수정 시작>>", showList.get(position).getFingerprint_name());
+                        Log.d(TAG,"EDIT MODE START");
 
-
-                        tempId = showList.get(position).getFingerprint_id();
+                        fingeredit_tempID = showList.get(position).getFingerprint_id();
 
                         String fingeredit_fingername = showList.get(position).getFingerprint_name();
                         String fingeredit_appname = showList.get(position).getApp_name();
 
 
-                        Log.d("Fingerprint 수정 시작 전 이름>>", fingeredit_fingername);
-                        Log.d("Fingerprint 수정 시작 전 어플>>", fingeredit_appname);
+                        Log.d("BEFORE EDIT FNAME>>", fingeredit_fingername);
+                        Log.d("BEFORE EDIT ANAME>>", fingeredit_appname);
                         SharedPreferences prefs = getSharedPreferences("fingeredit", MODE_PRIVATE);
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("fingeredit_fingername", fingeredit_fingername);
                         editor.putString("fingeredit_appname", fingeredit_appname);
+                        editor.putBoolean("edit_mode",true); // EDIT 버튼을 눌렀음을 알림
                         editor.commit();
 
                         Intent intent = new Intent(FingerprintSettingActivity.this, FingerprintEditActivity.class);
@@ -78,7 +82,6 @@ public class FingerprintSettingActivity extends AppCompatActivity {
 
 
     public void getFingerIdInSys() {
-
         try {
 
             FingerprintManager fingerprintManager = (FingerprintManager) FingerprintSettingActivity.this.getSystemService(Context.FINGERPRINT_SERVICE);
@@ -123,13 +126,11 @@ public class FingerprintSettingActivity extends AppCompatActivity {
         for (Map.Entry<String, ?> entry1 : allEntries1.entrySet()) {
             for (Map.Entry<String, ?> entry2 : allEntries2.entrySet()) {
                 if (entry1.getKey().equals(entry2.getKey())) {
-                    Log.d("저장된 List Finger:>>", entry1.getKey() + ", Fname " + entry1.getValue().toString() + "Aname " + entry2.getValue().toString());
+                    Log.d("Preferences에 저장된 List Finger:>>", entry1.getKey() + ", Fname: " + entry1.getValue().toString() + ",Aname: " + entry2.getValue().toString());
                     fingerprintList.add(new FingerprintListviewItem(entry1.getKey(), entry1.getValue().toString(), entry2.getValue().toString()));
                 }
             }
         }
-
-
     }
 
     public void compareFinger() {
@@ -139,24 +140,34 @@ public class FingerprintSettingActivity extends AppCompatActivity {
         if(fingerprintList.size() != 0){
             for (int i = 0; i < fingerIDInSys.size(); i++) {
                 for (int j = 0; j < fingerprintList.size(); j++) {
-                    Log.d("fingerID : ", fingerIDInSys.get(i).toString());
-                    Log.d("fingerList : ", fingerprintList.get(j).getFingerprint_id());
+                    // pref에서 받아온 fingerList에서, 시스템에서 받아온 fingerID와 같은 ID를 가진 fingerprint는
+                    // showList에 추가한다.
                     if (fingerIDInSys.get(i).toString().equals(fingerprintList.get(j).getFingerprint_id())) {
+                        Log.d("compareFinger()","시스템과 같은 fingerID의 정보 갱신");
                         showList.add(new FingerprintListviewItem(fingerIDInSys.get(i).toString(), fingerprintList.get(j).getFingerprint_name(), fingerprintList.get(j).getApp_name()));
-                        savePreferences(showList.get(i).getFingerprint_id(), showList.get(i).getFingerprint_name(), showList.get(i).getLaunchapp_name());
+                        savePreferences(showList.get(i).getFingerprint_id(), showList.get(i).getFingerprint_name(), showList.get(i).getApp_name());
                     }
+                    // TODO:만약 pref에는 있지만 시스템에는 없는 fingerID라면
+                    // 시스템에서 삭제된 fingerprint이므로
+                    // pref에서 해당 fingerprint를 제거
+
+                    // TODO:만약 시스템에는 있지만 pref에는 없는 fingerID라면
+                    // 시스템에서 추가된 fingerprint이므로
+                    // pref에서 해당 fingerprint를 생성, - Fname과 Aname은 비워둔다
                 }
             }
         }
         else
         {
-            Log.d("frist start", "get saved fingerID");
-            for(int i = 0; i < fingerIDInSys.size(); i++){
-                showList.add(new FingerprintListviewItem(fingerIDInSys.get(i).toString(), "손가락"+String.valueOf(i+1)));
-                savePreferences(showList.get(i).getFingerprint_id(), showList.get(i).getFingerprint_name(), showList.get(i).getLaunchapp_name());
+            // 어플을 처음 실행한 경우
+                Log.d("frist start", "get saved fingerID");
+                for (int i = 0; i < fingerIDInSys.size(); i++) {
+                    showList.add(new FingerprintListviewItem(fingerIDInSys.get(i).toString(), "손가락" + String.valueOf(i + 1)));
+                    savePreferences(showList.get(i).getFingerprint_id(), showList.get(i).getFingerprint_name(), showList.get(i).getApp_name());
             }
         }
 
+        // TODO: 실행할 어플 이미지 붙이기
 
         fingerprintListviewAdapter.notifyDataSetChanged();
     }
@@ -166,18 +177,6 @@ public class FingerprintSettingActivity extends AppCompatActivity {
 //        SharedPreferences pref = getSharedPreferences("fingerprint", MODE_PRIVATE);
 //        pref.getString(key, "");//defValue is null
 //    }
-
-    // 값 저장하기
-    private void savePreferences(String id,String key, String value) {
-        SharedPreferences pref1 = getSharedPreferences("fingerprint1", MODE_PRIVATE);
-        SharedPreferences pref2 = getSharedPreferences("fingerprint2", MODE_PRIVATE);
-        SharedPreferences.Editor editor1 = pref1.edit();
-        editor1.putString(id, key);
-        editor1.commit();
-        SharedPreferences.Editor editor2 = pref2.edit();
-        editor2.putString(id, value);
-        editor2.commit();
-    }
 //
 //    // 값(Key Data) 삭제하기
 //    private void removePreferences(String key) {
@@ -186,7 +185,6 @@ public class FingerprintSettingActivity extends AppCompatActivity {
 //        editor.remove(key);
 //        editor.commit();
 //    }
-
 //    // 값(All Data) 삭제하기
 //    private void removeAllPreferences() {
 //        SharedPreferences pref = getSharedPreferences("fingerprint", MODE_PRIVATE);
@@ -194,7 +192,6 @@ public class FingerprintSettingActivity extends AppCompatActivity {
 //        editor.clear();
 //        editor.commit();
 //    }
-
 //    @Override
 //    protected void onPause() {
 //        super.onPause();
@@ -205,37 +202,57 @@ public class FingerprintSettingActivity extends AppCompatActivity {
 //            editor.commit();
 //        }
 
+
+    // 값 저장하기
+    private void savePreferences(String Id,String Fname, String Aname) {
+        SharedPreferences pref1 = getSharedPreferences("fingerprint1", MODE_PRIVATE);
+        SharedPreferences pref2 = getSharedPreferences("fingerprint2", MODE_PRIVATE);
+        SharedPreferences.Editor editor1 = pref1.edit();
+        editor1.putString(Id, Fname);
+        editor1.commit();
+        SharedPreferences.Editor editor2 = pref2.edit();
+        editor2.putString(Id, Aname);
+        editor2.commit();
+    }
+
+
     protected void onResume() {
         super.onResume();
         SharedPreferences prefs = getSharedPreferences("fingeredit", MODE_PRIVATE);
+        if(prefs.getBoolean("edit_mode",false)==true) {
+            Log.d(TAG,"EDIT MODE END");
+            if (prefs.getBoolean("complete_edit", false) == true && !fingeredit_tempID.equals("")) {
+                Log.d(TAG, "EDIT COMPLETE!");
+                String fingeredit_fingername = prefs.getString("fingeredit_fingername", "");
+                String fingeredit_appname = prefs.getString("fingeredit_appname", ""); // 나중에 null 인거 처리해줘야댐!
 
-        if (prefs.getBoolean("edit", false) == true) {
-            Log.d("수정 완료", "");
-            String fingeredit_fingername = prefs.getString("fingeredit_fingername", "");
-            String fingeredit_appname = prefs.getString("fingeredit_appname", ""); // 나중에 null 인거 처리해줘야댐!
+                Log.d("EDITED fingername>>", fingeredit_fingername);
+                Log.d("EDITED appname>>", fingeredit_appname);
 
+                savePreferences(fingeredit_tempID, fingeredit_fingername, fingeredit_appname);
 
-            Log.d("수정된지문 fingername>>", fingeredit_fingername);
-            Log.d("수정된지문 appname>>", fingeredit_appname);
-            savePreferences(tempId,fingeredit_fingername, fingeredit_appname);
+                getAllPreferences();
+                compareFinger();
 
-            getAllPreferences();
-            compareFinger();
-
-            // prefs 초기화
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("edit", false);
-            editor.putString("fingeredit_fingername","");
-            editor.putString("fingeredit_appname","");
-            editor.commit();
+                // prefs 초기화
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("complete_edit", false);
+                editor.putBoolean("edit_mode",false);
+                editor.putString("fingeredit_fingername", "");
+                editor.putString("fingeredit_appname", "");
+                editor.commit();
+            } else if (prefs.getBoolean("complete_edit", false) == false && !fingeredit_tempID.equals("")) {
+                Log.d(TAG, "NOT SAVE EDIT");
+                fingeredit_tempID = "";
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("edit_mode",false);
+            } else {
+                Log.d(TAG, "그밖의상황!!!!!!!");
+            }
         }
+        // tempId 초기화
+        fingeredit_tempID = "";
     }
 
 }
-
-
-//
-//    }
-
-
 

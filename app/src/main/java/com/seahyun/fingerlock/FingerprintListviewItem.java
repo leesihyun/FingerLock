@@ -6,18 +6,9 @@ package com.seahyun.fingerlock;
 
 public class FingerprintListviewItem {
 
-    public String getLaunchapp_name() {
-        return launchapp_name;
-    }
-
-    public void setLaunchapp_name(String launchapp_name) {
-        this.launchapp_name = launchapp_name;
-    }
-
     private String fingerprint_id;
     private String fingerprint_name;
     private String launchapp_name;
-
 
     public FingerprintListviewItem(String fingerprint_id,String fingerprint_name, String launchapp_name) {
         this.fingerprint_id = fingerprint_id;
