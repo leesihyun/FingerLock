@@ -18,7 +18,7 @@ public class FingerprintListviewItem {
 
     public FingerprintListviewItem(String fingerprint_id, String fingerprint_name) {
         this.fingerprint_id = fingerprint_id;
-        this.fingerprint_name = fingerprint_name + " "+fingerprint_id;
+        this.fingerprint_name = fingerprint_name;
         this.launchapp_name = "";
     }
 

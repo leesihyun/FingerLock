@@ -60,7 +60,11 @@ public class FingerprintListviewAdapter extends BaseAdapter {
         PackageManager pm = context.getPackageManager();
         Drawable app_icon = null;
         try {
-            app_icon = pm.getApplicationIcon(list_itemArrayList.get(position).getApp_name());
+            if(app_icon!=null){
+            app_icon = pm.getApplicationIcon(list_itemArrayList.get(position).getApp_name());}
+//            else if(app_icon==null){
+//                app_icon = null;
+//            }
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
