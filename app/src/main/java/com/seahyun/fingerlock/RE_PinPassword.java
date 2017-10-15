@@ -242,20 +242,23 @@ public class RE_PinPassword extends AppCompatActivity implements View.OnClickLis
         }
         for(int i=0; i<4; i++){
             if(pre_input_arr[i] == input_arr[i]) {
-                if (input_arr[i] != 0)
                     cnt++;
+                //Log.d(TAG, "현재cnt값 >> "+cnt);
             }
         }
        // Toast.makeText(this, "cnt:"+cnt+"입니다.", Toast.LENGTH_SHORT).show();
         if((cnt == 4)) {
             //비밀번호 저장
-            SharedPreferences prefs = getSharedPreferences("select_state", MODE_PRIVATE);
+            SharedPreferences prefs = getSharedPreferences("password", MODE_PRIVATE);
             SharedPreferences.Editor prefsEditor = prefs.edit();
             prefsEditor.putInt("1st password", input_arr[0]);
             prefsEditor.putInt("2nd password", input_arr[1]);
             prefsEditor.putInt("3rd password", input_arr[2]);
             prefsEditor.putInt("4th password", input_arr[3]);
-
+            Log.d("설정시 비밀번호",String.valueOf(input_arr[0]));
+            Log.d("설정시 비밀번호",String.valueOf(input_arr[1]));
+            Log.d("설정시 비밀번호",String.valueOf(input_arr[2]));
+            Log.d("설정시 비밀번호",String.valueOf(input_arr[3]));
             prefsEditor.commit();
             Toast.makeText(this, "비밀번호 설정이 완료되었습니다.", Toast.LENGTH_SHORT).show();
             return true;

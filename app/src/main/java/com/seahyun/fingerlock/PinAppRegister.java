@@ -151,6 +151,12 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
                 int num2 = prefs2.getInt("num2", 0);
                 int num3 = prefs2.getInt("num3", 0);
                 int num4 = prefs2.getInt("num4", 0);
+               /* if ((num1 == num2) ||(num1==num3)||(num1==num4)||(num2==num3)||(num2==num4)||(num3==num4)){
+                    Toast.makeText(getApplicationContext(),"실행 번호가 다 달라야 합니다.", Toast.LENGTH_SHORT).show();
+                    //Intent intent2 = new Intent(getApplicationContext(), PinAppRegister.class);
+                    //startActivity(intent2);
+                }
+                else if(((num1 != num2) ||(num1!=num3)||(num1!=num4)||(num2!=num3)||(num2!=num4)||(num3!=num4))){*/
                 Log.d("CCC >> ", String.valueOf(num1));
                 Log.d("CCC >> ", String.valueOf(num2));
                 Log.d("CCC >> ", String.valueOf(num3));
@@ -210,6 +216,9 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     num[1] = Integer.valueOf((String) spinner2.getItemAtPosition(position));
+                if(num[0]==num[1]){
+                    Toast.makeText(getApplicationContext(),"실행 번호가 동일하면 안됩니다.",Toast.LENGTH_SHORT).show();
+                }
                     Log.d("선택한 스피너 값 : ", String.valueOf(num[1]));
                     prefsEditor5.putInt("num2", num[1]);
                     prefsEditor5.commit();
@@ -241,6 +250,9 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                     num[2] = Integer.valueOf((String) spinner3.getItemAtPosition(position));
+                if((num[2]==num[0])||(num[2]==num[1])){
+                    Toast.makeText(getApplicationContext(),"실행 번호가 동일하면 안됩니다.",Toast.LENGTH_SHORT).show();
+                }
                     Log.d("선택한 스피너 값 : ", String.valueOf(num[2]));
                     prefsEditor5.putInt("num3", num[2]);
                     prefsEditor5.commit();
@@ -272,6 +284,9 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                     num[3] = Integer.valueOf((String) spinner4.getItemAtPosition(position));
+                if((num[3]==num[0])||(num[3]==num[1])||(num[3]==num[2])){
+                    Toast.makeText(getApplicationContext(),"실행 번호가 동일하면 안됩니다.",Toast.LENGTH_SHORT).show();
+                }
                     Log.d("선택한 스피너 값 : ", String.valueOf(num[3]));
                     prefsEditor5.putInt("num4", num[3]);
                     prefsEditor5.commit();
@@ -394,7 +409,6 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
         SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor3 = prefs4.edit();
 
-
         SharedPreferences prefs5 = getSharedPreferences("num", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor4 = prefs5.edit();
 
@@ -422,7 +436,6 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
         prefsEditor4.putInt("num4", num[3]);
 
         prefsEditor4.commit();
-
 
     }
     public int[] getInputArray(){

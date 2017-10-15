@@ -13,10 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+<<<<<<< HEAD
+=======
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+>>>>>>> a32f4eff867126ebc89e4aab3ab3339c61d74ada
         </activity>
         <activity
             android:name=".TouchTabPreview"
@@ -36,7 +39,7 @@
         <activity
             android:name=".ApplicationSelectionActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Dialog"></activity>
+            android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".TouchTabFourActivity" />
         <activity android:name=".TouchTabFiveActivity" />
         <activity android:name=".TouchTabSixActivity" />
@@ -57,16 +60,28 @@
         <activity android:name=".RE_ColorTabSixPassword" />
         <activity android:name=".FingerprintAddActivity" />
         <activity android:name=".FingerprintSettingActivity" />
+<<<<<<< HEAD
+        <service android:name=".SimpleService" />
+        <activity android:name=".FingerprintEditActivity" />
+        <activity android:name=".StartActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+=======
 
         <service android:name=".SimpleService"/>
         <service android:name=".StartService">
             <intent-filter>
+>>>>>>> a32f4eff867126ebc89e4aab3ab3339c61d74ada
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+<<<<<<< HEAD
+        </activity>
+=======
         </service>
         <activity android:name=".FingerprintEditActivity"></activity>
+>>>>>>> a32f4eff867126ebc89e4aab3ab3339c61d74ada
     </application>
 
 </manifest>

@@ -2,11 +2,14 @@ package com.seahyun.fingerlock;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +37,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     private boolean select_mode = false;
     private int application_number = 0;
     private int app_num[]=new int [4];
+    private int cnt =0;
 
     public static Activity PinLockActivity;
 
@@ -63,7 +67,13 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
 
         SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
 
+<<<<<<< HEAD
+
+
+
+=======
         PinLockActivity = PinLock.this;
+>>>>>>> a32f4eff867126ebc89e4aab3ab3339c61d74ada
         int num = prefs.getInt("tab_num", 4);
         Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
         setContentView(R.layout.lock_screen_pin);
@@ -82,7 +92,11 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         user_password[0] = prefs2.getInt("1st password",0);
         user_password[1] = prefs2.getInt("2nd password",0);
         user_password[2] = prefs2.getInt("3rd password",0);
-        user_password[3] = prefs2.getInt("4rd password",0);
+        user_password[3] = prefs2.getInt("4th password",0);
+        Log.d("처음 패스워드",String.valueOf(user_password[0]));
+        Log.d("처음 패스워드",String.valueOf(user_password[1]));
+        Log.d("처음 패스워드",String.valueOf(user_password[2]));
+        Log.d("처음 패스워드",String.valueOf(user_password[3]));
 
         SharedPreferences prefs3 = getSharedPreferences("num", MODE_PRIVATE);
         app_num[0] = prefs3.getInt("num1",0);
@@ -163,6 +177,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
 
             }
         });
+
         num4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -173,8 +188,23 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (num4.length() == 1) {  // edit1  값의 제한값을 6이라고 가정했을때
                     input_arr[3]= Integer.parseInt(num4.getText().toString());
-                    // input_handler();
-                    //num5.requestFocus(); // 두번째EditText 로 포커스가 넘어가게 됩니다
+                    for(int i=0; i<4; i++){
+                        Log.d("사용자 입력 패스워드 : ", String.valueOf(input_arr[i]));
+                    }
+                    
+                    cnt=0;
+                    select_mode=false;
+                    Log.d("전) cnt 값 : ", String.valueOf(cnt));
+                    for(int j=0; j<4; j++){
+                        //while(input_arr[i]!=0) {
+                       if (user_password[j] == input_arr[j]) {
+
+                            Log.d("패스워드 값 비교 : ", "user : " + String.valueOf(user_password[j]) + " input : " + String.valueOf(input_arr[j]));
+                            cnt++;
+                            Log.d("cnt 값 : ",String.valueOf(cnt));}
+                    }
+                    input_handler();
+                    num5.requestFocus(); // 두번째EditText 로 포커스가 넘어가게 됩니다
                 }
             }
 
@@ -330,28 +360,17 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 break;
         }
 */
-        if(count == password_size){
+       /* if(count == password_size){
             count = 0;
             for(int i=0; i<4; i++){
                 Log.d("사용자 입력 패스워드 : ", String.valueOf(input_arr[i]));
             }
-            input_handler();
-        }
+           // input_handler();
+        }*/
     }
 
     public void input_handler(){
-        int cnt=0;
-        int i =0;
-        select_mode=false;
-        Log.d("전) cnt 값 : ", String.valueOf(cnt));
-        for(int j=0; j<4; j++){
-        //while(input_arr[i]!=0) {
-            if (user_password[j] == input_arr[j]) {
-                Log.d("패스워드 값 비교 : ", "user : " + String.valueOf(user_password[j]) + " input : " + String.valueOf(input_arr[j]));
-                cnt++;
-            }
-            i++;
-        }
+
         //}
         Log.d("후) cnt 값 : ", String.valueOf(cnt));
         if(cnt == 4){
@@ -449,5 +468,49 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
             System.exit(0);
         }
     }
+
+    /*
+    @Override
+
+    protected void onPause() {
+
+
+
+        if(ishomekey==true){
+
+            finish();
+
+            ishomekey=false;
+
+            Log.d("ghhan","finish activity!!");
+
+        }
+
+        super.onPause();
+
+    }
+
+
+*/
+
+   /* @Override
+
+    protected void onUserLeaveHint() {
+
+        //ishomekey = true;
+        Log.d("gg", "Home Button Touch");
+        finish();
+
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        super.onUserLeaveHint();
+    }
+
+
+*/
+
+
+
 
 }
