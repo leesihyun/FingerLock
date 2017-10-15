@@ -23,7 +23,7 @@ public class StartService extends Service {
     private KeyguardManager km = null;
     private KeyguardManager.KeyguardLock keylock = null;
 
-    //MainActivity o = new MainActivity();
+   // MainActivity o = new MainActivity();
     //TouchTabLockScreen TouchActivity = (TouchTabLockScreen)TouchTabLockScreen.TouchTabLockScreenActivity;
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver(){
@@ -71,17 +71,25 @@ public class StartService extends Service {
                 Log.d("알림 >> ", "화면 꺼짐");
                 //TouchActivity.finish();
                 TouchTabLockScreen activity1 = (TouchTabLockScreen)TouchTabLockScreen.TouchTabLockScreenActivity;
-                if(activity1!=null)
+                if(activity1!=null) {
+                    Log.d("activity>>", "터치탭꺼짐");
                     activity1.finish();
-
+                }
                 ColorTabLockScreen activity2 = (ColorTabLockScreen)ColorTabLockScreen.ColorTabLockScreenActivity;
-                if(activity2!=null)
+                if(activity2!=null) {
+                    Log.d("activity>>", "컬러탭꺼짐");
+
                     activity2.finish();
-
+                }
                 PinLock activity3 = (PinLock) PinLock.PinLockActivity;
-                if(activity3!=null)
-                    activity3.finish();
+                if(activity3!=null) {
+                    Log.d("activity>>", "pin꺼짐");
 
+                    activity3.finish();
+                }
+            }
+            else{
+                Log.d("##################","#######");
             }
         }
     };
@@ -95,6 +103,7 @@ public class StartService extends Service {
     public void onCreate() {
         // TODO Auto-generated method stub
         super.onCreate();
+
         km=(KeyguardManager) this.getSystemService(Activity.KEYGUARD_SERVICE);
         if(km!=null){
             keylock = km.newKeyguardLock("test");
@@ -107,7 +116,6 @@ public class StartService extends Service {
         PackageManager manager=getPackageManager();
         final ResolveInfo mInfo = manager.resolveActivity(intent, 0);
         System.out.println("Default Lancher is " + mInfo.activityInfo.applicationInfo.packageName);
-
         ComponentName componentName = new ComponentName(StartService.this, StartService.class);
 
         if (!isDefaultLauncher())
@@ -174,5 +182,6 @@ public class StartService extends Service {
             unregisterReceiver(mReceiver);
         Toast.makeText(this, "서비스 종료", Toast.LENGTH_LONG).show();
     }
+
 
 }

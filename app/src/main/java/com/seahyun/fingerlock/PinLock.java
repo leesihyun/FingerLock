@@ -67,13 +67,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
 
         SharedPreferences prefs = getSharedPreferences("pref", MODE_PRIVATE);
 
-<<<<<<< HEAD
-
-
-
-=======
         PinLockActivity = PinLock.this;
->>>>>>> a32f4eff867126ebc89e4aab3ab3339c61d74ada
         int num = prefs.getInt("tab_num", 4);
         Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
         setContentView(R.layout.lock_screen_pin);

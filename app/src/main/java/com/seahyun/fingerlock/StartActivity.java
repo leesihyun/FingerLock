@@ -60,7 +60,7 @@ public class StartActivity extends AppCompatActivity {
         int lock_mode = prefs.getInt("lock",-1);
         Log.d("어떤 lock? ", String.valueOf(lock_mode));
         if(lock_mode == 1){
-            i = new Intent(getApplicationContext(), touchtab_lockscreen.class);
+            i = new Intent(getApplicationContext(), TouchTabLockScreen.class);
         }
         else if(lock_mode == 2){
             Toast.makeText(StartActivity.this, "아직 미완성", Toast.LENGTH_SHORT).show();

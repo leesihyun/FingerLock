@@ -13,13 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-<<<<<<< HEAD
-=======
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
->>>>>>> a32f4eff867126ebc89e4aab3ab3339c61d74ada
         </activity>
         <activity
             android:name=".TouchTabPreview"
@@ -29,13 +27,13 @@
         <activity android:name=".PinLock" />
         <activity android:name=".PinSettingActivity" />
         <activity android:name=".RE_PinPassword" />
-
-        <activity android:name=".TouchTabLockScreen"></activity>
-        <activity android:name=".ColorTabLockScreen"></activity>
-        <activity android:name=".TouchTabSettingActivity"></activity>
-        <activity android:name=".ColorTabSettingActivity"></activity>
-        <activity android:name=".ColorTabPreview" android:theme="@android:style/Theme.Dialog"></activity>
-
+        <activity android:name=".TouchTabLockScreen" />
+        <activity android:name=".ColorTabLockScreen" />
+        <activity android:name=".TouchTabSettingActivity" />
+        <activity android:name=".ColorTabSettingActivity" />
+        <activity
+            android:name=".ColorTabPreview"
+            android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".ApplicationSelectionActivity"
             android:screenOrientation="portrait"
@@ -58,30 +56,19 @@
         <activity android:name=".RE_ColorTabFivePassword" />
         <activity android:name=".ColorTabSixPassword" />
         <activity android:name=".RE_ColorTabSixPassword" />
-        <activity android:name=".FingerprintAddActivity" />
         <activity android:name=".FingerprintSettingActivity" />
-<<<<<<< HEAD
-        <service android:name=".SimpleService" />
-        <activity android:name=".FingerprintEditActivity" />
-        <activity android:name=".StartActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-=======
 
-        <service android:name=".SimpleService"/>
+        <service android:name=".SimpleService" />
         <service android:name=".StartService">
             <intent-filter>
->>>>>>> a32f4eff867126ebc89e4aab3ab3339c61d74ada
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-<<<<<<< HEAD
-        </activity>
-=======
         </service>
-        <activity android:name=".FingerprintEditActivity"></activity>
->>>>>>> a32f4eff867126ebc89e4aab3ab3339c61d74ada
+
+        <activity android:name=".FingerprintEditActivity" />
+
     </application>
 
 </manifest>
