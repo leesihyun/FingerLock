@@ -117,10 +117,14 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
         String abc [] = formatDate.split("-");
         String inputTime = abc[abc.length-1];
 
-//        MActivity.finish();
         Intent intent = new Intent(mContext, FingerReadActivity.class);
         intent.putExtra("time", inputTime);
         mContext.startActivity(intent);
+
+//        MActivity.finish();
+//        Intent intent = new Intent(mContext, FingerReadActivity.class);
+//        intent.putExtra("time", inputTime);
+//        mContext.startActivity(intent);
 
 //        restartReader();
 //

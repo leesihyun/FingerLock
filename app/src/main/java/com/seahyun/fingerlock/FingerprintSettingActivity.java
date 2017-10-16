@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.lang.reflect.InvocationTargetException;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class FingerprintSettingActivity extends AppCompatActivity {
+public class FingerprintSettingActivity extends AppCompatActivity implements View.OnClickListener {
     private String TAG = FingerprintSettingActivity.class.getSimpleName();
     private ListView fingersetting_listView;
     private FingerprintListviewAdapter fingerprintListviewAdapter;
@@ -26,6 +27,8 @@ public class FingerprintSettingActivity extends AppCompatActivity {
     private ArrayList<FingerprintListviewItem> showList; // 사용자에게 보여줄 fingerprint List
     private ArrayList<String> fingerIDInSys; // 시스템에서 받아온 fingerID List
     private String fingeredit_tempID = ""; // 수정 할 fingerID
+
+    private Button complete;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -38,6 +41,9 @@ public class FingerprintSettingActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.DarkBlue));
         getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
         setContentView(R.layout.fingerprint_setting);
+
+        complete = (Button)findViewById(R.id.setting_complete);
+        complete.setOnClickListener((View.OnClickListener)FingerprintSettingActivity.this);
 
         fingerprintList = new ArrayList<FingerprintListviewItem>();
         showList = new ArrayList<FingerprintListviewItem>();
@@ -80,6 +86,16 @@ public class FingerprintSettingActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.setting_complete){
+            Log.d(TAG, "완료버튼 클릭");
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+    }
 
     public void getFingerIdInSys() {
         try {
