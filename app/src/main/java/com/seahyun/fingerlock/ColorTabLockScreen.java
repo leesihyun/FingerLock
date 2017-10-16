@@ -53,7 +53,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
 //    Button button5;
 //    Button button6;
 
-    SimpleService simpleservice = new SimpleService();
+    //SimpleService simpleservice = new SimpleService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

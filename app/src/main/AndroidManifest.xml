@@ -38,6 +38,10 @@
             android:name=".ApplicationSelectionActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Dialog" />
+        <activity
+            android:name=".ApplicationSelectionPINActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".TouchTabFourActivity" />
         <activity android:name=".TouchTabFiveActivity" />
         <activity android:name=".TouchTabSixActivity" />
@@ -57,23 +61,20 @@
         <activity android:name=".ColorTabSixPassword" />
         <activity android:name=".RE_ColorTabSixPassword" />
         <activity android:name=".FingerprintSettingActivity" />
-
-        <service android:name=".SimpleService" />
-        <service android:name=".StartService">
+        <service android:name=".SimpleService"/>
+        <!--<service android:name=".StartService">
             <intent-filter>
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-        </service>
+        </service>-->
 
         <activity android:name=".FingerprintEditActivity" />
-<<<<<<< HEAD
         <activity android:name=".FingerprintLockScreen" />
         <activity android:name=".FingerReadActivity"></activity>
-=======
 
->>>>>>> 0c10f7075c820b2ea2cdfecee4b72446463d5dcf
+
     </application>
 
 </manifest>

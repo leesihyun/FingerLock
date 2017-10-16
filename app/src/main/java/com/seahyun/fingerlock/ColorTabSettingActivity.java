@@ -57,9 +57,9 @@ public class ColorTabSettingActivity extends AppCompatActivity implements View.O
         //ActionBar title 변경
         actionBar.setTitle("컬러탭 환경설정");
         // ActionBar 배경색 변경
-        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.DarkGreen));
+        actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.DarkBlue));
 
-        getWindow().setStatusBarColor(getResources().getColor(R.color.DarkGreen));
+        getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
         setContentView(R.layout.color_tab_setting);
 

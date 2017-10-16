@@ -49,7 +49,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     EditText num4;
     EditText num5;
 
-    SimpleService simpleservice = new SimpleService();
+    //SimpleService simpleservice = new SimpleService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -174,7 +174,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 if (num4.length() == 1) {  // edit1  값의 제한값을 6이라고 가정했을때
                     input_arr[3]= Integer.parseInt(num4.getText().toString());
                     // input_handler();
-                    //num5.requestFocus(); // 두번째EditText 로 포커스가 넘어가게 됩니다
+                    num5.requestFocus(); // 두번째EditText 로 포커스가 넘어가게 됩니다
                 }
             }
 

@@ -125,23 +125,23 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
                 //Toast.makeText(getApplicationContext(),"dddddddddddddddddddd",Toast.LENGTH_SHORT).show();
                 prefsEditor.putBoolean("select1", true);
                 prefsEditor.commit();
-                startActivity(new Intent(this, ApplicationSelectionActivity.class));
+                startActivity(new Intent(this, ApplicationSelectionPINActivity.class));
                 break;
             case R.id.button4_2:
                 prefsEditor.putBoolean("select2", true);
                 prefsEditor.commit();
-                startActivity(new Intent(this, ApplicationSelectionActivity.class));
+                startActivity(new Intent(this, ApplicationSelectionPINActivity.class));
                 break;
             case R.id.button4_3:
                 prefsEditor.putBoolean("select3", true);
                 prefsEditor.commit();
-                startActivity(new Intent(this, ApplicationSelectionActivity.class));
+                startActivity(new Intent(this, ApplicationSelectionPINActivity.class));
                 break;
             case R.id.button4_4:
                 prefsEditor.putBoolean("select4", true);
                 prefsEditor.commit();
 
-                startActivity(new Intent(this, ApplicationSelectionActivity.class));
+                startActivity(new Intent(this, ApplicationSelectionPINActivity.class));
                 break;
             case R.id.app_registration:
                 Log.d("등록완료 클릭!","");
@@ -344,11 +344,11 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
         register.setOnClickListener(this);
         cancel.setOnClickListener(this);
 
-        SharedPreferences prefs = getSharedPreferences("Message", MODE_PRIVATE);
-        button4_1.setText(prefs.getString("msg1", "여기에 어플을 등록합니다"));
-        button4_2.setText(prefs.getString("msg2", "여기에 어플을 등록합니다"));
-        button4_3.setText(prefs.getString("msg3", "여기에 어플을 등록합니다"));
-        button4_4.setText(prefs.getString("msg4", "여기에 어플을 등록합니다"));
+        SharedPreferences prefs = getSharedPreferences("MessageP", MODE_PRIVATE);
+        button4_1.setText(prefs.getString("msgP1", "여기에 어플을 등록합니다"));
+        button4_2.setText(prefs.getString("msgP2", "여기에 어플을 등록합니다"));
+        button4_3.setText(prefs.getString("msgP3", "여기에 어플을 등록합니다"));
+        button4_4.setText(prefs.getString("msgP4", "여기에 어플을 등록합니다"));
 
      /*   SharedPreferences prefs5 = getSharedPreferences("num", MODE_PRIVATE);
 
@@ -362,23 +362,23 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
 
     public void applicationList() {
 
-        SharedPreferences prefs3 = getSharedPreferences("Message", MODE_PRIVATE);
+        SharedPreferences prefs3 = getSharedPreferences("MessageP", MODE_PRIVATE);
 
-        SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
+        SharedPreferences prefs4 = getSharedPreferences("PakageNameP", MODE_PRIVATE);
 
-        Message[0] = prefs3.getString("msg1", "여기에 어플을 등록합니다");
-        Message[1] = prefs3.getString("msg2", "여기에 어플을 등록합니다");
-        Message[2] = prefs3.getString("msg3", "여기에 어플을 등록합니다");
-        Message[3] = prefs3.getString("msg4", "여기에 어플을 등록합니다");
-        Message[4] = prefs3.getString("msg5", "여기에 어플을 등록합니다");
-        Message[5] = prefs3.getString("msg6", "여기에 어플을 등록합니다");
+        Message[0] = prefs3.getString("msgP1", "여기에 어플을 등록합니다");
+        Message[1] = prefs3.getString("msgP2", "여기에 어플을 등록합니다");
+        Message[2] = prefs3.getString("msgP3", "여기에 어플을 등록합니다");
+        Message[3] = prefs3.getString("msgP4", "여기에 어플을 등록합니다");
+        Message[4] = prefs3.getString("msgP5", "여기에 어플을 등록합니다");
+        Message[5] = prefs3.getString("msgP6", "여기에 어플을 등록합니다");
 
-        PackageName[0] = prefs4.getString("name1", "");
-        PackageName[1] = prefs4.getString("name2", "");
-        PackageName[2] = prefs4.getString("name3", "");
-        PackageName[3] = prefs4.getString("name4", "");
-        PackageName[4] = prefs4.getString("name5", "");
-        PackageName[5] = prefs4.getString("name6", "");
+        PackageName[0] = prefs4.getString("nameP1", "");
+        PackageName[1] = prefs4.getString("nameP2", "");
+        PackageName[2] = prefs4.getString("nameP3", "");
+        PackageName[3] = prefs4.getString("nameP4", "");
+        PackageName[4] = prefs4.getString("nameP5", "");
+        PackageName[5] = prefs4.getString("nameP6", "");
 
         for (int i = 0; i < 6; i++) {
             Log.d("TouchTabFourActivity", "Message >> " + Message[i]);
@@ -388,31 +388,31 @@ public class PinAppRegister extends AppCompatActivity implements View.OnClickLis
 
     public void returnApplicationList() {
 
-        SharedPreferences prefs3 = getSharedPreferences("Message", MODE_PRIVATE);
+        SharedPreferences prefs3 = getSharedPreferences("MessageP", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor2 = prefs3.edit();
 
-        SharedPreferences prefs4 = getSharedPreferences("PakageName", MODE_PRIVATE);
+        SharedPreferences prefs4 = getSharedPreferences("PakageNameP", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor3 = prefs4.edit();
 
 
         SharedPreferences prefs5 = getSharedPreferences("num", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor4 = prefs5.edit();
 
-        prefsEditor2.putString("msg1", Message[0]);
-        prefsEditor2.putString("msg2", Message[1]);
-        prefsEditor2.putString("msg3", Message[2]);
-        prefsEditor2.putString("msg4", Message[3]);
-        prefsEditor2.putString("msg5", Message[4]);
-        prefsEditor2.putString("msg6", Message[5]);
+        prefsEditor2.putString("msgP1", Message[0]);
+        prefsEditor2.putString("msgP2", Message[1]);
+        prefsEditor2.putString("msgP3", Message[2]);
+        prefsEditor2.putString("msgP4", Message[3]);
+        prefsEditor2.putString("msgP5", Message[4]);
+        prefsEditor2.putString("msgP6", Message[5]);
 
         prefsEditor2.commit();
 
-        prefsEditor3.putString("name1", PackageName[0]);
-        prefsEditor3.putString("name2", PackageName[1]);
-        prefsEditor3.putString("name3", PackageName[2]);
-        prefsEditor3.putString("name4", PackageName[3]);
-        prefsEditor3.putString("name5", PackageName[4]);
-        prefsEditor3.putString("name6", PackageName[5]);
+        prefsEditor3.putString("nameP1", PackageName[0]);
+        prefsEditor3.putString("nameP2", PackageName[1]);
+        prefsEditor3.putString("nameP3", PackageName[2]);
+        prefsEditor3.putString("nameP4", PackageName[3]);
+        prefsEditor3.putString("nameP5", PackageName[4]);
+        prefsEditor3.putString("nameP6", PackageName[5]);
 
         prefsEditor3.commit();
 

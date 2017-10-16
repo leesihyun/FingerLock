@@ -228,26 +228,26 @@ public class PinSettingActivity extends AppCompatActivity implements View.OnClic
         prefsEditor.commit();
 
 
-        SharedPreferences prefs2 = getSharedPreferences("Message", MODE_PRIVATE);
+        SharedPreferences prefs2 = getSharedPreferences("MessageP", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor2 = prefs2.edit();
 
-        prefsEditor2.putString("msg1", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg2", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg3", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg4", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg5", "여기에 어플을 등록합니다");
-        prefsEditor2.putString("msg6", "여기에 어플을 등록합니다");
+        prefsEditor2.putString("msgP1", "여기에 어플을 등록합니다");
+        prefsEditor2.putString("msgP2", "여기에 어플을 등록합니다");
+        prefsEditor2.putString("msgP3", "여기에 어플을 등록합니다");
+        prefsEditor2.putString("msgP4", "여기에 어플을 등록합니다");
+        prefsEditor2.putString("msgP5", "여기에 어플을 등록합니다");
+        prefsEditor2.putString("msgP6", "여기에 어플을 등록합니다");
         prefsEditor2.commit();
 
-        SharedPreferences prefs3 = getSharedPreferences("PakageName", MODE_PRIVATE);
+        SharedPreferences prefs3 = getSharedPreferences("PakageNameP", MODE_PRIVATE);
         SharedPreferences.Editor prefsEditor3 = prefs3.edit();
 
-        prefsEditor3.putString("name1","");
-        prefsEditor3.putString("name2","");
-        prefsEditor3.putString("name3","");
-        prefsEditor3.putString("name4","");
-        prefsEditor3.putString("name5","");
-        prefsEditor3.putString("name6","");
+        prefsEditor3.putString("nameP1","");
+        prefsEditor3.putString("nameP2","");
+        prefsEditor3.putString("nameP3","");
+        prefsEditor3.putString("nameP4","");
+        prefsEditor3.putString("nameP5","");
+        prefsEditor3.putString("nameP6","");
         prefsEditor3.commit();
 
         SharedPreferences prefs4 = getSharedPreferences("num", MODE_PRIVATE);
@@ -292,18 +292,18 @@ public class PinSettingActivity extends AppCompatActivity implements View.OnClic
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences pref = getSharedPreferences("PakageName", MODE_PRIVATE);
-        SharedPreferences pref2 = getSharedPreferences("Message", MODE_PRIVATE);
+        SharedPreferences pref = getSharedPreferences("PakageNameP", MODE_PRIVATE);
+        SharedPreferences pref2 = getSharedPreferences("MessageP", MODE_PRIVATE);
         SharedPreferences pref3 = getSharedPreferences("num", MODE_PRIVATE);
 
         PackageManager pm = getPackageManager();
 
-        PackageName[0] = pref.getString("name1","");
-        PackageName[1] = pref.getString("name2","");
-        PackageName[2] = pref.getString("name3","");
-        PackageName[3] = pref.getString("name4","");
-        PackageName[4] = pref.getString("name5","");
-        PackageName[5] = pref.getString("name6","");
+        PackageName[0] = pref.getString("nameP1","");
+        PackageName[1] = pref.getString("nameP2","");
+        PackageName[2] = pref.getString("nameP3","");
+        PackageName[3] = pref.getString("nameP4","");
+        PackageName[4] = pref.getString("nameP5","");
+        PackageName[5] = pref.getString("nameP6","");
 
         num[0]=pref3.getInt("num1",0);
         num[1]=pref3.getInt("num2",1);

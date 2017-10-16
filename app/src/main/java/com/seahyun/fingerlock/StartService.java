@@ -88,12 +88,17 @@ public class StartService extends Service {
                 if(activity3!=null) {
                     Log.d("activity>>", "pin꺼짐");
 
+
                 FingerprintLockScreen activity4 = (FingerprintLockScreen)FingerprintLockScreen.FingerLockActivity;
                 if(activity4!=null)
                     activity4.finish();
 
 
-                    activity3.finish();
+activity3.finish();
+                }
+                FingerprintLockScreen activity4 = (FingerprintLockScreen) FingerprintLockScreen.FingerLockActivity;
+                if (activity4 != null) {
+                    activity4.finish();
                 }
             }
             else{
