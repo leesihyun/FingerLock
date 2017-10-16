@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(touch_tab.isChecked()){
-                            startService(new Intent(MainActivity.this, StartService.class));
+                            startService(new Intent(MainActivity.this, SimpleService.class));
                             touch_tab.setChecked(true);
 
                             prefsEditor.putInt("lock",1);
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity{
 
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, StartService.class));
+                            stopService(new Intent(MainActivity.this, SimpleService.class));
                             touch_tab.setChecked(false);
 
                             prefsEditor2.putBoolean("touch_tab", false);
@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(color_tab.isChecked()){
-                            startService(new Intent(MainActivity.this, StartService.class));
+                            startService(new Intent(MainActivity.this, SimpleService.class));
                             color_tab.setChecked(true);
 
                             prefsEditor.putInt("lock",2);
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity{
                             prefsEditor2.commit();
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, StartService.class));
+                            stopService(new Intent(MainActivity.this, SimpleService.class));
                             color_tab.setChecked(false);
 
                             prefsEditor2.putBoolean("color_tab", false);
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(pin_lock.isChecked()){
-                            startService(new Intent(MainActivity.this, StartService.class));
+                            startService(new Intent(MainActivity.this, SimpleService.class));
                             pin_lock.setChecked(true);
 
                             prefsEditor.putInt("lock",3);
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity{
                             prefsEditor2.commit();
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, StartService.class));
+                            stopService(new Intent(MainActivity.this, SimpleService.class));
                             pin_lock.setChecked(false);
 
                             prefsEditor2.putBoolean("pin_lock", false);
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(finger_lock.isChecked()){
-                            startService(new Intent(MainActivity.this, StartService.class));
+                            startService(new Intent(MainActivity.this, SimpleService.class));
                             finger_lock.setChecked(true);
 
                             prefsEditor.putInt("lock",4);
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity{
                             prefsEditor2.commit();
                         }
                         else{
-                            stopService(new Intent(MainActivity.this, StartService.class));
+                            stopService(new Intent(MainActivity.this, SimpleService.class));
                             finger_lock.setChecked(false);
 
                             prefsEditor2.putBoolean("finger_lock", false);

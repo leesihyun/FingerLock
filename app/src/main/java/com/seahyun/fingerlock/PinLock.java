@@ -49,7 +49,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     EditText num4;
     EditText num5;
 
-    SimpleService simpleservice = new SimpleService();
+    //SimpleService simpleservice = new SimpleService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
