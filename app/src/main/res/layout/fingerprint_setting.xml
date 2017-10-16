@@ -8,7 +8,7 @@
     <ListView
         android:id="@+id/fingersetting_listView"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="474dp"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
         android:choiceMode="singleChoice"></ListView>
