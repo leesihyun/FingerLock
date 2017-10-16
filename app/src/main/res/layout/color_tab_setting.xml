@@ -41,7 +41,7 @@
                 android:layout_width="100dp"
                 android:layout_height="40dp"
                 android:layout_gravity="right"
-                android:background="@drawable/color_tab_shape"
+                android:background="@drawable/shape"
                 android:text="미리보기"
                 android:textColor="#FFFFFF"
                 android:textSize="15dp" />
@@ -70,7 +70,7 @@
                 android:text="어플 선택하기"
                 android:textSize="15dp"
                 android:textColor="#FFFFFF"
-                android:background="@drawable/color_tab_shape"/>
+                android:background="@drawable/shape"/>
 
             <Button
                 android:id="@+id/application_init"
@@ -80,7 +80,7 @@
                 android:text="어플 선택 초기화"
                 android:textSize="15dp"
                 android:textColor="#FFFFFF"
-                android:background="@drawable/color_tab_shape"/>
+                android:background="@drawable/shape"/>
 
         </LinearLayout>
 
@@ -245,7 +245,7 @@
             android:text="비밀번호 설정"
             android:textSize="15dp"
             android:textColor="#FFFFFF"
-            android:background="@drawable/color_tab_shape"/>
+            android:background="@drawable/shape"/>
         <Button
             android:id="@+id/setting_complete"
             android:layout_width="100dp"
@@ -258,7 +258,7 @@
             android:text="완료"
             android:textSize="15dp"
             android:textColor="#FFFFFF"
-            android:background="@drawable/color_tab_shape"/>
+            android:background="@drawable/shape"/>
 
     </LinearLayout>
 </ScrollView>

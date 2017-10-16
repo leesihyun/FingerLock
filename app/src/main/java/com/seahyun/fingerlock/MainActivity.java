@@ -112,10 +112,11 @@ public class MainActivity extends AppCompatActivity{
                     }
                 });
         /*이전 스위치 on/off 정보 유지*/
+        pin_lock = (Switch)findViewById(R.id.pin_lock);
         if(prefs2.getBoolean("pin_lock", false)){
             pin_lock.setChecked(true);
         }
-        pin_lock = (Switch)findViewById(R.id.pin_lock);
+
         pin_lock.setOnClickListener(
                 new Button.OnClickListener() {
                     public void onClick(View v) {
