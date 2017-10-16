@@ -1,25 +1,16 @@
 package com.seahyun.fingerlock;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.Switch;
-import  android.support.v7.app.ActionBar;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -29,6 +20,7 @@ public class MainActivity extends AppCompatActivity{
     Switch touch_tab;
     Switch pin_lock;
     Switch color_tab;
+    Switch finger_lock;
 
     ImageButton touch_tab_setting;
     ImageButton pin_lock_setting;
@@ -146,6 +138,36 @@ public class MainActivity extends AppCompatActivity{
                         }
                     }
                 });
+
+
+        finger_lock = (Switch)findViewById(R.id.finger_lock) ;
+        if(prefs2.getBoolean("finger_lock", false)){
+            finger_lock.setChecked(true);
+        }
+        finger_lock.setOnClickListener(
+                new Button.OnClickListener() {
+                    public void onClick(View v) {
+                        if(finger_lock.isChecked()){
+                            startService(new Intent(MainActivity.this, StartService.class));
+                            finger_lock.setChecked(true);
+
+                            prefsEditor.putInt("lock",4);
+                            prefsEditor.commit();
+
+                            prefsEditor2.putBoolean("finger_lock", true);
+                            prefsEditor2.commit();
+                        }
+                        else{
+                            stopService(new Intent(MainActivity.this, StartService.class));
+                            finger_lock.setChecked(false);
+
+                            prefsEditor2.putBoolean("finger_lock", false);
+                            prefsEditor2.commit();
+                        }
+                    }
+                }
+        );
+
 
         touch_tab_setting = (ImageButton)findViewById(R.id.touch_tab_lock_setting);
         touch_tab_setting.setOnClickListener(

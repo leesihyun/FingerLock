@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -56,12 +55,13 @@ public class FingerprintEditActivity extends AppCompatActivity {
         pack_name = fingeredit_appname;
         fingeredit_editText.setText(fingeredit_fingername);
         if ((!fingeredit_appname.equals("")) && (fingeredit_appname != null)) {
-            pm = getPackageManager();
+            pm = this.getPackageManager();
             try {
                 info = pm.getApplicationInfo(fingeredit_appname.toLowerCase(), PackageManager.GET_META_DATA);
-
                 if (info != null) {
                     fingeredit_selectButton.setText(pm.getApplicationLabel(info));
+                } else if(info == null) {
+                    fingeredit_selectButton.setText("여기에 어플을 등록합니다");
                 }
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();

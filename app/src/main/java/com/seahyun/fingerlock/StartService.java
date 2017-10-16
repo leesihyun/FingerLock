@@ -13,7 +13,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -64,6 +63,10 @@ public class StartService extends Service {
                     Log.d("핀번호 실행","");
                     i = new Intent(context, PinLock.class);
                 }
+                else if(lock_mode == 4){
+                    Log.d("지문 실행","");
+                    i = new Intent(context, FingerprintLockScreen.class);
+                }
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);
             }
@@ -85,11 +88,18 @@ public class StartService extends Service {
                 if(activity3!=null) {
                     Log.d("activity>>", "pin꺼짐");
 
+<<<<<<< HEAD
+                FingerprintLockScreen activity4 = (FingerprintLockScreen)FingerprintLockScreen.FingerLockActivity;
+                if(activity4!=null)
+                    activity4.finish();
+
+=======
                     activity3.finish();
                 }
             }
             else{
                 Log.d("##################","#######");
+>>>>>>> 0c10f7075c820b2ea2cdfecee4b72446463d5dcf
             }
         }
     };

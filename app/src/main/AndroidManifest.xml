@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="false"
@@ -67,7 +68,12 @@
         </service>
 
         <activity android:name=".FingerprintEditActivity" />
+<<<<<<< HEAD
+        <activity android:name=".FingerprintLockScreen" />
+        <activity android:name=".FingerReadActivity"></activity>
+=======
 
+>>>>>>> 0c10f7075c820b2ea2cdfecee4b72446463d5dcf
     </application>
 
 </manifest>
