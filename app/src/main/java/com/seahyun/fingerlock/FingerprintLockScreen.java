@@ -51,6 +51,9 @@ public class FingerprintLockScreen extends AppCompatActivity {
     private KeyGenerator mKeyGenerator;
     private SharedPreferences mSharedPreferences;
 
+    public static Activity FingerPrintLockScreenActivity;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
