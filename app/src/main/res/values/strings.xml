@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FingerLock</string>
+    <string name="app_name">손가LOCK</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="use_fingerprint_to_authenticate_key">use_fingerprint_to_authenticate_key</string>
