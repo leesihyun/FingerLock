@@ -209,9 +209,11 @@ public class FingerprintLockScreen extends AppCompatActivity {
             }
             mKeyGenerator.init(builder.build());
             mKeyGenerator.generateKey();
-        } catch (NoSuchAlgorithmException | InvalidAlgorithmParameterException
-                | CertificateException | IOException e) {
+        } catch (NoSuchAlgorithmException |/* InvalidAlgorithmParameterException
+                |*/ CertificateException | IOException e) {
             throw new RuntimeException(e);
+        } catch (InvalidAlgorithmParameterException e){
+
         }
     }
 
