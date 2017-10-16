@@ -62,22 +62,10 @@
         <activity android:name=".RE_ColorTabSixPassword" />
         <activity android:name=".FingerprintSettingActivity" />
         <service android:name=".SimpleService"/>
-        <!--<service android:name=".StartService">
-            <intent-filter>
-                <category android:name="android.intent.category.LAUNCHER" />
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </service>-->
-
         <activity android:name=".FingerprintEditActivity" />
         <activity android:name=".FingerprintLockScreen" />
         <activity android:name=".FingerReadActivity"></activity>
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 5e39e71e4175d33d7a1c2c39395d254d72d937be
     </application>
 
 </manifest>
