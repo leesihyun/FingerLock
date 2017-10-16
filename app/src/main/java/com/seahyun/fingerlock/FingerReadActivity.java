@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -44,9 +43,6 @@ public class FingerReadActivity extends AppCompatActivity {
     ProgressBar circle_bar;
 
     private ArrayList<FingerprintListviewItem> fingerprintList;
-
-
-    TextView fID_Text;
 
     private boolean stopRead = false;
 
@@ -102,8 +98,6 @@ public class FingerReadActivity extends AppCompatActivity {
         circle_bar = (ProgressBar) findViewById(R.id.progressBar);
         circle_bar.setVisibility(View.VISIBLE);
 
-        fID_Text = (TextView) findViewById(R.id.fingerID_textview);
-
         try {
             keyPair = getKeyPair(); // crashes on non-main thread
         } catch (GeneralSecurityException | IOException e) {
@@ -114,7 +108,6 @@ public class FingerReadActivity extends AppCompatActivity {
 
 
     }
-
 
     private void stopReader() {
         // adapter.clear();
@@ -171,8 +164,6 @@ public class FingerReadActivity extends AppCompatActivity {
         String aaaa[] = LogStr.split("=");
         String bbbb[] = aaaa[1].split(",");
         fID = bbbb[0];
-
-        fID_Text.setText(fID);
 
         SharedPreferences pref1 = getSharedPreferences("fingerprint1", MODE_PRIVATE);
         SharedPreferences pref2 = getSharedPreferences("fingerprint2", MODE_PRIVATE);
