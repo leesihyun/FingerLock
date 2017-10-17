@@ -180,7 +180,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
             case R.id.button4_1:
             case R.id.button5_1:
             case R.id.button6_1:
-                Toast.makeText(this, "1클릭", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "1클릭", Toast.LENGTH_SHORT).show();
                 if (select_mode == false) {
                     for (int i = 0; i < input_arr.length; i++) {
                         if (input_arr[i] == 0) {
@@ -200,7 +200,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
             case R.id.button4_2:
             case R.id.button5_2:
             case R.id.button6_2:
-                Toast.makeText(this, "2클릭", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "2클릭", Toast.LENGTH_SHORT).show();
                 if (select_mode == false) {
                     for (int i = 0; i < input_arr.length; i++) {
                         if (input_arr[i] == 0) {
@@ -220,7 +220,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
             case R.id.button4_3:
             case R.id.button5_3:
             case R.id.button6_3:
-                Toast.makeText(this, "3클릭", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "3클릭", Toast.LENGTH_SHORT).show();
                 if (select_mode == false) {
                     for (int i = 0; i < input_arr.length; i++) {
                         if (input_arr[i] == 0) {
@@ -240,7 +240,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
             case R.id.button4_4:
             case R.id.button5_4:
             case R.id.button6_4:
-                Toast.makeText(this, "4클릭", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "4클릭", Toast.LENGTH_SHORT).show();
                 if (select_mode == false) {
                     for (int i = 0; i < input_arr.length; i++) {
                         if (input_arr[i] == 0) {
@@ -258,7 +258,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
                 break;
             case R.id.button5_5:
             case R.id.button6_5:
-                Toast.makeText(this, "5클릭", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "5클릭", Toast.LENGTH_SHORT).show();
                 if (select_mode == false) {
                     for (int i = 0; i < input_arr.length; i++) {
                         if (input_arr[i] == 0) {
@@ -275,7 +275,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
                 }
                 break;
             case R.id.button6_6:
-                Toast.makeText(this, "6클릭", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "6클릭", Toast.LENGTH_SHORT).show();
                 if (select_mode == false) {
                     for (int i = 0; i < input_arr.length; i++) {
                         if (input_arr[i] == 0) {

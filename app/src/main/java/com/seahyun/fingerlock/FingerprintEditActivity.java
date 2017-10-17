@@ -14,15 +14,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 public class FingerprintEditActivity extends AppCompatActivity {
-    private String TAG = FingerprintEditActivity.class.getSimpleName();
-    private ImageView fingeredit_image;
-    private Button fingeredit_selectButton;
-    private EditText fingeredit_editText;
-    private Button fingeredit_completeButton;
-    private Button fingeredit_deleteButton;
+    public String TAG = FingerprintEditActivity.class.getSimpleName();
+    public Button fingeredit_selectButton;
+    public EditText fingeredit_editText;
+    public Button fingeredit_completeButton;
+//    public Button fingeredit_deleteButton;
 
     public String pack_name = "";
-    PackageManager pm;
+    public PackageManager pm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +42,15 @@ public class FingerprintEditActivity extends AppCompatActivity {
 
 
         SharedPreferences prefs = getSharedPreferences("fingeredit", MODE_PRIVATE);
-
         String fingeredit_fingername = prefs.getString("fingeredit_fingername", "");
         String fingeredit_appname = prefs.getString("fingeredit_appname", ""); // 나중에 null 인거 처리해줘야댐!
 
         Log.d("Fingerprint 수정 전 받아온 이름>>", fingeredit_fingername);
         Log.d("Fingerprint 수정 전 받아온 어플>>", fingeredit_appname);
 
-        // fingername불러와서
-        ApplicationInfo info = null;
-        pack_name = fingeredit_appname;
         fingeredit_editText.setText(fingeredit_fingername);
+        pack_name = fingeredit_appname;
+        ApplicationInfo info = null;
         if ((!fingeredit_appname.equals("")) && (fingeredit_appname != null)) {
             pm = this.getPackageManager();
             try {
@@ -115,7 +112,7 @@ public class FingerprintEditActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.d(TAG, "수정하고 EDIT 종료합니다.");
                 String fingeredit_fingername2 = fingeredit_editText.getText().toString();
-                String fingeredit_appname2 = pack_name;
+                String fingeredit_appname2 = pack_name.toString();
 
                 Log.d("수정할 FNAME>>", fingeredit_fingername2);
                 Log.d("수정할 ANAME>>", fingeredit_appname2);
@@ -134,51 +131,31 @@ public class FingerprintEditActivity extends AppCompatActivity {
 
         SharedPreferences prefs1 = getSharedPreferences("PakageName", MODE_PRIVATE);
         SharedPreferences prefs2 = getSharedPreferences("select_state", MODE_PRIVATE);
-        SharedPreferences.Editor prefsEditor = prefs2.edit();
 
-        pack_name = prefs1.getString("name1", "");
+        if(!prefs1.getString("name1","").equals("")) {
+            pack_name = prefs1.getString("name1", "");
 
-        ApplicationInfo info = null;
+            ApplicationInfo info = null;
+            if ((!pack_name.equals("")) && (pack_name != null)) {
+                pm = getPackageManager();
+                try {
+                    info = pm.getApplicationInfo(pack_name.toLowerCase(), PackageManager.GET_META_DATA);
 
-        if ((!pack_name.equals("")) && (pack_name != null)) {
-            pm = getPackageManager();
-            try {
-                info = pm.getApplicationInfo(pack_name.toLowerCase(), PackageManager.GET_META_DATA);
-
-                if (info != null) {
-                    fingeredit_selectButton.setText(pm.getApplicationLabel(info));
+                    if (info != null) {
+                        fingeredit_selectButton.setText(pm.getApplicationLabel(info));
+                    }
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                    Log.d(pack_name, "는 설치되지 않은 패키지 입니다.");
+                    fingeredit_selectButton.setText("여기에 어플을 등록합니다");
                 }
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
-                Log.d(pack_name, "는 설치되지 않은 패키지 입니다.");
-                fingeredit_selectButton.setText("여기에 어플을 등록합니다");
+                // pref 초기화
+                SharedPreferences.Editor prefsEditor1 = prefs1.edit();
+                prefsEditor1.putString("name1", "");
+                prefsEditor1.commit();
             }
         }
-        // pref 초기화
-        SharedPreferences.Editor prefsEditor1 = prefs1.edit();
-        prefsEditor1.putString("name1", "");
-        prefsEditor1.commit();
     }
-//
-//    public void setLaunchAname(String package_name){
-//        try {
-//            if (!package_name.equals("")) { // 실행 될 앱 이름이 있다면
-//                Log.d("setApppIcon(): package name is",pack_name);
-//
-//                Drawable AppIcon = getPackageManager().getApplicationInfo(package_name.toString());
-//
-//                fingeredit_image.setImageDrawable(AppIcon);
-//                //fingeredit_image.invalidate();
-//
-//            } else {
-//                Log.d("setApppIcon(): package name is null","");
-//                fingeredit_selectButton.setText("여기에 어플을 등록합니다");
-//            }
-//        } catch (PackageManager.NameNotFoundException e) {
-//            Log.d("setApppIcon():","Package:"+pack_name+"is Not Found!");
-//            e.printStackTrace();
-//        }
-//    }
 
     @Override
     public void onBackPressed() {

@@ -60,15 +60,12 @@ public class FingerprintListviewAdapter extends BaseAdapter {
         PackageManager pm = context.getPackageManager();
         Drawable app_icon = null;
         try {
-            if(app_icon!=null){
-            app_icon = pm.getApplicationIcon(list_itemArrayList.get(position).getApp_name());}
-//            else if(app_icon==null){
-//                app_icon = null;
-//            }
+            app_icon = pm.getApplicationIcon(list_itemArrayList.get(position).getApp_name().toLowerCase());
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
-        viewholder.imageView.setImageDrawable(app_icon);
+        if(app_icon!=null)
+            viewholder.imageView.setImageDrawable(app_icon);
         return convertView;
     }
 
