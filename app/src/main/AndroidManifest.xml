@@ -73,11 +73,6 @@
         <activity android:name=".FingerprintEditActivity" />
         <activity android:name=".FingerprintLockScreen" />
         <activity android:name=".FingerReadActivity"></activity>
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 5e39e71e4175d33d7a1c2c39395d254d72d937be
     </application>
 
 </manifest>

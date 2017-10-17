@@ -87,26 +87,12 @@ public class StartService extends Service {
                 PinLock activity3 = (PinLock) PinLock.PinLockActivity;
                 if(activity3!=null) {
                     Log.d("activity>>", "pin꺼짐");
-
-<<<<<<< HEAD
-                FingerprintLockScreen activity4 = (FingerprintLockScreen)FingerprintLockScreen.FingerLockActivity;
-                if(activity4!=null)
-                    activity4.finish();
-                    activity3.finish();
-=======
-
-                FingerprintLockScreen activity4 = (FingerprintLockScreen)FingerprintLockScreen.FingerLockActivity;
-                if(activity4!=null)
-                    activity4.finish();
-
-
-activity3.finish();
                 }
-                FingerprintLockScreen activity4 = (FingerprintLockScreen) FingerprintLockScreen.FingerLockActivity;
-                if (activity4 != null) {
+                FingerprintLockScreen activity4 = (FingerprintLockScreen)FingerprintLockScreen.FingerLockActivity;
+                if(activity4!=null) {
                     activity4.finish();
->>>>>>> 5e39e71e4175d33d7a1c2c39395d254d72d937be
                 }
+
             }
             else{
                 Log.d("##################","#######");
