@@ -35,6 +35,7 @@ public class FingerReadActivity extends AppCompatActivity {
     private static final String KEY_PUBLIC = "publicKey";
     private static final String KEY_PRIVATE = "privateKey";
 
+    String timeLimit = "";
     String inputTime = "";
     String inputMin[] = new String[]{"", "", ""};
     String LogStr = "";
@@ -77,23 +78,62 @@ public class FingerReadActivity extends AppCompatActivity {
         inputTime = intent.getStringExtra("time");
         String tmp[] = inputTime.split(":");
 
-        String min[] = new String[]{"", ""};
-        int num1 = Integer.parseInt(tmp[1]) - 1;
-        if (num1 < 10)
-            min[0] = "0" + String.valueOf(num1);
-        else
-            min[0] = String.valueOf(num1);
+        String plusOne[] = new String[]{"","",""};
+        plusOne[0] = tmp[0];
+        plusOne[1] = tmp[1];
+        plusOne[2] = tmp[2];
 
-        int num2 = Integer.parseInt(tmp[1]) + 1;
-        if (num2 < 10)
-            min[1] = "0" + String.valueOf(num2);
-        else
-            min[1] = String.valueOf(num2);
+        int sec_plus_one = Integer.parseInt(tmp[2])+1;
+
+        if(sec_plus_one == 60){
+            plusOne[2] = "00";
+
+            int min_plus_one = Integer.parseInt(tmp[1])+1;
+
+            if(min_plus_one == 60){
+                plusOne[1] = "00";
+
+                int hour_plus_one = Integer.parseInt(tmp[0])+1;
+
+                if(hour_plus_one == 25){
+                    plusOne[0] = "00";
+                } else {
+                    plusOne[0] = String.valueOf(hour_plus_one);
+                }
+
+            } else if (min_plus_one < 10){
+                plusOne[1] = "0"+ String.valueOf(min_plus_one);
+            } else {
+                plusOne[1] = String.valueOf(min_plus_one);
+            }
+
+        } else if(sec_plus_one < 10){
+            plusOne[2] = "0"+ String.valueOf(sec_plus_one);
+        } else {
+            plusOne[2] = String.valueOf(sec_plus_one);
+        }
+
+//        inputMin[0] =
+        timeLimit = plusOne[0]+":"+plusOne[1]+":"+plusOne[2];
+        Log.d("99999999 >>",timeLimit);
+
+//        String min[] = new String[]{"", ""};
+//        int num1 = Integer.parseInt(tmp[1]) - 1;
+//        if (num1 < 10)
+//            min[0] = "0" + String.valueOf(num1);
+//        else
+//            min[0] = String.valueOf(num1);
+//
+//        int num2 = Integer.parseInt(tmp[1]) + 1;
+//        if (num2 < 10)
+//            min[1] = "0" + String.valueOf(num2);
+//        else
+//            min[1] = String.valueOf(num2);
 
 
-        inputMin[0] = tmp[0] + ":" + min[0] + ":";
-        inputMin[1] = tmp[0] + ":" + tmp[1] + ":";
-        inputMin[2] = tmp[0] + ":" + min[1] + ":";
+//        inputMin[0] = tmp[0] + ":" + min[0] + ":";
+//        inputMin[1] = tmp[0] + ":" + tmp[1] + ":";
+//        inputMin[2] = tmp[0] + ":" + min[1] + ":";
 
         circle_bar = (ProgressBar) findViewById(R.id.progressBar);
         circle_bar.setVisibility(View.VISIBLE);
@@ -258,21 +298,33 @@ public class FingerReadActivity extends AppCompatActivity {
                     //getLine null 확인문
                     if (statusUpdate.getLines() != null) {
                         for (String str : statusUpdate.getLines()) {
-                            if (str.trim().contains(inputMin[0])) {
+
+                            if(str.trim().contains(timeLimit)){
+                                Log.d(TAG,"4444444444444444444444444");
+                                stopRead = true;
+                                break;
+                            }
+                            else{
                                 if (str.trim().contains("onAuthenticated(fid=")) {
                                     Log.d(TAG, "@@@@@@@@@@@@@@");
                                     LogStr = str.trim();
-                                    stopRead = true;
-                                    break;
-                                }
-                            } else if (str.trim().contains(inputMin[1])) {
-                                if (str.trim().contains("onAuthenticated(fid=")) {
-                                    Log.d(TAG, "@@@@@@@@@@@@@@");
-                                    LogStr = str.trim();
-                                    stopRead = true;
-                                    break;
                                 }
                             }
+//                            if (str.trim().contains(inputMin[0])) {
+//                                if (str.trim().contains("onAuthenticated(fid=")) {
+//                                    Log.d(TAG, "@@@@@@@@@@@@@@");
+//                                    LogStr = str.trim();
+//                                }
+//                            } else if (str.trim().contains(inputMin[1])) {
+//                                if (str.trim().contains("onAuthenticated(fid=")) {
+//                                    Log.d(TAG, "@@@@@@@@@@@@@@");
+//                                    LogStr = str.trim();
+//                                    stopRead = true;
+//                                    break;
+//                                }
+//                                } else if (str.trim().contains(inputTime)){
+//                                }
+//                            } else if (str.trim().contains(inputTime))
                         }
                     }//getLine null 확인문
                 }//stopRead if문
