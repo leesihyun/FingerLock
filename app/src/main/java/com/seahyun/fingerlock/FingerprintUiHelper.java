@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -117,6 +118,7 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
         String abc [] = formatDate.split("-");
         String inputTime = abc[abc.length-1];
 
+        Log.d(TAG, "inputFinger");
         Intent intent = new Intent(mContext, FingerReadActivity.class);
         intent.putExtra("time", inputTime);
         mContext.startActivity(intent);
