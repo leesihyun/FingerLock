@@ -134,6 +134,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (num2.length() == 1) {  // edit1  값의 제한값을 6이라고 가정했을때
                     input_arr[1]= Integer.parseInt(num2.getText().toString());
+
                     num3.requestFocus(); // 두번째EditText 로 포커스가 넘어가게 됩니다
                 }
             }
