@@ -61,12 +61,19 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
+
+
 		SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
 
 		TouchTabLockScreenActivity = TouchTabLockScreen.this;
 		password_size = 0;
 		int num = prefs.getInt("tab_num", 4);
 		Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
+		try
+		{
+			this.getSupportActionBar().hide();
+		} catch (NullPointerException e){}
+
 		if(num == 4){
 			setContentView(R.layout.lock_screen_touch_tab_four);
 		}
