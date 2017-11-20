@@ -1,5 +1,6 @@
 package com.seahyun.fingerlock;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,7 +13,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.tananaev.adblib.AdbBase64;
+import com.tananaev.adblib.AdbConnection;
+import com.tananaev.adblib.AdbCrypto;
+
 import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -34,6 +41,8 @@ public class FingerReadActivity extends AppCompatActivity {
     private ReaderTask readerTask;
     private static final String KEY_PUBLIC = "publicKey";
     private static final String KEY_PRIVATE = "privateKey";
+    FingerprintLockScreen o = new FingerprintLockScreen();
+
 
     String timeLimit = "";
     String inputTime = "";
@@ -244,9 +253,11 @@ public class FingerReadActivity extends AppCompatActivity {
             Intent intent = packageManager.getLaunchIntentForPackage(lauch_app_name);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            o.getmHomeKeyLocker().unlock();
             finish();
         } else {
             Log.d("없음녀", "그냥잠금해제");
+            o.getmHomeKeyLocker().unlock();
             finish();
         }
         //앱실행
@@ -291,14 +302,18 @@ public class FingerReadActivity extends AppCompatActivity {
         }
 
         protected void onProgressUpdate(StatusUpdate... items) {
+            Log.d(TAG, "*****onProgressUpdate****");
             //StatusUpdate for문
             for (StatusUpdate statusUpdate : items) {
+                Log.d(TAG, "*****for문****");
                 //stopRead if문
                 if (!stopRead) {
+                    Log.d(TAG, "*****if문****");
                     //getLine null 확인문
                     if (statusUpdate.getLines() != null) {
+                        Log.d(TAG, "*****1******");
                         for (String str : statusUpdate.getLines()) {
-
+                            Log.d(TAG, "*****2******");
                             if(str.trim().contains(timeLimit)){
                                 Log.d(TAG,"4444444444444444444444444");
                                 stopRead = true;
@@ -327,9 +342,10 @@ public class FingerReadActivity extends AppCompatActivity {
 //                            } else if (str.trim().contains(inputTime))
                         }
                     }//getLine null 확인문
-                }//stopRead if문
-                else
-                    break;
+                    else {
+                        Log.d(TAG, "****getline = null");
+                       }
+                    }//stopRead if문
 
             } //StatusUpdate for문
         }//onProgressUpdate

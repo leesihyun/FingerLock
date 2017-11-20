@@ -18,6 +18,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.mtramin.rxfingerprint.EncryptionMethod;
+import com.mtramin.rxfingerprint.RxFingerprint;
+
 import java.io.IOException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -25,6 +28,7 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
 
@@ -34,6 +38,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.GCMParameterSpec;
 
 public class FingerprintLockScreen extends AppCompatActivity {
 
@@ -52,6 +57,7 @@ public class FingerprintLockScreen extends AppCompatActivity {
     private SharedPreferences mSharedPreferences;
 
     public static Activity FingerPrintLockScreenActivity;
+    private HomeKeyLocker mHomeKeyLocker;
 
 
     @Override
@@ -68,6 +74,8 @@ public class FingerprintLockScreen extends AppCompatActivity {
         fragmentTransaction.add(R.id.main_container, fragment);
         fragmentTransaction.commit();
 
+        mHomeKeyLocker = new HomeKeyLocker();
+        mHomeKeyLocker.lock(this);
 
         try {
 //            Log.d("##### ", "startKeyStore ");
@@ -128,19 +136,22 @@ public class FingerprintLockScreen extends AppCompatActivity {
         createKey(DEFAULT_KEY_NAME, true);
         createKey(KEY_NAME_NOT_INVALIDATED, false);
 
-        startFingerprintLcok(defaultCipher, DEFAULT_KEY_NAME);
+        startFingerprintLock(defaultCipher, DEFAULT_KEY_NAME);
     }
 
     private boolean initCipher(Cipher cipher, String keyName) {
+
+        //GCMParameterSpec myPram = new GCMParameterSpec(100, SECRET_MESSAGE.getBytes());
+
         try {
             mKeyStore.load(null);
             SecretKey key = (SecretKey) mKeyStore.getKey(keyName, null);
-            cipher.init(Cipher.ENCRYPT_MODE, key);
+            cipher.init(Cipher.ENCRYPT_MODE, key/*, myPram*/);
             return true;
         } catch (KeyPermanentlyInvalidatedException e) {
             return false;
         } catch (KeyStoreException | CertificateException | UnrecoverableKeyException | IOException
-                | NoSuchAlgorithmException | InvalidKeyException e) {
+                | NoSuchAlgorithmException | InvalidKeyException /*| InvalidAlgorithmParameterException*/ e) {
             throw new RuntimeException("Failed to init Cipher", e);
         }
     }
@@ -218,7 +229,7 @@ public class FingerprintLockScreen extends AppCompatActivity {
     }
 
 
-    public void startFingerprintLcok(Cipher cipher, String keyName){
+    public void startFingerprintLock(Cipher cipher, String keyName){
 
 //        Log.d("@@@@", "startFingerLock");
 
@@ -226,24 +237,32 @@ public class FingerprintLockScreen extends AppCompatActivity {
         String mKeyName = keyName;
 
 
-        if (initCipher(mCipher, mKeyName)) {
+        if(RxFingerprint.isAvailable(this)) {
+            if (initCipher(mCipher, mKeyName)) {
 //            Log.d("@@@@", "initCipher is true");
-            FingerAuthFragment authFrg = new FingerAuthFragment();
-            authFrg.setCryptoObject(new FingerprintManager.CryptoObject(mCipher));
-            boolean useFingerprintPreference = mSharedPreferences
-                    .getBoolean(getString(R.string.use_fingerprint_to_authenticate_key),
-                            true);
+                FingerAuthFragment authFrg = new FingerAuthFragment();
+                authFrg.setCryptoObject(new FingerprintManager.CryptoObject(mCipher));
+                boolean useFingerprintPreference = mSharedPreferences
+                        .getBoolean(getString(R.string.use_fingerprint_to_authenticate_key),
+                                true);
 
-            if (useFingerprintPreference)
-            {
+                if (useFingerprintPreference) {
 //                Log.d("@@@@", "fragment change");
-                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-                android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.add(R.id.main_container, authFrg);
-                fragmentTransaction.commit();
-            }
+                    android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                    android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.add(R.id.main_container, authFrg);
+                    fragmentTransaction.commit();
+                }
 
+            }
+        }
+        else{
+            Log.d("ERROR >> ","fingerprint is not available!!");
         }
 
+    }
+
+    public HomeKeyLocker getmHomeKeyLocker(){
+        return mHomeKeyLocker;
     }
 }

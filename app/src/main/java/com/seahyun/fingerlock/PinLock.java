@@ -36,6 +36,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     private int app_num[]=new int [4];
 
     public static Activity PinLockActivity;
+    private HomeKeyLocker mHomeKeyLocker;
 
     TouchTabFourPassword o = new TouchTabFourPassword();
 
@@ -101,7 +102,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         num3.setOnClickListener(this);
         num4.setOnClickListener(this);
         num5.setOnClickListener(this);
-
+        mHomeKeyLocker = new HomeKeyLocker();
+        mHomeKeyLocker.lock(this);
         //check_application();
 
         num1.addTextChangedListener(new TextWatcher() {
@@ -386,6 +388,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
+                finish();
             }
         }
 
@@ -399,6 +403,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
+                finish();
             }
         }
         else if(num == app_num[2]){
@@ -411,6 +417,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
+                finish();
             }
         }
         if(num == app_num[3]){
@@ -423,6 +431,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
+                finish();
             }
         }
     }
