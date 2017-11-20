@@ -78,6 +78,11 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
         color[4] = R.color.Purple;
         color[5] = R.color.Pink;
 
+        try
+        {
+            this.getSupportActionBar().hide();
+        } catch (NullPointerException e){}
+
         int num = prefs.getInt("tab_num", 4);
         Log.d("잠금화면 컬러탭 개수 >>", String.valueOf(num));
         if (num == 4) {

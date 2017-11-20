@@ -57,6 +57,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
 
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
@@ -67,6 +68,12 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         PinLockActivity = PinLock.this;
         int num = prefs.getInt("tab_num", 4);
         Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
+
+        try
+        {
+            this.getSupportActionBar().hide();
+        } catch (NullPointerException e){}
+
         setContentView(R.layout.lock_screen_pin);
 
         for(int i=0; i<5; i++){

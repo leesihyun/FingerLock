@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,6 +24,7 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
     private static final String TAG = FingerprintUiHelper.class.getSimpleName();
 
     FingerprintLockScreen fLockActivity = (FingerprintLockScreen)FingerprintLockScreen.FingerLockActivity;
+
 //    MainActivity MActivity = (MainActivity) MainActivity.MainActivity;
 
     private final FingerprintManager mFingerprintManager;
