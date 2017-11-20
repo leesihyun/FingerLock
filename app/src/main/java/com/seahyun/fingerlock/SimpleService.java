@@ -12,9 +12,12 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.Serializable;
+
 public class SimpleService extends Service {
     private KeyguardManager km = null;
     private KeyguardManager.KeyguardLock keylock = null;
+
 
     //MainActivity o = new MainActivity();
     //TouchTabLockScreen TouchActivity = (TouchTabLockScreen)TouchTabLockScreen.TouchTabLockScreenActivity;
@@ -57,6 +60,7 @@ public class SimpleService extends Service {
                 else if(lock_mode == 4){
                     Log.d("지문 실행", "");
                     i = new Intent(context, FingerprintLockScreen.class);
+
                 }
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(i);

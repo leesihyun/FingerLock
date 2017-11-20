@@ -3,6 +3,7 @@ package com.seahyun.fingerlock;
 import android.Manifest;
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.hardware.fingerprint.FingerprintManager;
@@ -15,18 +16,28 @@ import android.security.keystore.KeyProperties;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.SecureRandom;
 import java.security.UnrecoverableKeyException;
 import java.security.cert.CertificateException;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -34,6 +45,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 
 public class FingerprintLockScreen extends AppCompatActivity {
 
@@ -46,12 +58,9 @@ public class FingerprintLockScreen extends AppCompatActivity {
     private static final String KEY_NAME_NOT_INVALIDATED = "key_not_invalidated";
     static final String DEFAULT_KEY_NAME = "default_key";
 
-
     private KeyStore mKeyStore;
     private KeyGenerator mKeyGenerator;
     private SharedPreferences mSharedPreferences;
-
-    public static Activity FingerPrintLockScreenActivity;
 
 
     @Override
@@ -131,16 +140,26 @@ public class FingerprintLockScreen extends AppCompatActivity {
         startFingerprintLcok(defaultCipher, DEFAULT_KEY_NAME);
     }
 
+
+
+
+
     private boolean initCipher(Cipher cipher, String keyName) {
         try {
             mKeyStore.load(null);
             SecretKey key = (SecretKey) mKeyStore.getKey(keyName, null);
             cipher.init(Cipher.ENCRYPT_MODE, key);
+
+//            SecureRandom r = new SecureRandom();
+//            byte[] ivBytes = new byte[16];
+//            r.nextBytes(ivBytes);
+//
+//            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(ivBytes));
             return true;
         } catch (KeyPermanentlyInvalidatedException e) {
             return false;
         } catch (KeyStoreException | CertificateException | UnrecoverableKeyException | IOException
-                | NoSuchAlgorithmException | InvalidKeyException e) {
+                | NoSuchAlgorithmException | InvalidKeyException /*| InvalidAlgorithmParameterException*/ e) {
             throw new RuntimeException("Failed to init Cipher", e);
         }
     }
@@ -225,7 +244,6 @@ public class FingerprintLockScreen extends AppCompatActivity {
         Cipher mCipher = cipher;
         String mKeyName = keyName;
 
-
         if (initCipher(mCipher, mKeyName)) {
 //            Log.d("@@@@", "initCipher is true");
             FingerAuthFragment authFrg = new FingerAuthFragment();
@@ -246,4 +264,8 @@ public class FingerprintLockScreen extends AppCompatActivity {
         }
 
     }
+
+
+
+
 }

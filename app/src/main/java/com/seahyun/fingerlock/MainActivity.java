@@ -1,16 +1,32 @@
 package com.seahyun.fingerlock;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Switch;
+
+import com.tananaev.adblib.AdbConnection;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.security.GeneralSecurityException;
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.PrivateKey;
+import java.security.PublicKey;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -29,12 +45,24 @@ public class MainActivity extends AppCompatActivity{
 
     private BackPressCloseSystem backPressCloseSystem;
 
+    boolean firstLogConnect;
+
+    public Reader reader;
+    KeyPair keyPair;
+    private static final String KEY_PUBLIC = "publicKey";
+    private static final String KEY_PRIVATE = "privateKey";
+
+    public static Activity MActivity;
+
     public MainActivity(){};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        MActivity = MainActivity.this;
+
+        firstLogConnect = false;
 
         ActionBar actionBar = getSupportActionBar();
         //ActionBar title 변경
@@ -149,8 +177,27 @@ public class MainActivity extends AppCompatActivity{
                 new Button.OnClickListener() {
                     public void onClick(View v) {
                         if(finger_lock.isChecked()){
-                            startService(new Intent(MainActivity.this, SimpleService.class));
+                            Intent intent = new Intent(MainActivity.this, SimpleService.class);
+
+                            try {
+                                keyPair = getKeyPair();
+                                reader = new RemoteReader(keyPair);
+
+                                new Thread(){
+                                    public void run(){
+                                        reader.create();
+                                    }
+                                }.start();
+
+                            } catch (GeneralSecurityException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            startService(intent);
                             finger_lock.setChecked(true);
+
 
                             prefsEditor.putInt("lock",4);
                             prefsEditor.commit();
@@ -238,5 +285,38 @@ public class MainActivity extends AppCompatActivity{
 //        return lock;
 //
 //    }
+
+
+
+
+    private KeyPair getKeyPair() throws GeneralSecurityException, IOException {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        KeyPair keyPair;
+
+        if (preferences.contains(KEY_PUBLIC) && preferences.contains(KEY_PRIVATE)) {
+            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+
+            PublicKey publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(
+                    Base64.decode(preferences.getString(KEY_PUBLIC, null), Base64.DEFAULT)));
+            PrivateKey privateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(
+                    Base64.decode(preferences.getString(KEY_PRIVATE, null), Base64.DEFAULT)));
+
+            keyPair = new KeyPair(publicKey, privateKey);
+        } else {
+            KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+            generator.initialize(2048);
+            keyPair = generator.generateKeyPair();
+
+            preferences
+                    .edit()
+                    .putString(KEY_PUBLIC, Base64.encodeToString(keyPair.getPublic().getEncoded(), Base64.DEFAULT))
+                    .putString(KEY_PRIVATE, Base64.encodeToString(keyPair.getPrivate().getEncoded(), Base64.DEFAULT))
+                    .apply();
+        }
+
+        return keyPair;
+    }
 
 }

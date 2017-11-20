@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
+import android.os.Parcelable;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -21,6 +23,8 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
 
     private static final String TAG = FingerprintUiHelper.class.getSimpleName();
 
+
+    FingerprintLockScreen fLockactivity = (FingerprintLockScreen) FingerprintLockScreen.FingerLockActivity;
 //    MainActivity MActivity = (MainActivity) MainActivity.MainActivity;
 
     private final FingerprintManager mFingerprintManager;
@@ -119,6 +123,7 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
         String inputTime = abc[abc.length-1];
 
         Log.d("입력 inputFinger >>", inputTime);
+        fLockactivity.finish();
         Intent intent = new Intent(mContext, FingerReadActivity.class);
         intent.putExtra("time", inputTime);
         mContext.startActivity(intent);
