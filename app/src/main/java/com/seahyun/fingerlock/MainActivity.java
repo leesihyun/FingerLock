@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity{
 
         ActionBar actionBar = getSupportActionBar();
         //ActionBar title 변경
-        actionBar.setTitle("손가LOCK");
+       actionBar.setTitle("손가LOCK");
         // ActionBar 배경색 변경
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.DarkBlue));
 

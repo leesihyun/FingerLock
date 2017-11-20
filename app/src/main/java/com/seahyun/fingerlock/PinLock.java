@@ -55,8 +55,15 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
+        //타이틀바 없애기
+  //      this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //노티케이션 바 없애기
+      //  this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
+        //뷰적용
+//        this.setContentView(R.layout.lock_screen_pin);
+        //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
@@ -82,7 +89,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         user_password[0] = prefs2.getInt("1st password",0);
         user_password[1] = prefs2.getInt("2nd password",0);
         user_password[2] = prefs2.getInt("3rd password",0);
-        user_password[3] = prefs2.getInt("4rd password",0);
+        user_password[3] = prefs2.getInt("4th password",0);
 
         SharedPreferences prefs3 = getSharedPreferences("num", MODE_PRIVATE);
         app_num[0] = prefs3.getInt("num1",0);
@@ -373,11 +380,11 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         Toast.makeText(this, "선택한 어플리케이션 번호는 "+ String.valueOf(application_number), Toast.LENGTH_SHORT).show();
         PackageManager packageManager = this.getPackageManager();
 
-        SharedPreferences prefs = getSharedPreferences("PakageName", MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences("PakageNameP", MODE_PRIVATE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         if(num == app_num[0]){
-            String pakage_name = prefs.getString("name1", "");
+            String pakage_name = prefs.getString("nameP1", "");
             if(pakage_name.equals("")){
                 Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
                 System.exit(0);
@@ -390,7 +397,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         }
 
         else if(num == app_num[1]){
-            String pakage_name = prefs.getString("name2", "");
+            String pakage_name = prefs.getString("nameP2", "");
             if(pakage_name.equals("")){
                 Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
                 System.exit(0);
@@ -402,7 +409,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
             }
         }
         else if(num == app_num[2]){
-            String pakage_name = prefs.getString("name3", "");
+            String pakage_name = prefs.getString("nameP3", "");
             if(pakage_name.equals("")){
                 Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
                 System.exit(0);
@@ -414,7 +421,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
             }
         }
         if(num == app_num[3]){
-            String pakage_name = prefs.getString("name4", "");
+            String pakage_name = prefs.getString("nameP4", "");
             if(pakage_name.equals("")){
                 Toast.makeText(this, "미리 등록한 어플이 없습니다", Toast.LENGTH_SHORT).show();
                 System.exit(0);
