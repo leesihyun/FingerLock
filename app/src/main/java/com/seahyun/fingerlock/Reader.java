@@ -26,6 +26,10 @@ public interface Reader {
         void update(int status, List<String> lines);
     }
 
+    void create();
+
     void read(UpdateHandler updateHandler);
+
+
 
 }
