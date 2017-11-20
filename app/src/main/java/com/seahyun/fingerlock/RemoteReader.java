@@ -55,12 +55,10 @@ public class RemoteReader implements Reader, Serializable {
     public void create() {
 
         onPostExecute(false);
-        Log.d("remote reader","1");
 
         try {
 
             Socket socket = new Socket("localhost", 5555);
-            Log.d("remote reader","2");
 
             AdbCrypto crypto = AdbCrypto.loadAdbKeyPair(new AdbBase64() {
                 @Override
@@ -68,13 +66,10 @@ public class RemoteReader implements Reader, Serializable {
                     return Base64.encodeToString(data, Base64.DEFAULT);
                 }
             }, keyPair);
-            Log.d("remote reader","3");
 
             connection = AdbConnection.create(socket, crypto);
-            Log.d("remote reader","4");
 
             connection.connect();
-            Log.d("remote reader","5");
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,7 +85,6 @@ public class RemoteReader implements Reader, Serializable {
 
 //        AdbConnection connection = null;
         onPostExecute(false);
-        Log.d("remote reader 22222","read start");
 
         try {
 
@@ -111,13 +105,10 @@ public class RemoteReader implements Reader, Serializable {
 //            Log.d("remote reader","5");
 
             updateHandler.update(R.string.status_opening, null);
-            Log.d("remote reader","6");
 
             AdbStream stream = connection.open("shell:logcat -v time");
-            Log.d("remote reader","7");
 
             updateHandler.update(R.string.status_active, null);
-            Log.d("remote reader","8");
 
             while (!onPostExec/*!updateHandler.isCancelled()*/) {
                 List<String> lines = new ArrayList<>();
