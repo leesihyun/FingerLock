@@ -106,9 +106,6 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         num3.setOnClickListener(this);
         num4.setOnClickListener(this);
         num5.setOnClickListener(this);
-//        mHomeKeyLocker = new HomeKeyLocker();
-//        mHomeKeyLocker.lock(this);
-        //check_application();
 
 
     }
@@ -140,7 +137,6 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         num2.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -161,7 +157,6 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         num3.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -180,7 +175,6 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         num4.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
             }
 
             @Override
@@ -221,132 +215,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
             }
 
         });
-  /*
-        switch (v.getId()){
-            case R.id.button4_1:
-            case R.id.button5_1:
-            case R.id.button6_1:
-                Toast.makeText(this, "1클릭", Toast.LENGTH_SHORT).show();
-                if(select_mode == false){
-                    for(int i=0; i<input_arr.length; i++){
-                        if(input_arr[i]==0){
-                            input_arr[i] = 1;
-                            i = input_arr.length;
-                        }
-                    }
-                    count++;
-                    Log.d("count 값 : ", String.valueOf(count));
-                }
-                else{
-                    application_number = 1;
-                    execute_application(application_number);
-                }
-                break;
-
-            case R.id.button4_2:
-            case R.id.button5_2:
-            case R.id.button6_2:
-                Toast.makeText(this, "2클릭", Toast.LENGTH_SHORT).show();
-                if(select_mode == false) {
-                    for (int i = 0; i < input_arr.length; i++) {
-                        if (input_arr[i] == 0) {
-                            input_arr[i] = 2;
-                            i = input_arr.length;
-                        }
-                    }
-                    count++;
-                    Log.d("count 값 : ", String.valueOf(count));
-                }
-                else{
-                    application_number = 2;
-                    execute_application(application_number);
-                }
-                break;
-
-            case R.id.button4_3:
-            case R.id.button5_3:
-            case R.id.button6_3:
-                Toast.makeText(this, "3클릭", Toast.LENGTH_SHORT).show();
-                if(select_mode == false) {
-                    for (int i = 0; i < input_arr.length; i++) {
-                        if (input_arr[i] == 0) {
-                            input_arr[i] = 3;
-                            i = input_arr.length;
-                        }
-                    }
-                    count++;
-                    Log.d("count 값 : ", String.valueOf(count));
-                }
-                else{
-                    application_number = 3;
-                    execute_application(application_number);
-                }
-                break;
-
-            case R.id.button4_4:
-            case R.id.button5_4:
-            case R.id.button6_4:
-                Toast.makeText(this, "4클릭", Toast.LENGTH_SHORT).show();
-                if(select_mode == false) {
-                    for (int i = 0; i < input_arr.length; i++) {
-                        if (input_arr[i] == 0) {
-                            input_arr[i] = 4;
-                            i = input_arr.length;
-                        }
-                    }
-                    count++;
-                    Log.d("count 값 : ", String.valueOf(count));
-                }
-                else{
-                    application_number = 4;
-                    execute_application(application_number);
-                }
-                break;
-            case R.id.button5_5:
-            case R.id.button6_5:
-                Toast.makeText(this, "5클릭", Toast.LENGTH_SHORT).show();
-                if(select_mode == false) {
-                    for (int i = 0; i < input_arr.length; i++) {
-                        if (input_arr[i] == 0) {
-                            input_arr[i] = 5;
-                            i = input_arr.length;
-                        }
-                    }
-                    count++;
-                    Log.d("count 값 : ", String.valueOf(count));
-                }
-                else{
-                    application_number = 5;
-                    execute_application(application_number);
-                }
-                break;
-            case R.id.button6_6:
-                Toast.makeText(this, "6클릭", Toast.LENGTH_SHORT).show();
-                if(select_mode == false) {
-                    for (int i = 0; i < input_arr.length; i++) {
-                        if (input_arr[i] == 0) {
-                            input_arr[i] = 6;
-                            i = input_arr.length;
-                        }
-                    }
-                    count++;
-                    Log.d("count 값 : ", String.valueOf(count));
-                }
-                else{
-                    application_number = 6;
-                    execute_application(application_number);
-                }
-                break;
-        }
-*/
-        if(count == password_size){
-            count = 0;
-            for(int i=0; i<4; i++){
-                Log.d("사용자 입력 패스워드 : ", String.valueOf(input_arr[i]));
-            }
-            input_handler();
-        }
     }
+
 
     public void input_handler(){
         int cnt=0;
@@ -423,7 +293,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-               // mHomeKeyLocker.unlock();
+
                 finish();
             }
         }
@@ -437,7 +307,10 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+
                // mHomeKeyLocker.unlock();
+
+                //mHomeKeyLocker.unlock();
                 finish();
             }
         }

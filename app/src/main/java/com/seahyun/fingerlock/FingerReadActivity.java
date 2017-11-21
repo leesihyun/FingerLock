@@ -41,7 +41,7 @@ public class FingerReadActivity extends AppCompatActivity {
     public ReaderTask readerTask;
     private static final String KEY_PUBLIC = "publicKey";
     private static final String KEY_PRIVATE = "privateKey";
-    FingerprintLockScreen o = new FingerprintLockScreen();
+
 
 
     String timeLimit = "";
@@ -242,12 +242,24 @@ public class FingerReadActivity extends AppCompatActivity {
             Log.d("package실행", lauch_app_name);
             Intent intent = packageManager.getLaunchIntentForPackage(lauch_app_name);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            FingerprintLockScreen o = new FingerprintLockScreen();
+//            if(o == null){
+//                Log.d("객체가 NULL", "");
+//            }
+//            else{
+//                Log.d("문제없음","");
+                FingerprintLockScreen.mHomeKeyLocker.unlock();
+//                o.getmHomeKeyLocker().unlock();
+//            }
+
             startActivity(intent);
-            o.getmHomeKeyLocker().unlock();
+
             finish();
         } else {
             Log.d("없음녀", "그냥잠금해제");
-            o.getmHomeKeyLocker().unlock();
+            //o.getmHomeKeyLocker().unlock();
+            FingerprintLockScreen.mHomeKeyLocker.unlock();
+
             finish();
         }
         //앱실행
@@ -292,20 +304,16 @@ public class FingerReadActivity extends AppCompatActivity {
         }
 
         protected void onProgressUpdate(StatusUpdate... items) {
-            Log.d(TAG, "*****onProgressUpdate****");
+
             //StatusUpdate for문
             for (StatusUpdate statusUpdate : items) {
-                Log.d(TAG, "*****for문****");
                 //stopRead if문
                 if (!stopRead) {
-                    Log.d(TAG, "*****if문****");
                     //getLine null 확인문
                     if (statusUpdate.getLines() != null) {
-                        Log.d(TAG, "*****1******");
                         for (String str : statusUpdate.getLines()) {
-                            Log.d(TAG, "*****2******");
                             if(str.trim().contains(timeLimit)){
-                                Log.d(TAG,"4444444444444444444444444");
+                                //Log.d(TAG,"4444444444444444444444444");
                                 stopRead = true;
                                 break;
                             }
