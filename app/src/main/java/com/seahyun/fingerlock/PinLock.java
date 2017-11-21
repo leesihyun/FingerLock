@@ -106,9 +106,16 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         num3.setOnClickListener(this);
         num4.setOnClickListener(this);
         num5.setOnClickListener(this);
-        mHomeKeyLocker = new HomeKeyLocker();
-        mHomeKeyLocker.lock(this);
+//        mHomeKeyLocker = new HomeKeyLocker();
+//        mHomeKeyLocker.lock(this);
         //check_application();
+
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
 
         num1.addTextChangedListener(new TextWatcher() {
             @Override
@@ -214,11 +221,6 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
             }
 
         });
-
-    }
-
-    @Override
-    public void onClick(View v) {
   /*
         switch (v.getId()){
             case R.id.button4_1:
@@ -392,7 +394,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                mHomeKeyLocker.unlock();
+                //mHomeKeyLocker.unlock();
                 finish();
             }
         }
@@ -407,7 +409,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                mHomeKeyLocker.unlock();
+                //mHomeKeyLocker.unlock();
                 finish();
             }
         }
@@ -421,7 +423,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                mHomeKeyLocker.unlock();
+               // mHomeKeyLocker.unlock();
                 finish();
             }
         }
@@ -435,7 +437,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-                mHomeKeyLocker.unlock();
+               // mHomeKeyLocker.unlock();
                 finish();
             }
         }
