@@ -36,6 +36,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     private int app_num[]=new int [4];
 
     public static Activity PinLockActivity;
+    private HomeKeyLocker mHomeKeyLocker;
 
     TouchTabFourPassword o = new TouchTabFourPassword();
 
@@ -55,16 +56,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        //타이틀바 없애기
-  //      this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        //노티케이션 바 없애기
-      //  this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
-        //뷰적용
-//        this.setContentView(R.layout.lock_screen_pin);
-        //requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
+      getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
 
@@ -73,6 +65,12 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         PinLockActivity = PinLock.this;
         int num = prefs.getInt("tab_num", 4);
         Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
+
+        try
+        {
+            this.getSupportActionBar().hide();
+        } catch (NullPointerException e){}
+
         setContentView(R.layout.lock_screen_pin);
 
         for(int i=0; i<5; i++){
@@ -108,7 +106,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         num3.setOnClickListener(this);
         num4.setOnClickListener(this);
         num5.setOnClickListener(this);
-
+        mHomeKeyLocker = new HomeKeyLocker();
+        mHomeKeyLocker.lock(this);
         //check_application();
 
         num1.addTextChangedListener(new TextWatcher() {
@@ -393,6 +392,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
+                finish();
             }
         }
 
@@ -406,6 +407,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
+                finish();
             }
         }
         else if(num == app_num[2]){
@@ -418,6 +421,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
+                finish();
             }
         }
         if(num == app_num[3]){
@@ -430,6 +435,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
+                finish();
             }
         }
     }

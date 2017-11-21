@@ -24,23 +24,27 @@ import com.tananaev.adblib.AdbCrypto;
 import com.tananaev.adblib.AdbStream;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.Socket;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RemoteReader implements Reader {
+public class RemoteReader implements Reader, Serializable {
 
     private static final String TAG = RemoteReader.class.getSimpleName();
 
     private KeyPair keyPair;
+
+    private boolean onPostExec;
+
+    AdbConnection connection = null;
 
     public RemoteReader(KeyPair keyPair) {
         this.keyPair = keyPair;
         onPostExecute(false);
     }
 
-    private boolean onPostExec;
 
     @Override
     public void onPostExecute(boolean onPostExecute) {
@@ -48,13 +52,11 @@ public class RemoteReader implements Reader {
     }
 
     @Override
-    public void read(UpdateHandler updateHandler) {
+    public void create() {
 
-        AdbConnection connection = null;
+        onPostExecute(false);
 
         try {
-
-            updateHandler.update(R.string.status_connecting, null);
 
             Socket socket = new Socket("localhost", 5555);
 
@@ -68,6 +70,39 @@ public class RemoteReader implements Reader {
             connection = AdbConnection.create(socket, crypto);
 
             connection.connect();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @Override
+    public void read(UpdateHandler updateHandler) {
+
+//        AdbConnection connection = null;
+        onPostExecute(false);
+
+        try {
+
+//            updateHandler.update(R.string.status_connecting, null);
+//            Log.d("remote reader","1");
+//            Socket socket = new Socket("localhost", 5555);
+//            Log.d("remote reader","2");
+//            AdbCrypto crypto = AdbCrypto.loadAdbKeyPair(new AdbBase64() {
+//                @Override
+//                public String encodeToString(byte[] data) {
+//                    return Base64.encodeToString(data, Base64.DEFAULT);
+//                }
+//            }, keyPair);
+//            Log.d("remote reader","3");
+//            connection = AdbConnection.create(socket, crypto);
+//            Log.d("remote reader","4");
+//            connection.connect();
+//            Log.d("remote reader","5");
 
             updateHandler.update(R.string.status_opening, null);
 
@@ -85,6 +120,11 @@ public class RemoteReader implements Reader {
                 updateHandler.update(0, lines);
             }
 
+//            if(onPostExec){
+//                connection.close();
+//            }
+
+
         } catch (InterruptedException e) {
             try {
                 connection.close();
@@ -96,5 +136,7 @@ public class RemoteReader implements Reader {
         }
 
     }
+
+
 
 }

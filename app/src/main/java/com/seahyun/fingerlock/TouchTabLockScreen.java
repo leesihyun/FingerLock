@@ -2,6 +2,8 @@ package com.seahyun.fingerlock;
 
 import android.app.Activity;
 import android.app.KeyguardManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
@@ -12,6 +14,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.Touch;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -36,6 +39,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 
 	public static Activity TouchTabLockScreenActivity;
 
+	private HomeKeyLocker mHomeKeyLocker;
 	TouchTabFourPassword o = new TouchTabFourPassword();
 
 	ArrayList<String> arGeneral;
@@ -56,10 +60,13 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		//requestWindowFeature(Window.FEATURE_NO_TITLE);
+		setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
 		getWindow().setStatusBarColor(getResources().getColor(R.color.DarkBlue));
 
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED|WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON|WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+
+
 
 		SharedPreferences prefs = getSharedPreferences("user_tab_num", MODE_PRIVATE);
 
@@ -67,6 +74,11 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 		password_size = 0;
 		int num = prefs.getInt("tab_num", 4);
 		Log.d("잠금화면 터치탭 개수 >>", String.valueOf(num));
+		try
+		{
+			this.getSupportActionBar().hide();
+		} catch (NullPointerException e){}
+
 		if(num == 4){
 			setContentView(R.layout.lock_screen_touch_tab_four);
 		}
@@ -154,7 +166,8 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 			button6.setOnClickListener(this);
 		}
 
-
+		mHomeKeyLocker = new HomeKeyLocker();
+		mHomeKeyLocker.lock(this);
 		//check_application();
 
 
@@ -340,6 +353,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				mHomeKeyLocker.unlock();
 				finish();
 			}
 		}
@@ -354,6 +368,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				mHomeKeyLocker.unlock();
 				finish();
 			}
 		}
@@ -367,6 +382,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				mHomeKeyLocker.unlock();
 				finish();
 			}
 		}
@@ -380,6 +396,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				mHomeKeyLocker.unlock();
 				finish();
 			}
 		}
@@ -393,6 +410,7 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				mHomeKeyLocker.unlock();
 				finish();
 			}
 		}
@@ -406,12 +424,13 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 				Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
 				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				mHomeKeyLocker.unlock();
 				finish();
 			}
 		}
 	}
 
-	/*public void check_application(){
+/*public void check_application(){
 		Toast.makeText(this, "설치된 앱 확인", Toast.LENGTH_SHORT).show();
 
 		final PackageManager pm = getPackageManager();
@@ -434,5 +453,55 @@ public class TouchTabLockScreen extends AppCompatActivity implements OnClickList
 			System.exit(0);
 		}
 	}
+
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getAction() == KeyEvent.ACTION_DOWN) {
+			switch (event.getKeyCode()) {
+				case KeyEvent.KEYCODE_BACK:
+					// 단말기의 BACK버튼
+					return false;
+				case KeyEvent.KEYCODE_MENU:
+					return false;
+			}
+
+		}
+		return super.dispatchKeyEvent(event);
+	}
+
+//	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
+//		@Override
+//		public void onReceive(Context context, Intent intent) {
+//
+//			Log.i("", ">>> Home Event");
+//
+//			String action = intent.getAction();
+//			if (action.equals(Intent.ACTION_CLOSE_SYSTEM_DIALOGS)) {
+//				String reason = intent.getStringExtra(SYSTEM_DIALOG_REASON_KEY);
+//				if (reason != null) {
+//					if (reason.equals(SYSTEM_DIALOG_REASON_HOME_KEY)) {
+//						Log.i("", ">>> Home Clcik Event");
+//						if (select_mode == false)
+//							Toast.makeText(TouchTabLockScreen.this, "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
+//						else {
+//							//simpleservice.onDestroy();
+//							System.exit(0);
+//						}
+//					} else if (reason.equals(SYSTEM_DIALOG_REASON_RECENT_APPS)) {
+//						Log.i("", ">>> Home Long Press Event");
+//						if (select_mode == false)
+//							Toast.makeText(TouchTabLockScreen.this, "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
+//						else {
+//							//simpleservice.onDestroy();
+//							System.exit(0);
+//						}
+//					}
+//				}
+//			}
+//
+//		}
+//	};
+
+
 
 }

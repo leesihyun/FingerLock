@@ -1,5 +1,6 @@
 package com.seahyun.fingerlock;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,7 +13,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.tananaev.adblib.AdbBase64;
+import com.tananaev.adblib.AdbConnection;
+import com.tananaev.adblib.AdbCrypto;
+
 import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.security.GeneralSecurityException;
 import java.security.KeyFactory;
 import java.security.KeyPair;
@@ -29,11 +36,13 @@ public class FingerReadActivity extends AppCompatActivity {
 
     private static final String TAG = FingerReadActivity.class.getSimpleName();
 
+    MainActivity mainActivity = (MainActivity) MainActivity.MActivity;
 
-    private KeyPair keyPair;
-    private ReaderTask readerTask;
+    public ReaderTask readerTask;
     private static final String KEY_PUBLIC = "publicKey";
     private static final String KEY_PRIVATE = "privateKey";
+    FingerprintLockScreen o = new FingerprintLockScreen();
+
 
     String timeLimit = "";
     String inputTime = "";
@@ -71,6 +80,13 @@ public class FingerReadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_finger_read);
 
         stopRead = false;
+
+        if(stopRead){
+            Log.d("stopread if문",">> true");
+        }
+        else{
+            Log.d("stopread if문",">> false");
+        }
 
         fingerprintList = new ArrayList<FingerprintListviewItem>();
 
@@ -113,37 +129,20 @@ public class FingerReadActivity extends AppCompatActivity {
             plusOne[2] = String.valueOf(sec_plus_one);
         }
 
-//        inputMin[0] =
+
         timeLimit = plusOne[0]+":"+plusOne[1]+":"+plusOne[2];
         Log.d("99999999 >>",timeLimit);
-
-//        String min[] = new String[]{"", ""};
-//        int num1 = Integer.parseInt(tmp[1]) - 1;
-//        if (num1 < 10)
-//            min[0] = "0" + String.valueOf(num1);
-//        else
-//            min[0] = String.valueOf(num1);
-//
-//        int num2 = Integer.parseInt(tmp[1]) + 1;
-//        if (num2 < 10)
-//            min[1] = "0" + String.valueOf(num2);
-//        else
-//            min[1] = String.valueOf(num2);
-
-
-//        inputMin[0] = tmp[0] + ":" + min[0] + ":";
-//        inputMin[1] = tmp[0] + ":" + tmp[1] + ":";
-//        inputMin[2] = tmp[0] + ":" + min[1] + ":";
 
         circle_bar = (ProgressBar) findViewById(R.id.progressBar);
         circle_bar.setVisibility(View.VISIBLE);
 
-        try {
-            keyPair = getKeyPair(); // crashes on non-main thread
-        } catch (GeneralSecurityException | IOException e) {
-            Log.w(TAG, e);
-        }
+//        try {
+//            keyPair = getKeyPair(); // crashes on non-main thread
+//        } catch (GeneralSecurityException | IOException e) {
+//            Log.w(TAG, e);
+//        }
 
+//        reader.create(keyPair);
         restartReader();
 
 
@@ -169,35 +168,35 @@ public class FingerReadActivity extends AppCompatActivity {
         stopReader();
     }
 
-    private KeyPair getKeyPair() throws GeneralSecurityException, IOException {
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        KeyPair keyPair;
-
-        if (preferences.contains(KEY_PUBLIC) && preferences.contains(KEY_PRIVATE)) {
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-
-            PublicKey publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(
-                    Base64.decode(preferences.getString(KEY_PUBLIC, null), Base64.DEFAULT)));
-            PrivateKey privateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(
-                    Base64.decode(preferences.getString(KEY_PRIVATE, null), Base64.DEFAULT)));
-
-            keyPair = new KeyPair(publicKey, privateKey);
-        } else {
-            KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
-            generator.initialize(2048);
-            keyPair = generator.generateKeyPair();
-
-            preferences
-                    .edit()
-                    .putString(KEY_PUBLIC, Base64.encodeToString(keyPair.getPublic().getEncoded(), Base64.DEFAULT))
-                    .putString(KEY_PRIVATE, Base64.encodeToString(keyPair.getPrivate().getEncoded(), Base64.DEFAULT))
-                    .apply();
-        }
-
-        return keyPair;
-    }
+//    private KeyPair getKeyPair() throws GeneralSecurityException, IOException {
+//
+//        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+//
+//        KeyPair keyPair;
+//
+//        if (preferences.contains(KEY_PUBLIC) && preferences.contains(KEY_PRIVATE)) {
+//            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+//
+//            PublicKey publicKey = keyFactory.generatePublic(new X509EncodedKeySpec(
+//                    Base64.decode(preferences.getString(KEY_PUBLIC, null), Base64.DEFAULT)));
+//            PrivateKey privateKey = keyFactory.generatePrivate(new PKCS8EncodedKeySpec(
+//                    Base64.decode(preferences.getString(KEY_PRIVATE, null), Base64.DEFAULT)));
+//
+//            keyPair = new KeyPair(publicKey, privateKey);
+//        } else {
+//            KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
+//            generator.initialize(2048);
+//            keyPair = generator.generateKeyPair();
+//
+//            preferences
+//                    .edit()
+//                    .putString(KEY_PUBLIC, Base64.encodeToString(keyPair.getPublic().getEncoded(), Base64.DEFAULT))
+//                    .putString(KEY_PRIVATE, Base64.encodeToString(keyPair.getPrivate().getEncoded(), Base64.DEFAULT))
+//                    .apply();
+//        }
+//
+//        return keyPair;
+//    }
 
     public void setFid() {
         Log.d(TAG, "$$$$$$$setFid");
@@ -244,9 +243,11 @@ public class FingerReadActivity extends AppCompatActivity {
             Intent intent = packageManager.getLaunchIntentForPackage(lauch_app_name);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            o.getmHomeKeyLocker().unlock();
             finish();
         } else {
             Log.d("없음녀", "그냥잠금해제");
+            o.getmHomeKeyLocker().unlock();
             finish();
         }
         //앱실행
@@ -257,18 +258,18 @@ public class FingerReadActivity extends AppCompatActivity {
     }
 
 
-    private class ReaderTask extends AsyncTask<Void, StatusUpdate, Void> {
+    public class ReaderTask extends AsyncTask<Void, StatusUpdate, Void> {
 
         @Override
         protected Void doInBackground(Void... params) {
 
             Log.d(TAG, "###############");
 
-            final Reader reader = new RemoteReader(keyPair);
-            //Reader reader = new LocalReader();
 
+//            final Reader reader = new RemoteReader(keyPair);
+//            //Reader reader = new LocalReader();
 
-            reader.read(new Reader.UpdateHandler() {
+            mainActivity.reader.read(new Reader.UpdateHandler() {
                 @Override
                 public boolean isCancelled() {
                     return ReaderTask.this.isCancelled();
@@ -280,7 +281,7 @@ public class FingerReadActivity extends AppCompatActivity {
                         publishProgress(new StatusUpdate(status, lines));
                     else {
                         Log.d(TAG, "3333333333");
-                        reader.onPostExecute(true);
+                        mainActivity.reader.onPostExecute(true);
                     }
 
                 }
@@ -291,14 +292,18 @@ public class FingerReadActivity extends AppCompatActivity {
         }
 
         protected void onProgressUpdate(StatusUpdate... items) {
+            Log.d(TAG, "*****onProgressUpdate****");
             //StatusUpdate for문
             for (StatusUpdate statusUpdate : items) {
+                Log.d(TAG, "*****for문****");
                 //stopRead if문
                 if (!stopRead) {
+                    Log.d(TAG, "*****if문****");
                     //getLine null 확인문
                     if (statusUpdate.getLines() != null) {
+                        Log.d(TAG, "*****1******");
                         for (String str : statusUpdate.getLines()) {
-
+                            Log.d(TAG, "*****2******");
                             if(str.trim().contains(timeLimit)){
                                 Log.d(TAG,"4444444444444444444444444");
                                 stopRead = true;
@@ -327,9 +332,10 @@ public class FingerReadActivity extends AppCompatActivity {
 //                            } else if (str.trim().contains(inputTime))
                         }
                     }//getLine null 확인문
-                }//stopRead if문
-                else
-                    break;
+                    else {
+                        Log.d(TAG, "****getline = null");
+                       }
+                    }//stopRead if문
 
             } //StatusUpdate for문
         }//onProgressUpdate

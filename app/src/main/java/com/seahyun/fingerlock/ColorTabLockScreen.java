@@ -39,6 +39,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
 
     private static String TAG = "ColorTabLockscreen";
     public static Activity ColorTabLockScreenActivity;
+    private HomeKeyLocker mHomeKeyLocker;
 
     TouchTabFourPassword o = new TouchTabFourPassword();
 
@@ -76,6 +77,11 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
         color[3] = R.color.Blue;
         color[4] = R.color.Purple;
         color[5] = R.color.Pink;
+
+        try
+        {
+            this.getSupportActionBar().hide();
+        } catch (NullPointerException e){}
 
         int num = prefs.getInt("tab_num", 4);
         Log.d("잠금화면 컬러탭 개수 >>", String.valueOf(num));
@@ -171,7 +177,8 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
 
         //check_application();
 
-
+        mHomeKeyLocker = new HomeKeyLocker();
+        mHomeKeyLocker.lock(this);
     }
 
     @Override
@@ -346,6 +353,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
                 finish();
             }
         } else if (num == 2) {
@@ -357,6 +365,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
                 finish();
             }
         } else if (num == 3) {
@@ -368,6 +377,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
                 finish();
             }
         }
@@ -380,6 +390,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
                 finish();
             }
         }
@@ -392,6 +403,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
                 finish();
             }
         }
@@ -404,6 +416,7 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                mHomeKeyLocker.unlock();
                 finish();
             }
         }
