@@ -63,8 +63,9 @@ public class FingerprintLockScreen extends AppCompatActivity {
     private KeyGenerator mKeyGenerator;
     private SharedPreferences mSharedPreferences;
 
-    private HomeKeyLocker mHomeKeyLocker;
+    static public HomeKeyLocker mHomeKeyLocker;
 
+    public FingerprintLockScreen(){};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -270,9 +271,7 @@ public class FingerprintLockScreen extends AppCompatActivity {
 
     }
 
-    public HomeKeyLocker getmHomeKeyLocker() {
-        return mHomeKeyLocker;
-    }
+
 }
 
 
