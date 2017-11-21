@@ -24,7 +24,7 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".PinAppRegister" />
         <activity android:name=".PinPassword" />
-        <activity android:name=".PinLock" />
+        <activity android:name=".PinLock"/>
         <activity android:name=".PinSettingActivity" />
         <activity android:name=".RE_PinPassword" />
         <activity android:name=".TouchTabLockScreen" />

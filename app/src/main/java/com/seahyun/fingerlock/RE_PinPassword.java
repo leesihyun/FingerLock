@@ -242,7 +242,7 @@ public class RE_PinPassword extends AppCompatActivity implements View.OnClickLis
         }
         for(int i=0; i<4; i++){
             if(pre_input_arr[i] == input_arr[i]) {
-                if (input_arr[i] != 0)
+                //if (input_arr[i] != 0)
                     cnt++;
             }
         }
