@@ -292,18 +292,13 @@ public class FingerReadActivity extends AppCompatActivity {
         }
 
         protected void onProgressUpdate(StatusUpdate... items) {
-            Log.d(TAG, "*****onProgressUpdate****");
             //StatusUpdate for문
             for (StatusUpdate statusUpdate : items) {
-                Log.d(TAG, "*****for문****");
                 //stopRead if문
                 if (!stopRead) {
-                    Log.d(TAG, "*****if문****");
                     //getLine null 확인문
                     if (statusUpdate.getLines() != null) {
-                        Log.d(TAG, "*****1******");
                         for (String str : statusUpdate.getLines()) {
-                            Log.d(TAG, "*****2******");
                             if(str.trim().contains(timeLimit)){
                                 Log.d(TAG,"4444444444444444444444444");
                                 stopRead = true;
