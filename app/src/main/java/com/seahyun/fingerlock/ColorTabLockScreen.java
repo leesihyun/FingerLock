@@ -686,15 +686,15 @@ public class ColorTabLockScreen extends AppCompatActivity implements OnClickList
     }
 
 
-    @Override
-    public void onBackPressed() {
-        if (select_mode == false)
-            Toast.makeText(this, "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
-        else {
-            //simpleservice.onDestroy();
-            System.exit(0);
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (select_mode == false)
+//            Toast.makeText(this, "비밀번호를 입력하세요", Toast.LENGTH_SHORT).show();
+//        else {
+//            //simpleservice.onDestroy();
+//            System.exit(0);
+//        }
+//    }
 
 
     @Override

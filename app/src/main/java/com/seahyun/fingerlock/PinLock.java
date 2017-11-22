@@ -36,7 +36,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
     private int app_num[]=new int [4];
 
     public static Activity PinLockActivity;
-    private HomeKeyLocker mHomeKeyLocker;
+    //private HomeKeyLocker mHomeKeyLocker;
 
     TouchTabFourPassword o = new TouchTabFourPassword();
 
@@ -95,6 +95,9 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         app_num[2] = prefs3.getInt("num3",0);
         app_num[3] = prefs3.getInt("num4",0);
 
+//        mHomeKeyLocker = new HomeKeyLocker();
+//        mHomeKeyLocker.lock(this);
+
         num1 = (EditText) findViewById(R.id.num1);
         num2 = (EditText) findViewById(R.id.num2);
         num3 = (EditText) findViewById(R.id.num3);
@@ -106,6 +109,8 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
         num3.setOnClickListener(this);
         num4.setOnClickListener(this);
         num5.setOnClickListener(this);
+
+
 
 
     }
@@ -293,7 +298,7 @@ public class PinLock extends AppCompatActivity implements OnClickListener {
                 Intent intent = packageManager.getLaunchIntentForPackage(pakage_name);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
-
+                //mHomeKeyLocker.unlock();
                 finish();
             }
         }
